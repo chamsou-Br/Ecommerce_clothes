@@ -1,0 +1,68 @@
+/*--------------------------------------------------------------
+#trending Section
+--------------------------------------------------------------*/
+.trendingBrandsContainer {
+    width: 100%;
+    margin-top: 60px;
+  }
+  
+  .trendingBrandsContainer .title {
+    font-size: 1.6rem;
+    text-align: center;
+    font-weight: bold;
+    color: #000;
+  }
+  
+  .trendingBrandsContainer .trendingBrands {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 90%;
+    margin: auto;
+  }
+  
+  .trendingBrandsContainer .trendingBrands  img {
+    width: auto;
+    height: 200px;
+    margin: 10px 30px;
+  
+  }
+  
+/*--------------------------------------------------------------
+#footer Section
+--------------------------------------------------------------*/
+  
+  .footer {
+    width: 100%;
+  }
+  
+  .footer .contact {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 10px;
+    border-top: 1px solid #00000044;
+  }
+  
+  .footer .contact div {
+    margin: 5px 2rem;
+    height: 30px;
+    width: 2px;
+    background-color: #00000055;
+  }
+  .footer .contact img {
+    width: 30px;
+    height: 30px;
+    margin: 5px 1.5rem;
+    cursor: pointer;
+  }
+  
+  .footer .privacy {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 5%;
+    font-size: 0.8rem;
+    color: #000;
+    font-weight: 400;
+    background-color: #eee;
+  }
