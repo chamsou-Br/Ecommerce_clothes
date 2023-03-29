@@ -44,6 +44,9 @@
   </head>
 
   <body>
+    <!-- ======= Navbar ======= -->
+    <%- include("components/nav") %>
+    <!-- ======= End navbar ======= -->
     <!-- ======= Hero Section ======= -->
     <section id="hero">
       <div class="hero-container">
@@ -188,7 +191,9 @@
     >
       <% for (let i=0;i<5;i++) { %>
       <li class="list-group-item border-0">
-        <%- include('components/card',{ i : 0,image : "https://th.bing.com/th/id/OIP.6tz_WpcFRSUCH64gZJtgngHaJ4?pid=ImgDet&w=194&h=258&c=7&dpr=1,1"}) %>
+        <%- include('components/card',{ i : 0,image :
+        "https://th.bing.com/th/id/OIP.6tz_WpcFRSUCH64gZJtgngHaJ4?pid=ImgDet&w=194&h=258&c=7&dpr=1,1"})
+        %>
       </li>
       <% } %>
     </ul>
@@ -206,7 +211,9 @@
     >
       <% for (let i=0;i<5;i++) { %>
       <li class="list-group-item border-0">
-        <%- include('components/card',{ i : 0 , image : "https://th.bing.com/th/id/OIP.2TipB0AaK2_Xj7kTYMStSgHaHa?w=207&h=207&c=7&r=0&o=5&dpr=1.1&pid=1.7" }) %>
+        <%- include('components/card',{ i : 0 , image :
+        "https://th.bing.com/th/id/OIP.2TipB0AaK2_Xj7kTYMStSgHaHa?w=207&h=207&c=7&r=0&o=5&dpr=1.1&pid=1.7"
+        }) %>
       </li>
       <% } %>
     </ul>
@@ -224,7 +231,9 @@
     >
       <% for (let i=0;i<5;i++) { %>
       <li class="list-group-item border-0">
-        <%- include('components/card',{ i : 0,image : "https://th.bing.com/th/id/OIP.Y8N2gq9pO4DTSk5dsZgR2gHaHa?w=215&h=215&c=7&r=0&o=5&dpr=1.1&pid=1.7"}) %>
+        <%- include('components/card',{ i : 0,image :
+        "https://th.bing.com/th/id/OIP.Y8N2gq9pO4DTSk5dsZgR2gHaHa?w=215&h=215&c=7&r=0&o=5&dpr=1.1&pid=1.7"})
+        %>
       </li>
       <% } %>
     </ul>
@@ -233,15 +242,24 @@
     <!-- ======= trending Brands ======= -->
     <%- include('components/trending') %>
     <!-- ======= End trending Brands ======= -->
-    
+
     <!-- ======= Footer ======= -->
-        <%- include('components/footer') %>
+    <%- include('components/footer') %>
     <!-- ======= End Footer ======= -->
 
-
     <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
       crossorigin="anonymous"
     ></script>
   </body>

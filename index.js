@@ -21,3 +21,6 @@ app.get('/', (req, res) => {
 app.get("/details/:id",(req , res) => {
     res.render("details");
 })
+app.get("/vestes",(req , res) => {
+    res.render("allProduct")
+})

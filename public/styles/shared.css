@@ -1,3 +1,23 @@
+
+
+body::-webkit-scrollbar {
+  width: 12px;
+}
+
+body::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: #5f5950;
+  border-radius: 0.1rem;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+  background: #1ecde4;
+}
+
 /*--------------------------------------------------------------
 #trending Section
 --------------------------------------------------------------*/
@@ -66,3 +86,55 @@
     font-weight: 400;
     background-color: #eee;
   }
+
+  /*--------------------------------------------------------------
+#navbar Section
+--------------------------------------------------------------*/
+
+nav {
+  position: sticky;
+  top: 0;
+  background-color: #eee;
+  margin-bottom: 50px;
+  padding: 10px 20px;
+
+}
+
+@media (min-width : 1000px) {
+  .navbar-collapse {
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+}
+
+  /*--------------------------------------------------------------
+#title Section
+--------------------------------------------------------------*/
+.section-title {
+  text-align: center;
+  width: 400px;
+  margin: auto;
+  margin-top: 60px;
+}
+.section-title .title {
+
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #2d2d2d;
+}
+
+.section-title .descr {
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: #2d2d2d;
+}
+@media (min-width : 720px) {
+  .section-title {
+    text-align: center;
+    width: 600px;
+    margin: auto;
+    margin-top: 60px;
+  }
+}
