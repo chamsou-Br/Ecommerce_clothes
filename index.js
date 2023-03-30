@@ -24,3 +24,7 @@ app.get("/details/:id",(req , res) => {
 app.get("/vestes",(req , res) => {
     res.render("allProduct")
 })
+
+app.get("/profile",(req , res) => {
+    res.render("profile")
+})

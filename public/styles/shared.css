@@ -1,5 +1,8 @@
 
-
+body{
+  overflow-x: hidden;
+  min-height: 100vh;
+}
 body::-webkit-scrollbar {
   width: 12px;
 }
@@ -53,7 +56,9 @@ body::-webkit-scrollbar-thumb:hover {
 --------------------------------------------------------------*/
   
   .footer {
+
     width: 100%;
+
   }
   
   .footer .contact {
