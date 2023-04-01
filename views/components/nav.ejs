@@ -6,16 +6,16 @@
     <div class="collapse navbar-collapse"  id="navbarNavDropdown">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="#">Accueille <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="/">Accueille <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Des produits
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="#">pantalons</a>
-              <a class="dropdown-item" href="#">chemises</a>
-              <a class="dropdown-item" href="#">vestes</a>
+              <% types.map(item => { %>
+                <a class="dropdown-item" href="/produit/<%= item.type %>" > <%= item.type %></a>
+              <% }) %>
             </div>
           </li>
         <li class="nav-item dropdown">

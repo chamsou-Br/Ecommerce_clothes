@@ -47,17 +47,16 @@
 
   <body>
     <!-- ======= Navbar ======= -->
-      <%- include("components/nav") %>
+      <%- include("components/nav",{types : types }) %>
     <!-- ======= End navbar ======= -->
 
     <!-- ======= title Section ======= -->
     <div class="section-title">
       <h1 class="title">
-        vestes
+        <%= info.title %>
       </h1>
       <h2 class="descr">
-        Trouver de nouvelles couches pour correspondre à votre ajustement n’est pas toujours facile. Entrez: notre boutique de vêtements pour hommes et femmes - votre go-to pour une apparence élégante .
-      </h2>
+        <%= info.descr %>
     </div>
     <!-- ======= End title Section ======= -->
 
@@ -69,11 +68,12 @@
         required
         aria-label="Default select example"
       >
-        <option disabled selected value="S">trier</option>
-        <option value="M">style 1</option>
-        <option value="L">style 2</option>
-        <option value="XL">style 3</option>
-        <option value="XXL">style 4</option>
+        <option disabled selected value="date">Quoi de neuf</option>
+        <option value="prix">Prix bas à haut</option>
+        <option value="prix">Prix élevé à bas</option>
+        <option value="rang">rang</option>
+        <option value="adore">adore</option>
+
       </select>
 
       <select
@@ -83,23 +83,9 @@
         aria-label="Default select example"
       >
         <option disabled selected value="S">Catégorie</option>
-        <option value="M">style 1</option>
-        <option value="L">style 2</option>
-        <option value="XL">style 3</option>
-        <option value="XXL">style 4</option>
-      </select>
-
-      <select
-        class="form-select mt-2"
-        name="categorie"
-        required
-        aria-label="Default select example"
-      >
-        <option disabled selected value="S">Gamme de prix</option>
-        <option value="M">style 1</option>
-        <option value="L">style 2</option>
-        <option value="XL">style 3</option>
-        <option value="XXL">style 4</option>
+        <option value="Homme">Homme</option>
+        <option value="Femme">Femme</option>
+        <option value="Enfant">Enfant</option>
       </select>
 
       <select
@@ -109,50 +95,51 @@
         aria-label="Default select example"
       >
         <option disabled selected value="S">Styles</option>
-        <option value="M">style 1</option>
-        <option value="L">style 2</option>
-        <option value="XL">style 3</option>
-        <option value="XXL">style 4</option>
+        <% styles.map((item) => { %>
+          <option value="<%= item.style %>"><%= item.style %></option>
+       <% }) %>
       </select>
+      <select
+      class="form-select mt-2"
+      name="categorie"
+      required
+      aria-label="Default select example"
+    >
+      <option disabled selected value="S">Marques</option>
+      <% marks.map((mark) => { %>
+        <option value="<%= mark.marque %>"><%= mark.marque %></option>
+     <% }) %>
+
+    </select>
     </div>
-    <div class="productsFound">401 styles trouvés</div>
+    <div class="productsFound"><%= products.length %> styles trouvés</div>
     <!-- ======= End filter Brands ======= -->
     <div class="gallery">
       <div class="gallery-items">
-        <% for (let i = 0 ; i < 13 ; i++) { %>
+        <% for (let i = 0 ; i <  products.length  ; i++) { %>
         <div class="product">
           <div class="gallery-item">
-            <a href="" class="gallery-lightbox">
+            <div class="mark">
+              <%= products[i].marque %>
+            </div>
+            <a href="/produit/details/<%= products[i].id %>" class="gallery-lightbox">
               <img
                 class=""
-                src="https://th.bing.com/th/id/OIP.XuKxEZ7rPEF-VoQU0UvrfgHaKX?pid=ImgDet&w=1000&h=1400&rs=1"
+                src="<%= products[i].picture %>"
                 alt=""
                 class="img-fluid"
               />
             </a>
             <div class="iconContainer">+</div>
           </div>
-          <h2>Puma Seasons long sleeve top</h2>
-          <h1>$20.00</h1>
-        </div>
-        <div class="product">
-          <div class="gallery-item">
-            <a href="" class="gallery-lightbox">
-              <img
-                class=""
-                src="https://th.bing.com/th/id/R.c6fd8985e0887731bd0baf292603a512?rik=TTreNXrAwbi0tg&riu=http%3a%2f%2fwww.triads.co.uk%2fimages%2fproducts%2fzoom%2f1412074458-54189600.jpg&ehk=J372nY3t%2biYNkv8aCYw7kWYIpKGR6%2b34UBBM8p1iUdo%3d&risl=&pid=ImgRaw&r=0"
-                alt=""
-                class="img-fluid"
-              />
-            </a>
-            <div class="iconContainer">+</div>
-          </div>
-          <h2>Puma Seasons long sleeve top</h2>
-          <h1>$20.00</h1>
+          <h2><%= products[i].nom %></h2>
+          <h1>$ <%= products[i].prix.toLocaleString('en-US', { minimumFractionDigits: 2 }) %></h1>
         </div>
         <% } %>
       </div>
     </div>
+
+    
     <!-- ======= Footer ======= -->
 
     <!-- ======= End Footer ======= -->

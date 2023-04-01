@@ -42,11 +42,12 @@
         font-family: "Josefin Sans";
       }
     </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
   </head>
 
   <body>
         <!-- ======= Navbar ======= -->
-        <%- include("components/nav") %>
+        <%- include("components/nav",{types}) %>
         <!-- ======= End navbar ======= -->
 
 
@@ -60,7 +61,7 @@
                             </a>    
                         </div>
  
-                    <img src="https://cdn.sarenza.cloud/_img/productsv4/0000337263/0000337263_600843_09_504x690.jpg?202211141044&v=20180830155342" />
+                    <img src="<%= product.picture %>" />
                 </div>
 
                 
@@ -69,21 +70,21 @@
             <div class=" details-right">
                 <div class="details-info">
                     <h1>
-                        Vest addidas
+                        <%= product.nom %>
                     </h1>
-                    <p>adidas te propose une très large sélection de vestes pour tous tes besoins et toutes les occasions. Parmi nos différents modèles</p>
+                    <p><%= product.descr %></p>
                     <div class="rating">
                         <i class="bi bi-star-fill"></i>
                         <i class="bi bi-star-fill"></i>
                         <i class="bi bi-star-fill"></i>
                         <i class="bi bi-star-fill"></i>
                         <i class="bi bi-star-fill"></i>
-                        <span >(120)</span>
+                        <span >(<%= product.rang %>)</span>
                     </div>
                 </div>
                 <div class="details-info">
                     <div class="price">
-                        $ 50.00
+                        <%= product.prix %>
                     </div>
                     <div class="reduction">
                         <div>
@@ -96,22 +97,19 @@
                     </div>
                 </div>
                 <div class="details-info">
-                    <div class="price">
+                    <div id="test" class="price">
                         choisir une couleur
                     </div>
+                    <input type="hidden" value="0" name="color" id="itemActive" />
                     <div class="colors">
-                        <div class="color active">
-                            <div class="color-top" style="background-color: #51e2f5;"></div>
-                            <div class="color-bottom" style="background-color: #51e2f555;"></div>
-                        </div>
-                        <div class="color">
-                            <div class="color-top" style="background-color: #f5517a;"></div>
-                            <div class="color-bottom" style="background-color: #f5517a55;"></div>
-                        </div>
-                        <div class="color">
-                            <div class="color-top" style="background-color: #72f551;"></div>
-                            <div class="color-bottom" style="background-color: #72f55155;"></div>
-                        </div>
+                      <% product.items.map((item,index) => { %>
+                        <div class="color <%= index == 0 ? "active" : '' %>">
+                          <div class="color-top" style="background-color: <%= colors[item.color][0] %>"></div>
+                          <div class="color-bottom" style="background-color: <%= colors[item.color][1] %>"></div>
+                      </div>
+
+                      <%}) %>
+
                     </div>
                 </div>
 
@@ -119,12 +117,12 @@
                     <div class="price">
                         choisissez votre taille
                     </div>
-                    <select  class="form-select mt-2" name="categorie" required  aria-label="Default select example">
-                        <option selected value="S">S</option>
-                        <option value="M">M</option>
-                        <option value="L">L</option>
-                        <option value="XL">XL</option>
-                        <option value="XXL">XXL</option>
+                    <select  class="form-select mt-2" name="quantite" required  aria-label="Default select example">
+                        <option id="S" selected <%= product.items[0].quantites == 0 ? "disabled" : "" %> value="S">S </option>
+                        <option id="M" <%= product.items[0].quantitem == 0 ? "disabled" : "" %> value="M">M</option>
+                        <option id="L" <%= product.items[0].quantitel == 0 ? "disabled" : "" %> value="L">L</option>
+                        <option id="XL" <%= product.items[0].quantitexl == 0 ? "disabled" : "" %> value="XL">XL</option>
+                        <option id="XXL" <%= product.items[0].quantitexxl == 0 ? "disabled" : "" %> value="XXL">XXL</option>
                     </select>
                     <div class="buyButtoncontainer">
                         Ajouter au panier
@@ -157,5 +155,9 @@
       integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
       crossorigin="anonymous"
     ></script>
+    <script>
+      const product = <%- JSON.stringify(product) %>
+  </script>
+    <script src="/script/details.js"></script>
   </body>
 </html>
