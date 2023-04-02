@@ -47,7 +47,7 @@
 
   <body>
         <!-- ======= login ======= -->
-  <div class="parent clearfix">
+          <div class="parent clearfix">
     <div class="bg-illustration">
 
       <div class="burger-btn">
@@ -60,29 +60,29 @@
     
     <div class="login">
       <div class="container">
-        <h1>Connectez-vous pour accéder à<br />votre compte</h1>
+        <h1>Registrez-vous pour accéder à<br />votre compte</h1>
 
         <% if (message) { %>
           <h2 class="messageError" ><%= message %></h2>
         <% } %>
         <div class="login-form">
-          <form method="post" action="/login">
-            <input class="info" type="email" name="email" placeholder="E-mail Address">
-            <input class="info" type="password" name="password" placeholder="Mot de passe">
+          <form method="post" action="/register">
+            <input required class="info" type="text" name="firstName" placeholder="Nom">
+            <input required class="info" type="text" name="lastName" placeholder="Prenom">
+            <input required class="info" type="text" name="address" placeholder="Adresse">
+            <input required class="info" type="number" name="phone" placeholder="N télephone">
+            <input required class="info" type="email" name="email" placeholder="E-mail Address">
+            <input required class="info" type="password" name="password" placeholder="Mot de passe">
 
-            <div class="remember-form">
-              <input type="checkbox">
-              <span>Souvenez-vous de moi</span>
-            </div>
-            <button type="submit">Se connecter</button>
+            <button style="margin-top: 20px;" type="submit">Register</button>
             <div class="forget-password">
                 <span>Mot de passe oublié ?</span>
             </div>
-            <a href="/register">
+            <a href="/login">
             <div class="navigation">
-              <span>Vous n’avez pas de compte ?</span>
-            </div>
-          </a>
+                <span>Vous avez un compte ?</span>
+              </div>
+            </a>
 
           </form>
         </div>

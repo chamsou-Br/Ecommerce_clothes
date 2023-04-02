@@ -1,4 +1,16 @@
+const { removeCookie, createToken } = require("../middleware/auth");
 const { getTypesOfProducts } = require("../modals/products");
+const { changePicture, getUser } = require("../modals/user");
+const { createCookie } = require("./auth");
+
+const modifyPictureController = async(req , res) => {
+    await changePicture(req.file.filename,req.client.email);
+    const client = await getUser(req.client.email);
+    const token = await createToken(client,process.env.JWT_SECRET,process.env.JWT_ACCESS_TOKEN_EXPIRES)
+    res.cookie('accessToken', token);
+    res.redirect("/profile")
+}
+
 
 const profileController = async (req , res) => {
     if (!req.client) {
@@ -9,4 +21,4 @@ const profileController = async (req , res) => {
     res.render("profile",{types,user})
 }
 
-module.exports = profileController;
+module.exports = {profileController,modifyPictureController};

@@ -1,4 +1,4 @@
-const { getUser } = require("../modals/user")
+const { getUser, addUser } = require("../modals/user")
 const bcrypt = require("bcrypt")
 const { createToken, createCookie, checkuser, removeCookie } = require("../middleware/auth")
 
@@ -14,7 +14,6 @@ const loginHandlerController = async (req , res ) => {
     if (client) {
         const auth = await bcrypt.compare(req.body.password,client.motdepasse )
             if (auth) {
-              // Passwords match, redirect to home page
               const token = await createToken(client,process.env.JWT_SECRET,process.env.JWT_ACCESS_TOKEN_EXPIRES)
               createCookie(res,token,'accessToken',process.env.ACCESS_TOKEN_COOKIE_EXPIRES);
               res.redirect('/');
@@ -32,6 +31,38 @@ const logoutController = (req,res) => {
     res.redirect("/login")
 }
 
-module.exports = { loginHandlerController , loginPageController , logoutController}
+const registerController = (req , res) => {
+    res.render("register",{message : null});
+}
+
+
+const registerHandlerController = async (req , res) => {
+    console.log("body",req.body)
+    const {firstName , lastName , email , address , password , phone} = req.body;
+    const client = await getUser(email);
+    if (client) {
+        res.render("register",{message : 'Cet e-mail a déjà été enregistré'});
+    }else {
+        if (password.length < 8 || password.length > 12) {
+            res.render("register",{message : 'Mot de passe non valide'});
+        }else {
+            const salt = await bcrypt.genSalt();
+            const hashPassword = bcrypt.hash(password,salt)
+            await addUser(firstName , lastName , email , address , hashPassword , phone)
+            const client = await getUser(email);
+            const token = await createToken(client,process.env.JWT_SECRET,process.env.JWT_ACCESS_TOKEN_EXPIRES)
+            createCookie(res,token,'accessToken',process.env.ACCESS_TOKEN_COOKIE_EXPIRES);
+            req.body = {};
+            res.redirect('/');
+
+        }
+
+    }
+
+    
+
+
+}
+module.exports = { loginHandlerController , loginPageController , logoutController , registerController , registerHandlerController}
 
 

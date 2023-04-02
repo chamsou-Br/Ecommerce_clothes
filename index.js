@@ -2,10 +2,13 @@ const express = require("express");
 const homeController = require("./controllers/home");
 const { productsController, productDetailsController } = require("./controllers/products");
 const {getAllProduct , getProductsByType} = require("./modals/products");
-const { loginPageController, loginHandlerController, logoutController } = require("./controllers/auth");
+const { loginPageController, loginHandlerController, logoutController, registerController, registerHandlerController } = require("./controllers/auth");
 const cookieParser = require("cookie-parser");
 const { verifyAuth } = require("./middleware/auth");
-const profileController = require("./controllers/profile");
+const {profileController,modifyPictureController} = require("./controllers/profile");
+const multer = require("multer");
+const upload = require("./middleware/upload");
+
 require('dotenv').config();
 
 const app = express();
@@ -30,3 +33,8 @@ app.get("/profile",verifyAuth,profileController)
 app.get("/login",loginPageController)
 app.post("/login",loginHandlerController)
 app.get("/logout",logoutController)
+app.get("/register",registerController);
+app.post("/register",registerHandlerController)
+
+
+app.post('/profile/upload', upload.single("picture"),verifyAuth,modifyPictureController);

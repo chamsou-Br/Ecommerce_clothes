@@ -52,10 +52,16 @@
 
     <!-- ======= Profile ======= -->
     <div class="profile">
-            <div class="">
+            <div class="imgContainer">
                 <div class="profile-img">
                     <img src="<%= user.picture ? user.picture : 'https://www.pngitem.com/pimgs/m/150-1503945_transparent-user-png-default-user-image-png-png.png' %>" />
-                </div>
+                    <form id="upload-form" action="/profile/upload" method="POST" enctype="multipart/form-data">
+                      <i class="bi bi-camera"></i>
+                      <input id="uplaod-picture" type="file" name="picture" style="display: none;" >
+                    </form>
+                  </div>
+
+                
                 
             </div>
             <form method="post"  class="col-lg-8 row profile-info" >
@@ -86,9 +92,8 @@
     <%- include('components/footer') %>
     <!-- ======= End Footer ======= -->
 
-    <script>
 
-    </script>
+
         
     <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -105,5 +110,6 @@
       integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
       crossorigin="anonymous"
     ></script>
+    <script src="/script/profile.js"></script>
   </body>
 </html>
