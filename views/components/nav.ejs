@@ -33,9 +33,19 @@
           </li>
       </ul>
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-            <a class="nav-link" href="#">connexion</a>
+        <% if (user) { %>
+          <li class="nav-item active">
+            <a class="nav-link" href="/profile">profile</a>
           </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="/logout">déconnexion</a>
+          </li>
+       <% } else {%>
+        <li class="nav-item active">
+          <a class="nav-link" href="/login">connexion</a>
+        </li>
+        <% }%>
+
       </ul>
 
     </div>

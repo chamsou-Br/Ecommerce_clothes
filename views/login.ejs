@@ -61,11 +61,14 @@
     <div class="login">
       <div class="container">
         <h1>Connectez-vous pour accéder à<br />votre compte</h1>
-    
+
+        <% if (message) { %>
+          <h2 class="messageError" ><%= message %></h2>
+        <% } %>
         <div class="login-form">
-          <form action="">
-            <input class="info" type="email" placeholder="E-mail Address">
-            <input class="info" type="password" placeholder="Password">
+          <form method="post" action="/login">
+            <input class="info" type="email" name="email" placeholder="E-mail Address">
+            <input class="info" type="password" name="password" placeholder="Password">
 
             <div class="remember-form">
               <input type="checkbox">

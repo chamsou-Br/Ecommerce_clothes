@@ -95,3 +95,6 @@ VALUES (11, 'rouge', 5, 10, 7, 3, 0, 0),
 (11, 'blanc', 5, 10, 7, 3, 10, 0),
 (11, 'bleu', 5, 10, 7, 3, 0, 0)
 ;
+
+INSERT INTO client (type, nom, prenom, email, adresse, telephone, motDePasse, picture ) 
+VALUES ('client','salah','falek','user1@gmail.com','Paris','0664827074','$2b$10$4M6t2/THE6k5nJMZloL6D.nNxLt2RmVxpCcwRzFOaOg7H3HMQZmo6','https://th.bing.com/th/id/OIP.8-24d462Al7n2nEWHu6AvAHaE8?w=296&h=184&c=7&r=0&o=5&dpr=1.1&pid=1.7')

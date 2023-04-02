@@ -48,6 +48,13 @@
   *:focus {
     outline: none;
   }
+
+  .login .container .messageError {
+    color: rgb(224, 62, 62);
+    font-size: 1rem;
+    font-weight: 600;
+    margin-top: 30px;
+  }
   
   .clearfix::after {
     content: "";
@@ -152,7 +159,7 @@
     font-weight: bolder;
   }
   .login .container .login-form {
-    margin-top: 40px;
+    margin-top: 10px;
   }
   .login .container .login-form form {
     display: -ms-grid;
@@ -319,7 +326,7 @@
       margin-top: 40px;
     }
     .login .container .login-form {
-      margin-top: 30px;
+      margin-top: 10px;
     }
     .login .container .login-form form input {
       height: 45px;

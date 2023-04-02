@@ -54,26 +54,26 @@
     <div class="profile">
             <div class="">
                 <div class="profile-img">
-                    <img src="https://www.pngitem.com/pimgs/m/150-1503945_transparent-user-png-default-user-image-png-png.png" />
+                    <img src="<%= user.picture ? user.picture : 'https://www.pngitem.com/pimgs/m/150-1503945_transparent-user-png-default-user-image-png-png.png' %>" />
                 </div>
                 
             </div>
             <form method="post"  class="col-lg-8 row profile-info" >
 
             <div class="col-md-6 form-group">
-                <input  type="text" name="nom" value="" class="form-control" id="name" placeholder="nom " >
+                <input  type="text" name="nom" value="<%= user.nom %>" class="form-control" id="name" placeholder="nom " >
             </div>
             <div class="col-md-6 form-group">
-                <input type="text"   name="prenom" value="" class="form-control" id="name" placeholder="prenom" >
+                <input type="text"   name="prenom" value="<%= user.prenom %>" class="form-control" id="name" placeholder="prenom" >
             </div>
             <div class="col-md-6 form-group ">
-                <input type="text" name="email" value="" class="form-control" id="name" placeholder="email" >
+                <input type="text" name="email" value="<%= user.email %>" class="form-control" id="name" placeholder="email" >
             </div>
             <div class="col-md-6 form-group">
-                <input type="number"  name="telephone" value="" class="form-control" id="name" placeholder="nemuro de portable" >
+                <input type="number"  name="telephone" value="<%= user.telephone %>" class="form-control" id="name" placeholder="nemuro de portable" >
             </div>
             <div class="col-md-6 form-group">
-                <input type="text"  name="adress" value="" class="form-control" id="name" placeholder="adress" >
+                <input type="text"  name="adress" value="<%= user.adresse %>" class="form-control" id="name" placeholder="adress" >
             </div>
             <div class="col-md-6 form-group">
             <button style="margin: auto;" class="submit"  name="save-profile" type="submit">Sauvgarder</button>
