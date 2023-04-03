@@ -5,7 +5,7 @@ const {getAllProduct , getProductsByType} = require("./modals/products");
 const { loginPageController, loginHandlerController, logoutController, registerController, registerHandlerController } = require("./controllers/auth");
 const cookieParser = require("cookie-parser");
 const { verifyAuth } = require("./middleware/auth");
-const {profileController,modifyPictureController} = require("./controllers/profile");
+const {profileController,modifyPictureController, updateProfileController} = require("./controllers/profile");
 const multer = require("multer");
 const upload = require("./middleware/upload");
 
@@ -25,10 +25,11 @@ app.use(cookieParser());
 
 app.get('/',verifyAuth, homeController);
 
-app.get("/produit/details/:id",productDetailsController)
-app.get("/produit/:type",productsController);
+app.get("/produit/details/:id",verifyAuth,productDetailsController)
+app.get("/produit/:type",verifyAuth,productsController);
 
 app.get("/profile",verifyAuth,profileController)
+app.post("/profile",verifyAuth,updateProfileController);
 
 app.get("/login",loginPageController)
 app.post("/login",loginHandlerController)

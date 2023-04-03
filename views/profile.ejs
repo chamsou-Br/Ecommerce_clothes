@@ -64,25 +64,26 @@
                 
                 
             </div>
-            <form method="post"  class="col-lg-8 row profile-info" >
+            <form method="post" action="/profile"  class="col-lg-8 row profile-info" >
 
             <div class="col-md-6 form-group">
-                <input  type="text" name="nom" value="<%= user.nom %>" class="form-control" id="name" placeholder="nom " >
+                <input  type="text" name="lastName" value="<%= user.nom %>" class="form-control" id="name" placeholder="nom " >
             </div>
             <div class="col-md-6 form-group">
-                <input type="text"   name="prenom" value="<%= user.prenom %>" class="form-control" id="name" placeholder="prenom" >
+                <input type="text"   name="firstName" value="<%= user.prenom %>" class="form-control" id="name" placeholder="prenom" >
             </div>
             <div class="col-md-6 form-group ">
-                <input type="text" name="email" value="<%= user.email %>" class="form-control" id="name" placeholder="email" >
+                <input type="text"  name="newEmail" value="<%= user.email %>" class="form-control" id="name" placeholder="email" >
+                <input type="hidden"  name="email" value="<%= user.email %>" class="form-control" id="name" placeholder="email" >
             </div>
             <div class="col-md-6 form-group">
-                <input type="number"  name="telephone" value="<%= user.telephone %>" class="form-control" id="name" placeholder="nemuro de portable" >
+                <input type="number"  name="phone" value="<%= user.telephone %>" class="form-control" id="name" placeholder="nemuro de portable" >
             </div>
             <div class="col-md-6 form-group">
-                <input type="text"  name="adress" value="<%= user.adresse %>" class="form-control" id="name" placeholder="adress" >
+                <input type="text"  name="address" value="<%= user.adresse %>" class="form-control" id="name" placeholder="adress" >
             </div>
             <div class="col-md-6 form-group">
-            <button style="margin: auto;" class="submit"  name="save-profile" type="submit">Sauvgarder</button>
+            <button style="margin: auto;" class="submit"   type="submit">Sauvgarder</button>
             </div>
             </form>
     </div>
