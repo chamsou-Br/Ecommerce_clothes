@@ -1,7 +1,34 @@
 
+body{
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  justify-content: space-between;
+}
+
 /* ##############################
               Profile 
      ##############################*/
+
+     .filterContainer {
+      width: 100vw;
+      background-color: #FFF;
+      height: 80px;
+      border: 0.5px solid #2d2d2d22;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      margin-bottom: 30px;
+      margin-top: 80px;
+  }
+  .filterContainer h1 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #2d2d2d;
+  }
+  
       #upload-form {
         position: absolute;
         bottom: 40px;
@@ -19,7 +46,7 @@
       }
      .profile {
         padding: 10px 30px;
-        margin-top: 120px;
+
         display: flex;
         align-items: center;
         justify-content: center;
@@ -104,6 +131,9 @@
             width: 270px;
             height: 270px;
         }
+        .imgContainer {
+          margin-top: -20px;
+        }
         .form-group {
             margin-bottom: 20px;
         }
@@ -111,13 +141,22 @@
       }
 
       @media (max-width : 600px)  {
+        .filterContainer {
+          display: none;
+          margin: 0;
+        }
         .profile{
             padding: 0;
             display: block;
             overflow: hidden;
             margin: 0;
             margin-top: 50px;
+            
 
+        }
+        #upload-form  {
+          bottom: 0px;
+          right: 10px;
         }
         .profile-img {
             width: 100%;

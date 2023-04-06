@@ -8,6 +8,7 @@ const { verifyAuth } = require("./middleware/auth");
 const {profileController,modifyPictureController, updateProfileController} = require("./controllers/profile");
 const multer = require("multer");
 const upload = require("./middleware/upload");
+const { bagController } = require("./controllers/bag");
 
 require('dotenv').config();
 
@@ -36,6 +37,8 @@ app.post("/login",loginHandlerController)
 app.get("/logout",logoutController)
 app.get("/register",registerController);
 app.post("/register",registerHandlerController)
+
+app.get("/bag",verifyAuth,bagController)
 
 
 app.post('/profile/upload', upload.single("picture"),verifyAuth,modifyPictureController);

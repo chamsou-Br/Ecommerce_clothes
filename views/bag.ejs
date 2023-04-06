@@ -1,0 +1,176 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta charset="ISO-8859-1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ecommerce</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      rel="stylesheet"
+      integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css"
+    />
+    <link rel="stylesheet" href="/styles/home.css" />
+    <link rel="stylesheet" href="/styles/bag.css" />
+    <link rel="stylesheet" href="/styles/shared.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="//fonts.googleapis.com/css?family=Josefin+Sans"
+    />
+    <style>
+      body {
+        font-family: "Josefin Sans";
+      }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+  </head>
+
+  <body>
+        <!-- ======= Navbar ======= -->
+        <%- include("components/nav",{types}) %>
+        <!-- ======= End navbar ======= -->
+
+
+    <!-- ======= Bag =======   -->
+    <% if (bag) { %>
+    <div class="bag">
+        <div class="products-bag">
+            <% for (let i = 0 ; i <5 ; i++) { %>
+                <div class="item-product"> 
+                    <button type="button" class="btn-close" aria-label="Close"></button>
+                    <img src="/assets/login.jpg" />
+                    <div class="item-product-info">
+                        <h1>$ 20.00</h1>
+                    <h2>Vans unisex left chest logo t-shirt in purle</h2>
+                    <div class="update">
+                        <select  class="form-select mt-2" name="quantite" required  aria-label="Default select example">
+                            <option id="S" selected  value="S">QT 1 </option>
+                            <option id="M" value="M">M</option>
+                            <option id="L"  value="L">L</option>
+                            <option id="XL"  value="XL">XL</option>
+                            <option id="XXL" value="XXL">XXL</option>
+                        </select>
+                        <select  class="form-select mt-2" name="quantite" required  aria-label="Default select example">
+                            <option id="S" selected  value="S">S </option>
+                            <option id="M" value="M">M</option>
+                            <option id="L"  value="L">L</option>
+                            <option id="XL"  value="XL">XL</option>
+                            <option id="XXL" value="XXL">XXL</option>
+                        </select>
+                        <select  class="form-select mt-2" name="quantite" required  aria-label="Default select example">
+                            <option id="S" selected value="S">Red </option>
+                            <option id="M" value="M">M</option>
+                            <option id="L"  value="L">L</option>
+                            <option id="XL" value="XL">XL</option>
+                            <option id="XXL" value="XXL">XXL</option>
+                        </select>
+                    </div>
+                    <div class="save">
+                        <i class="bi bi-lightbulb-fill"></i>
+                        <span>Enregistrer</span>
+                    </div>
+                    </div>
+                </div>
+            <%  } %>
+
+        </div>
+        <div class="info-bag">
+            
+            <h1>TOTAL</h1>
+            <div class="sub-total">
+                <h2>Sous-total</h2>
+                <span>$20.00</span>
+            </div>
+            <div class="sub-total">
+                <h2>Votre Infomation</h2>
+                <i class="bi bi-exclamation-circle"></i>
+            </div>
+            <div class="input-container">
+                <input class="info" type="text" name="lastName" placeholder="Nom">
+                <i class="bi bi-caret-down icon-input"></i>
+            </div>
+            <div class="input-container">
+                <input class="info" type="firstName" name="text" placeholder="Prénom">
+                <i class="bi bi-caret-down icon-input"></i>
+            </div>
+            <div class="input-container">
+                <input class="info" type="address" name="" placeholder="Adresse">
+                <i class="bi bi-caret-down icon-input"></i>
+            </div>
+            <div class="input-container">
+                <input class="info" type="text" name="email" placeholder="Adresse e-mail">
+                <i class="bi bi-caret-down icon-input"></i>
+            </div>
+            <div class="input-container">
+                <input class="info" type="text" name="phone" placeholder="N de portable">
+                <i class="bi bi-caret-down icon-input"></i>
+            </div>
+            <div class="input-container">
+                <input class="info" type="date" name="date" placeholder="l’heure de livraison">
+                <i class="bi bi-caret-down icon-input"></i>
+            </div>
+            <div class="finaliser">
+                FINALISER
+            </div>
+
+
+
+            
+        </div>
+    </div>
+    <% } else { %>
+        <div class="bag-empty">
+            <i class="bi bi-bag"></i>
+            <h1>
+                Votre sac est vide
+            </h1>
+            <p>
+                Vous pouvez magasiner à nouveau . Entrez: notre boutique pour hommes et femmes - votre go-to pour une apparence élégante !
+            </p>
+        </div>
+    <%} %>
+    <!-- ======= End Bag ======= -->
+    
+    <!-- ======= Footer ======= -->
+        <%- include('components/footer') %>
+    <!-- ======= End Footer ======= -->
+
+
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+
+  </body>
+</html>
