@@ -28,7 +28,7 @@ const getProductById = async (id) => {
     const product = (
       await pool.query("select * from produit where id = $1", [id])
     ).rows;
-    return product;
+    return product[0];
   } catch (error) {
     console.log(error, "err");
     return [];

@@ -8,7 +8,8 @@ const { verifyAuth } = require("./middleware/auth");
 const {profileController,modifyPictureController, updateProfileController} = require("./controllers/profile");
 const multer = require("multer");
 const upload = require("./middleware/upload");
-const { bagController } = require("./controllers/bag");
+const { bagController, addBagController, deleteBagController } = require("./controllers/bag");
+const session = require("express-session");
 
 require('dotenv').config();
 
@@ -23,6 +24,11 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use(express.urlencoded({extended : true}))
 app.use(cookieParser());
+app.use(session({
+    secret: 'Ecommerce', // Set your own secret key for session management
+    resave: false,
+    saveUninitialized: true
+  }));
 
 app.get('/',verifyAuth, homeController);
 
@@ -39,6 +45,8 @@ app.get("/register",registerController);
 app.post("/register",registerHandlerController)
 
 app.get("/bag",verifyAuth,bagController)
+app.post("/bag/:id",verifyAuth,addBagController)
+app.get("/bag/delete/:id",verifyAuth,deleteBagController)
 
 
 app.post('/profile/upload', upload.single("picture"),verifyAuth,modifyPictureController);

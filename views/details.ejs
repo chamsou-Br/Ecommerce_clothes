@@ -67,7 +67,7 @@
                 
 
             </div>
-            <div class=" details-right">
+            <form action="/bag/<%= product.id %>" method="post" class=" details-right">
                 <div class="details-info">
                     <h1>
                         <%= product.nom %>
@@ -117,21 +117,22 @@
                     <div class="price">
                         choisissez votre taille
                     </div>
-                    <select  class="form-select mt-2" name="quantite" required  aria-label="Default select example">
+                    <select  class="form-select mt-2" name="size" required  aria-label="Default select example">
                         <option id="S" selected <%= product.items[0].quantites == 0 ? "disabled" : "" %> value="S">S </option>
                         <option id="M" <%= product.items[0].quantitem == 0 ? "disabled" : "" %> value="M">M</option>
                         <option id="L" <%= product.items[0].quantitel == 0 ? "disabled" : "" %> value="L">L</option>
                         <option id="XL" <%= product.items[0].quantitexl == 0 ? "disabled" : "" %> value="XL">XL</option>
                         <option id="XXL" <%= product.items[0].quantitexxl == 0 ? "disabled" : "" %> value="XXL">XXL</option>
                     </select>
-                    <div class="buyButtoncontainer">
+                    <button type="submit" class="buyButtoncontainer">
                         Ajouter au panier
-                    </div>
+                    </button>
+                    </a>
                 </div>
 
                     
 
-        </div>
+              </form>
     </div>
     <!-- ======= End trending Brands ======= -->
     

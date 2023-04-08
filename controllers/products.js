@@ -16,7 +16,7 @@ const productDetailsController = async (req , res) => {
     const product = await getProductById(id)
     const items = await getExamplairOfProduct(id);
     const types = await getTypesOfProducts();
-    res.render("details",{types,product : {...product[0] , items : items},colors ,user:req.client});
+    res.render("details",{types,product : {...product , items : items},colors ,user:req.client});
 }
 
 

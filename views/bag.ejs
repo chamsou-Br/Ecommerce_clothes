@@ -52,30 +52,31 @@
 
 
     <!-- ======= Bag =======   -->
-    <% if (bag) { %>
+    <% if (bag && bag.length > 0) { %>
     <div class="bag">
         <div class="products-bag">
-            <% for (let i = 0 ; i <5 ; i++) { %>
+            <% for (let i = 0 ; i < bag.length ; i++) { %>
+                
                 <div class="item-product"> 
+                    <a href="/bag/delete/<%= i %>">
                     <button type="button" class="btn-close" aria-label="Close"></button>
-                    <img src="/assets/login.jpg" />
+                    </a>
+                    <a href="/produit/details/<%= bag[i].product.id %>">
+                    <img src="<%= bag[i].product.picture %>" />
+                     </a>
                     <div class="item-product-info">
-                        <h1>$ 20.00</h1>
-                    <h2>Vans unisex left chest logo t-shirt in purle</h2>
+                        <h1><%= bag[i].product.prix %></h1>
+                    <h2><%= bag[i].product.nom %></h2>
                     <div class="update">
                         <select  class="form-select mt-2" name="quantite" required  aria-label="Default select example">
-                            <option id="S" selected  value="S">QT 1 </option>
-                            <option id="M" value="M">M</option>
-                            <option id="L"  value="L">L</option>
-                            <option id="XL"  value="XL">XL</option>
-                            <option id="XXL" value="XXL">XXL</option>
+                            <option id="S" selected  value="S"><%= bag[i].qty %></option>
                         </select>
                         <select  class="form-select mt-2" name="quantite" required  aria-label="Default select example">
-                            <option id="S" selected  value="S">S </option>
-                            <option id="M" value="M">M</option>
-                            <option id="L"  value="L">L</option>
-                            <option id="XL"  value="XL">XL</option>
-                            <option id="XXL" value="XXL">XXL</option>
+                            <option  <% if (bag[i].size === 'S') { %> selected <% } %> id="S"  value="S">S </option>
+                            <option  <% if (bag[i].size === 'M') { %> selected <% } %> id="M" value="M">M</option>
+                            <option <% if (bag[i].size === 'L') { %> selected <% } %>  value="L">L</option>
+                            <option <% if (bag[i].size === 'XL') { %> selected <% } %> id="XL"  value="XL">XL</option>
+                            <option <% if (bag[i].size === 'XXL') { %> selected <% } %> id="XXL" value="XXL">XXL</option>
                         </select>
                         <select  class="form-select mt-2" name="quantite" required  aria-label="Default select example">
                             <option id="S" selected value="S">Red </option>
