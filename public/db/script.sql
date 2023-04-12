@@ -16,7 +16,7 @@ style varchar(40),
 catgorie varchar(40),
 marque varchar(40),
 quantite  integer default 0,
-accessoire integer references accessoire(id),
+accessoire BOOLEAN default false,
 picture varchar(300),
 prix double PRECISION ,
 rang integer default 0, 
@@ -28,8 +28,16 @@ id SERIAL  primary key ,
 type varchar(40) not null ,
 titre varchar(50) not null,
 marque varchar(40),
-quantity  integer default 0,
+quantite  integer default 0,
 picture varchar(300)
+);
+
+create table productsAccessoire (
+    id SERIAL PRIMARY KEY,
+    produit INT,
+    accessoire INT,
+    FOREIGN KEY (produit) REFERENCES produit(id),
+    FOREIGN KEY (accessoire) REFERENCES accessoire(id)
 );
 
 create table examplaire (
@@ -51,15 +59,37 @@ nom varchar(30),
 prenom varchar(30),
 adresse character varying(200) ,
 telephone character varying(20),
-livraison TIMESTAMP
+livraison TIMESTAMP,
+prix double PRECISION
 );
+
+create table commandeProduits (
+id SERIAL primary key ,
+commande integer references commande(id),
+produit integer references produit(id),
+qte integer,
+size varchar(20),
+color varchar(20)
+);
+
+create table commandeAccessoires (
+id SERIAL primary key ,
+commande integer references commande(id),
+produit integer references produit(id),
+accessoire integer references accessoire(id),
+qte integer
+);
+
 
 create table panier (
 id SERIAL primary key ,
 commande integer references commande(id),
 produit integer references produit(id),
 accessoire integer references accessoire(id),
-combinaison integer references combinaison(id)
+combinaison integer references combinaison(id),
+qte integer,
+size varchar(20),
+color varchar(20)
 );
 
 
@@ -97,4 +127,16 @@ VALUES (11, 'rouge', 5, 10, 7, 3, 0, 0),
 ;
 
 INSERT INTO client (type, nom, prenom, email, adresse, telephone, motDePasse, picture ) 
-VALUES ('client','salah','falek','user1@gmail.com','Paris','0664827074','$2b$10$4M6t2/THE6k5nJMZloL6D.nNxLt2RmVxpCcwRzFOaOg7H3HMQZmo6','https://th.bing.com/th/id/OIP.8-24d462Al7n2nEWHu6AvAHaE8?w=296&h=184&c=7&r=0&o=5&dpr=1.1&pid=1.7')
+VALUES ('client','salah','falek','user1@gmail.com','Paris','0664827074','$2b$10$4M6t2/THE6k5nJMZloL6D.nNxLt2RmVxpCcwRzFOaOg7H3HMQZmo6','https://th.bing.com/th/id/OIP.8-24d462Al7n2nEWHu6AvAHaE8?w=296&h=184&c=7&r=0&o=5&dpr=1.1&pid=1.7');
+
+INSERT INTO produit (type, nom, descr, style, catgorie, marque, quantite, accessoire, picture , prix)   
+VALUES ('pantalon', 'Pantalon femme', 'Pantalon femme qui épouse la silhouette et qui peut être porté avec nimporte quel haut décontracté', 'Urbain', 'Femme', 'Levi''s', 10, true, 'https://i.pinimg.com/originals/f7/7e/c2/f77ec2a8bc81cc5d89b2ac4fc436c1a1.jpg',25.00),
+('pantalon', 'jean slim', 'Pantalon femme qui épouse la silhouette et qui peut être porté avec nimporte quel haut décontracté', 'Urbain', 'Femme', 'Levi''s', 10, true, 'https://www.lahalle.com/dw/image/v2/BCHM_PRD/on/demandware.static/-/Sites-lahalle_master/default/dwdb69d692/jeans-slim-ceinture-gris-clair-femme-b-36165600125960015.jpg?sw=1404&sh=1404',40.00);
+
+INSERT INTO accessoire (type, marque, quantity, prix,picture)   
+VALUES ('ceinture', 'Gucci',10,13.00,'https://th.bing.com/th/id/OIP.osW0pBlggHevwFhAV5gpVgHaHa?pid=ImgDet&rs=1'),
+('ceinture', 'Louis',15,15.00,'https://th.bing.com/th/id/OIP.ldVXB3iPYOUDNNcFJDUHewHaHa?pid=ImgDet&w=500&h=500&rs=1'),
+(' nœud papillon', 'Dior',10,13.00,'https://th.bing.com/th/id/OIP.itoeJJAEmCdnipYKaKRnWQHaHk?pid=ImgDet&rs=1'),
+(' nœud papillon', 'Hugo Boss',15,15.00,'https://th.bing.com/th/id/OIP.s4OFrFKDGJpvW4rMrhnr0gHaE6?pid=ImgDet&w=1978&h=1312&rs=1');
+
+

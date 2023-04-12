@@ -53,10 +53,8 @@
     <!-- ======= title Section ======= -->
     <div class="section-title">
       <h1 class="title">
-        <%= info.title %>
+        Accessoire
       </h1>
-      <h2 class="descr">
-        <%= info.descr %>
     </div>
     <!-- ======= End title Section ======= -->
 
@@ -77,29 +75,6 @@
       </select>
 
       <select
-        class="form-select mt-2"
-        name="categorie"
-        required
-        aria-label="Default select example"
-      >
-        <option disabled selected value="S">Catégorie</option>
-        <option value="Homme">Homme</option>
-        <option value="Femme">Femme</option>
-        <option value="Enfant">Enfant</option>
-      </select>
-
-      <select
-        class="form-select mt-2"
-        name="categorie"
-        required
-        aria-label="Default select example"
-      >
-        <option disabled selected value="S">Styles</option>
-        <% styles.map((item) => { %>
-          <option value="<%= item.style %>"><%= item.style %></option>
-       <% }) %>
-      </select>
-      <select
       class="form-select mt-2"
       name="categorie"
       required
@@ -112,28 +87,26 @@
 
     </select>
     </div>
-    <div class="productsFound"><%= products.length %> styles trouvés</div>
+
     <!-- ======= End filter Brands ======= -->
     <div class="gallery">
       <div class="gallery-items">
-        <% for (let i = 0 ; i <  products.length  ; i++) { %>
+        <% for (let i = 0 ; i <  accessoire.length  ; i++) { %>
         <div class="product">
           <div class="gallery-item">
             <div class="mark">
-              <%= products[i].marque %>
-            </div>
-            
+              <%= accessoire[i].marque %>
+            </div> 
               <img
                 class=""
-                src="<%= products[i].picture %>"
+                src="<%= accessoire[i].picture %>"
                 alt=""
                 class="img-fluid"
               />
-      
-              <a href="/produit/details/<%= products[i].id %>" class="gallery-lightbox">  <div class="iconContainer">+</div> </a>
+            <a href="/accessoire/<%= accessoire[i].id %>"><div class="iconContainer">+</div></a>
           </div>
-          <h2><%= products[i].nom %></h2>
-          <h1>$ <%= products[i].prix.toLocaleString('en-US', { minimumFractionDigits: 2 }) %></h1>
+          <h2><%= accessoire[i].type %></h2>
+          <h1>$ <%= accessoire[i].prix.toLocaleString('en-US', { minimumFractionDigits: 2 }) %></h1>
         </div>
         <% } %>
       </div>

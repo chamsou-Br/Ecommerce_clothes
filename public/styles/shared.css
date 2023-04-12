@@ -143,3 +143,79 @@ nav {
     margin-top: 60px;
   }
 }
+
+
+/*--------------------------------------------------------------
+# Card   Accessoire
+--------------------------------------------------------------*/
+
+.Accesscard {
+  margin: auto;
+  width: 12rem;
+  overflow: hidden;
+}
+
+.Accesscard .box {
+  padding: 15px 10px;
+  width: 100%;
+  transition: all ease-in-out 0.4s;
+}
+
+
+.Accesscard .box h4 {
+  text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0;
+  outline: none;
+  color: #2d2d2d;
+}
+
+
+
+.Accesscard .card-image {
+  background-size: contain;
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+  border: 0.5px solid #2d2d2d44;
+  border-radius: 5px;
+  transition: all ease-in-out 0.4s;
+}
+
+.Accesscard .card-image img {
+  height: 100%;
+  width: 100%;
+  transition: all ease-in-out 0.4s;
+}
+
+
+
+.Accesscard:hover .card-image img {
+  transform: scale(1.2);
+}
+
+
+.Accesscard .iconContainer{
+  z-index: 20;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #FFF;
+  font-size: 2rem;
+  border: 1px solid #51e2f5;
+  color: #51e2f5;
+  font-weight: 500;
+  border-radius: 50%;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+.Accesscard .iconContainer:hover {
+  color: #FFF;
+  background-color: #51e2f5;
+  border-color: #51e2f5;
+}

@@ -1,0 +1,12 @@
+<div class="Accesscard" accId="<%= acc.id %>" >
+        <div class="card-image"  style="overflow: hidden;">
+            <div accType="<%= acc.type %>" accId="<%=  JSON.stringify(acc) %>" class="iconContainer">+</div>
+            <img class="" src="<%= acc.picture %>" style="object-fit: cover;" />
+        </div>
+        <div class="box">
+            <div style="display: flex;justify-content: space-between;">
+                <h4><%= acc.type %></h4>
+                <h4>$ <%= acc.prix.toLocaleString('en-US', { minimumFractionDigits: 2 }) %></h4>
+            </div>
+        </div>
+</div>

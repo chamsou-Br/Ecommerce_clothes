@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken")
 
 const verifyAuth = async (req , res , next) => {
-  const client = await checkuser(req);
+  const client = await checkuser(req,res);
   if (client) {
     req.client = client
     next()
@@ -15,18 +15,24 @@ const createToken = async (payload, secretKey, expiresIn) => {
   return jwt.sign(payload, secretKey, {expiresIn : expiresIn });
   };
   
-  const checkuser = async (req) => {
-    const token = req.cookies.accessToken;
-    if (await token) {
-      const encoded = jwt.verify(token, process.env.JWT_SECRET)
-        if (encoded) {
-          const { motdepasse, ...client } =  encoded;
-          return client
-        }
-        else {
-          return null
-        }
+  const checkuser = async (req,res) => {
+    try {
+      const token = req.cookies.accessToken;
+      if (await token) {
+        const encoded = jwt.verify(token, process.env.JWT_SECRET)
+          if (encoded) {
+            const { motdepasse, ...client } =  encoded;
+            return client
+          }
+          else {
+            return null
+          }
+      }
+    } catch (error) {
+      removeCookie(res)
+      return null
     }
+
   };
 
   

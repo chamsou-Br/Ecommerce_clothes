@@ -24,9 +24,21 @@
   }
 
   .details-left {
-    display: flex;
+
     padding: 10px 30px;
-    justify-content: flex-end;
+
+  }
+
+  .details-left .addAccessoire {
+    outline: none;
+    border: none;
+    background: none;
+    color: #51e2f5;
+    font-size: 1rem;
+    font-weight: bold;
+  }
+  .details-left .addAccessoire:hover{
+    color: #1c99f9;
   }
 
   .details-img img {
@@ -208,9 +220,7 @@
       margin-top: 70px;
     }
     .details-left {
-        display: flex;
         padding: 10px 30px;
-        justify-content: center
     }
     .details-right {
         margin: auto;
@@ -228,11 +238,15 @@
     width: 100vw;
     padding: 0 0;
   }
-    .details-left {
-        display: flex;
+  .details-left {
+       
         width: 100%;
         justify-content: center;
         padding: 0;
+    }
+    .details-left .addAccessoire {
+      padding: 10px;
+      font-size: 1.2rem;
     }
     .details-right {
         margin: auto;
@@ -257,4 +271,31 @@
       }
       
     
+}
+
+ul.list-group {
+  overflow-y: scroll;
+}
+
+ul.list-group::-webkit-scrollbar {
+  width: 8px;
+  height: 5px;
+}
+
+ul.list-group::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+ul.list-group::-webkit-scrollbar-thumb {
+  background: #5f5950;
+  border-radius: 10px;
+}
+
+ul.list-group::-webkit-scrollbar-thumb:hover {
+  background: #1ecde4;
+}
+
+#accessoireContainer {
+  margin-top: 15px;
 }

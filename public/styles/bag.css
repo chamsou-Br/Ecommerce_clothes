@@ -183,7 +183,7 @@ body{
 
 
 .info-bag input{
-    font-size: 0.8rem;
+    font-size: 1rem;
     font-weight: normal;
     color: #2d2d2d;
     background-color: #FFF;
@@ -193,6 +193,9 @@ body{
 
     outline: none;
     padding: 0 10px;
+}
+.info-bag input:disabled {
+    color: #00000099;
 }
 
 .info-bag .icon-input {
@@ -205,6 +208,8 @@ body{
     background-color: #51e2f5;
     cursor: pointer;
     color: #FFF;
+    outline: none;
+    border: none;
     width: 100%;
     padding: 10px;
     text-align: center;

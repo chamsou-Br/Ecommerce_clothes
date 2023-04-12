@@ -8,8 +8,9 @@ const { verifyAuth } = require("./middleware/auth");
 const {profileController,modifyPictureController, updateProfileController} = require("./controllers/profile");
 const multer = require("multer");
 const upload = require("./middleware/upload");
-const { bagController, addBagController, deleteBagController } = require("./controllers/bag");
+const { bagController, addBagController, deleteBagController, deleteAccessoireFromBagController, valideBagController, deleteAccessoireFromProductController } = require("./controllers/bag");
 const session = require("express-session");
+const { accessoiresController, addAccessoireToBagController } = require("./controllers/accessoir");
 
 require('dotenv').config();
 
@@ -34,6 +35,8 @@ app.get('/',verifyAuth, homeController);
 
 app.get("/produit/details/:id",verifyAuth,productDetailsController)
 app.get("/produit/:type",verifyAuth,productsController);
+app.get("/accessoire",verifyAuth,accessoiresController)
+app.get("/accessoire/:id",verifyAuth,addAccessoireToBagController)
 
 app.get("/profile",verifyAuth,profileController)
 app.post("/profile",verifyAuth,updateProfileController);
@@ -45,8 +48,11 @@ app.get("/register",registerController);
 app.post("/register",registerHandlerController)
 
 app.get("/bag",verifyAuth,bagController)
+app.post('/bag',verifyAuth,valideBagController)
 app.post("/bag/:id",verifyAuth,addBagController)
 app.get("/bag/delete/:id",verifyAuth,deleteBagController)
+app.get("/bag/accessoire/delete/:id",verifyAuth,deleteAccessoireFromBagController)
+app.get("/bag/product/accessoire/delete",verifyAuth,deleteAccessoireFromProductController)
 
 
 app.post('/profile/upload', upload.single("picture"),verifyAuth,modifyPictureController);

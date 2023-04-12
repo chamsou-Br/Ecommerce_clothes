@@ -29,7 +29,7 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css"
     />
-    <link rel="stylesheet" href="/styles/home.css" />
+    
     <link rel="stylesheet" href="/styles/details.css" />
     <link rel="stylesheet" href="/styles/shared.css" />
     <link
@@ -63,6 +63,9 @@
  
                     <img src="<%= product.picture %>" />
                 </div>
+                <button type="button" class="addAccessoire" data-toggle="modal" data-target="#exampleModalCenter">
+                  + Ajouter Accessoire
+                </button>
 
                 
 
@@ -84,7 +87,7 @@
                 </div>
                 <div class="details-info">
                     <div class="price">
-                        <%= product.prix %>
+                        $ <%= product.prix.toLocaleString('en-US', { minimumFractionDigits: 2 }) %>
                     </div>
                     <div class="reduction">
                         <div>
@@ -100,7 +103,7 @@
                     <div id="test" class="price">
                         choisir une couleur
                     </div>
-                    <input type="hidden" value="0" name="color" id="itemActive" />
+                    <input type="hidden" value="<%= product.items[0].color %>" name="color" id="itemActive" />
                     <div class="colors">
                       <% product.items.map((item,index) => { %>
                         <div class="color <%= index == 0 ? "active" : '' %>">
@@ -124,6 +127,12 @@
                         <option id="XL" <%= product.items[0].quantitexl == 0 ? "disabled" : "" %> value="XL">XL</option>
                         <option id="XXL" <%= product.items[0].quantitexxl == 0 ? "disabled" : "" %> value="XXL">XXL</option>
                     </select>
+
+                    <div id="accessoireContainer">
+                      <div class="price">
+                        Accessoires
+                      </div>
+                    </div>
                     <button type="submit" class="buyButtoncontainer">
                         Ajouter au panier
                     </button>
@@ -135,6 +144,34 @@
               </form>
     </div>
     <!-- ======= End trending Brands ======= -->
+
+                          <!-- Modal -->
+                          <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLongTitle">Accessoires</h5>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                  <ul
+                                  class="list-group list-group-horizontal position-relative overflow-auto w-90"
+                                >
+                                  <% for (let i=0;i<accs.length;i++) { %>
+                                  <li class="list-group-item border-0">
+                                    <%- include('components/accessCard',{ acc : accs[i] }) %>
+                                  </li>
+                                  <% } %>
+                                </ul>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary " id="closeModal" data-dismiss="modal">réinitialiser</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
     
     <!-- ======= Footer ======= -->
         <%- include('components/footer') %>

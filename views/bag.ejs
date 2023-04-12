@@ -52,7 +52,7 @@
 
 
     <!-- ======= Bag =======   -->
-    <% if (bag && bag.length > 0) { %>
+    <% if (bag.length > 0 || accessoires.length > 0) { %>
     <div class="bag">
         <div class="products-bag">
             <% for (let i = 0 ; i < bag.length ; i++) { %>
@@ -65,7 +65,7 @@
                     <img src="<%= bag[i].product.picture %>" />
                      </a>
                     <div class="item-product-info">
-                        <h1><%= bag[i].product.prix %></h1>
+                        <h1>$ <%=  bag[i].product.prix.toLocaleString('en-US', { minimumFractionDigits: 2 })%></h1>
                     <h2><%= bag[i].product.nom %></h2>
                     <div class="update">
                         <select  class="form-select mt-2" name="quantite" required  aria-label="Default select example">
@@ -79,11 +79,8 @@
                             <option <% if (bag[i].size === 'XXL') { %> selected <% } %> id="XXL" value="XXL">XXL</option>
                         </select>
                         <select  class="form-select mt-2" name="quantite" required  aria-label="Default select example">
-                            <option id="S" selected value="S">Red </option>
-                            <option id="M" value="M">M</option>
-                            <option id="L"  value="L">L</option>
-                            <option id="XL" value="XL">XL</option>
-                            <option id="XXL" value="XXL">XXL</option>
+                            <option id="S" selected value="<%= bag[i].color %>"><%= bag[i].color %> </option>
+      
                         </select>
                     </div>
                     <div class="save">
@@ -92,9 +89,58 @@
                     </div>
                     </div>
                 </div>
+                <% for(let j = 0 ; j< bag[i].accessoire.length;j++) { %>
+                  <div class="item-product"> 
+                    <a href="/bag/product/accessoire/delete?id=<%= i%>&acc=<%= j %>">
+                    <button type="button" class="btn-close" aria-label="Close"></button>
+                    </a>
+                    <img src="<%=  bag[i].accessoire[j].picture %>" />
+                    <div class="item-product-info">
+                        <h1><%=  bag[i].accessoire[j].prix %></h1>
+                    <h2><%=  bag[i].accessoire[j].type %></h2>
+                    <div class="update">
+                        <select  class="form-select mt-2" name="quantite" required  aria-label="Default select example">
+                            <option id="S" selected  value="S">  1 </option>
+                        </select>
+                        <select  class="form-select mt-2" name="quantite" required  aria-label="Default select example">
+                            <option id="S" selected value="S"><%=  bag[i].accessoire[j].marque %></option>
+                        </select>
+                    </div>
+                    <div class="save">
+                        <i class="bi bi-lightbulb-fill"></i>
+                        <span>Enregistrer</span>
+                    </div>
+                    </div>
+                </div>
+                <% } %>
             <%  } %>
+            <% for (let i = 0 ; i < accessoires.length ; i++) { %>
+              <div class="item-product"> 
+                <a href="/bag/accessoire/delete/<%= i %>">
+                <button type="button" class="btn-close" aria-label="Close"></button>
+                </a>
+                <img src="<%= accessoires[i].accessoire.picture %>" />
+                <div class="item-product-info">
+                    <h1><%= accessoires[i].accessoire.prix %></h1>
+                <h2><%= accessoires[i].accessoire.type %></h2>
+                <div class="update">
+                    <select  class="form-select mt-2" name="quantite" required  aria-label="Default select example">
+                        <option id="S" selected  value="S"><%= accessoires[i].qty %></option>
+                    </select>
+                    <select  class="form-select mt-2" name="quantite" required  aria-label="Default select example">
+                        <option id="S" selected value="S"><%= accessoires[i].accessoire.marque %></option>
+                    </select>
+                </div>
+                <div class="save">
+                    <i class="bi bi-lightbulb-fill"></i>
+                    <span>Enregistrer</span>
+                </div>
+                </div>
+            </div>
+              <%  } %>
 
         </div>
+        <form method="post" action="/bag">
         <div class="info-bag">
             
             <h1>TOTAL</h1>
@@ -107,37 +153,51 @@
                 <i class="bi bi-exclamation-circle"></i>
             </div>
             <div class="input-container">
-                <input class="info" type="text" name="lastName" placeholder="Nom">
+              <% if (user) { %>
+                <input type="hidden" value="<%= user ? user.nom : "" %>"   class="info" type="text" name="lastName" placeholder="Nom">
+              <% } %>
+                <input value="<%= user ? user.nom : "" %>" <%= user ? "disabled" : "" %>  required class="info" type="text" name="lastName" placeholder="Nom">
                 <i class="bi bi-caret-down icon-input"></i>
             </div>
             <div class="input-container">
-                <input class="info" type="firstName" name="text" placeholder="Prénom">
+              <% if (user) { %>
+                <input type="hidden" value="<%= user ? user.prenom : "" %>" class="info" type="firstName" name="firstName" placeholder="Prénom">
+              <% } %>
+                <input value="<%= user ? user.prenom : "" %>" <%= user ? "disabled" : "" %>   required class="info" type="firstName" name="firstName" placeholder="Prénom">
                 <i class="bi bi-caret-down icon-input"></i>
             </div>
             <div class="input-container">
-                <input class="info" type="address" name="" placeholder="Adresse">
+                <input value="<%= user ? user.adresse : "" %>"   required class="info" type="address" name="address" placeholder="Adresse">
                 <i class="bi bi-caret-down icon-input"></i>
             </div>
             <div class="input-container">
-                <input class="info" type="text" name="email" placeholder="Adresse e-mail">
+              <% if (user) { %>
+                <input type="hidden" value="<%= user ? user.email : "" %>" class="info" type="text" name="email" placeholder="Adresse e-mail">
+              <% } %>
+                <input value="<%= user ? user.email : "" %>" <%= user ? "disabled" : "" %>   required class="info" type="text" name="email" placeholder="Adresse e-mail">
                 <i class="bi bi-caret-down icon-input"></i>
             </div>
             <div class="input-container">
-                <input class="info" type="text" name="phone" placeholder="N de portable">
+              <% if (user) { %>
+                <input type="hidden" value="<%= user ? user.telephone : "" %>"  required class="info"  name="phone" placeholder="N de portable">
+              <% } %>
+                <input value="<%= user ? user.telephone : "" %>" <%= user ? "disabled" : "" %>   required class="info" type="text" name="phone" placeholder="N de portable">
                 <i class="bi bi-caret-down icon-input"></i>
             </div>
             <div class="input-container">
-                <input class="info" type="date" name="date" placeholder="l’heure de livraison">
+                <input required class="info" type="date" name="date" placeholder="l’heure de livraison">
                 <i class="bi bi-caret-down icon-input"></i>
             </div>
-            <div class="finaliser">
+            <input type="hidden"  value="20.00" name="price" />
+            <button type="submit" class="finaliser">
                 FINALISER
-            </div>
+            </button>
 
 
 
             
         </div>
+      </form>
     </div>
     <% } else { %>
         <div class="bag-empty">

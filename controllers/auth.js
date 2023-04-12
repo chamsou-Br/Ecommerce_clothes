@@ -47,7 +47,7 @@ const registerHandlerController = async (req , res) => {
             res.render("register",{message : 'Mot de passe non valide'});
         }else {
             const salt = await bcrypt.genSalt();
-            const hashPassword = bcrypt.hash(password,salt)
+            const hashPassword = await bcrypt.hash(password,salt)
             await addUser(firstName , lastName , email , address , hashPassword , phone)
             const client = await getUser(email);
             const token = await createToken(client,process.env.JWT_SECRET,process.env.JWT_ACCESS_TOKEN_EXPIRES)
