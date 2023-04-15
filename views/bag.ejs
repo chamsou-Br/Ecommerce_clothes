@@ -46,9 +46,11 @@
   </head>
 
   <body>
-        <!-- ======= Navbar ======= -->
+
+      <!-- ======= Navbar ======= -->
         <%- include("components/nav",{types}) %>
         <!-- ======= End navbar ======= -->
+
 
 
     <!-- ======= Bag =======   -->
@@ -96,7 +98,7 @@
                     </a>
                     <img src="<%=  bag[i].accessoire[j].picture %>" />
                     <div class="item-product-info">
-                        <h1><%=  bag[i].accessoire[j].prix %></h1>
+                        <h1>$ <%=  bag[i].accessoire[j].prix.toLocaleString('en-US', { minimumFractionDigits: 2 }) %></h1>
                     <h2><%=  bag[i].accessoire[j].type %></h2>
                     <div class="update">
                         <select  class="form-select mt-2" name="quantite" required  aria-label="Default select example">
@@ -121,7 +123,7 @@
                 </a>
                 <img src="<%= accessoires[i].accessoire.picture %>" />
                 <div class="item-product-info">
-                    <h1><%= accessoires[i].accessoire.prix %></h1>
+                    <h1>$ <%= accessoires[i].accessoire.prix.toLocaleString('en-US', { minimumFractionDigits: 2 }) %></h1>
                 <h2><%= accessoires[i].accessoire.type %></h2>
                 <div class="update">
                     <select  class="form-select mt-2" name="quantite" required  aria-label="Default select example">

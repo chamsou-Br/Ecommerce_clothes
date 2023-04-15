@@ -3,9 +3,75 @@ body{
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    justify-content: space-between;
+    background-color: #eee;
 }
 
+.list-group-item.cardFilter {
+    background-color: #FFF;  
+    padding: 15px 20px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    margin: 20px 30px;
+    cursor: pointer;
+}
+
+.list-group-item.cardFilter:hover{
+    border : 2px solid #51e2f5;
+}
+
+
+
+.list-group-item.cardFilter.pennding {
+    border-top: 4px solid #f29a62;
+}
+
+.list-group-item.cardFilter.done {
+    border-top: 4px solid #56e164;
+}
+
+.list-group-item.cardFilter.canceld {
+    border-top: 4px solid #fa5959;
+}
+
+
+.cardFilter div {
+    display: flex;
+    margin-top: 5px;
+    margin-left: 20px;
+    margin-right: 10px;
+    flex-direction: column;
+    justify-content: center;
+    width: 120px;
+   }
+
+.filter {
+    margin-top: 70px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+.cardFilter h1 {
+    font-size: 1rem;
+    color: #2d2d2d;
+    font-weight: normal;
+}
+.cardFilter h2 {
+    font-size: 0.9rem;
+    color: #2d2d2d;
+    font-weight: normal;
+}
+
+li {
+    background-color: none;
+}
+
+
+.cardFilter img{
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+}
 .bag-empty {
     width: 450px;
     margin: auto;
@@ -36,97 +102,96 @@ body{
 .bag {
     display: flex;
     justify-content: center;
-    background-color: #eee;
-    padding-top: 90px;
+    background-color: #red;
+    padding-top: 20px;
     overflow-x: hidden;
     padding-bottom: 30px;
+
 }
 
-.products-bag {
+
+.commandes-bag {
     width: 600px;
     background-color: #FFF;
     border: 1px solid #eee;
+    border-top:  4px solid #f29a62;
 }
 
-.item-product {
+.item-commande {
     display:  flex;
     justify-content: start;
     padding: 20px 0px;
+    align-items: start;
     margin: 0 30px;
     border-bottom: 0.5px solid #22222222;
     position: relative;
 }
-
-.item-product img {
+.item-commande .info {
+    display:  flex;
+    justify-content: space-between;
+}
+.item-commande img {
     width: 110px;
-    height: 150px;
+    height: 110px;
     object-fit:  cover;
     margin-right: 20px;
-    border-radius: 0.2rem;
+    border-radius: 100%;
     cursor: pointer;
 
 }
-.item-product .btn-close {
+.item-commande .btn-close {
     position: absolute;
     top: 30px;
     right: 0px;
     font-size: 0.8rem;
 }
 
-.item-product-info  {
+.item-commande-info  {
     display: flex;
+    flex: 1;
     flex-direction: column;
     justify-content: space-between;
     padding: 5px;
 }
-.item-product h1 {
+.item-commande h1 {
     color: #2d2d2d;
     font-size: 1.2rem;
     font-weight: bold;
     letter-spacing: 1.1px;
 }
-.item-product h2{
+.item-commande h2{
     color: #2d2d2dCC;
     font-size: 1rem;
     font-weight: 500;
-    margin-top: 5px;
+    margin-top: 2px;
     overflow: hidden; /* Hide the overflowing text */
     white-space: nowrap; /* Prevent line breaks within the paragraph */
     text-overflow: ellipsis; /* Replace overflowing text with ellipsis (...) */
 }
-
-.item-product .update {
-    display:  flex;
-}
-.item-product .update h4 {
-    margin-top: 10px;
-    font-size: 1rem;
-    color: #2d2d2d;
-    border-right: 1px solid #2d2d2d;
-    padding:0 20px;
-}
-.item-product .update h4:first-of-type {
-    padding-left: 0;
-}
-.item-product .update select {
-    width: 80px;
-    padding:0 10px;
-    border-top: none;
-    border-bottom: none;
-    border-radius: 0;
+.item-commande h3{
+    color: #2d2d2dCC;
     font-size: 0.8rem;
-    color: #2d2d2d;
+    font-weight: 500;
+    overflow: hidden; /* Hide the overflowing text */
+    white-space: nowrap; /* Prevent line breaks within the paragraph */
+    text-overflow: ellipsis; /* Replace overflowing text with ellipsis (...) */
 }
-.item-product .update select:nth-of-type(1) {
-    border-left: none;
-    padding-left: 0;
-}
-.item-product .update select:last-of-type{
-    border-right: none;
+.item-commande h3 span {
+    margin-left: 5px;
 }
 
-.item-product .save {
-    margin-top: 15px;
+.item-commande .update {
+    display:  flex;
+    margin-top: 20px;
+}
+a {
+    text-decoration: none; /* remove underline */
+    color: inherit; /* inherit color from parent */
+    cursor: pointer; /* change cursor to pointer on hover */
+  }
+
+.item-commande .save {
+    margin-right: 20px;
     padding: 5px 10px;
     border: 1px solid #2d2d2d22;
     width: 140px;
@@ -134,14 +199,36 @@ body{
     justify-content: center;
     font-size: 1rem;
     border-radius: 0.2rem;
-
+    cursor: pointer;
 }
 
-.item-product .save i {
+
+.item-commande .save.done{
+    border: 2px solid #56e164;
+    color: #56e164;
+}
+.item-commande .save.cancel {
+    border: 2px solid salmon;
+    color: salmon;
+}
+
+.item-commande .save.done:hover  {
+    background-color: #56e164;
+    color: #FFF;
+}
+
+.item-commande .save.cancel:hover  {
+    background-color: salmon;
+    color: #FFF;
+}
+
+.item-commande .save i {
     margin-right: 10px;
     font-size: 12px;
     margin-top: 5px;
 }
+
+
 
 .info-bag {
     display: flex;
@@ -237,27 +324,31 @@ body{
 
 @media (max-width : 1050px)  { 
 
-    .bag{
+    .list-group-item.cardFilter {
+        margin: 20px 10px;
+    }
 
+    .bag{
         overflow-x: hidden;
         padding: 0;
     }
-    .products-bag {
+    .commandes-bag {
         width: 500px;    
     }
 
 }
 
 @media (max-width : 950px)  { 
+
+
     .bag {
         display: block;
         padding: 10px 20px;
-        padding-top: 80px;
         padding-bottom: 40px;
         overflow-x: hidden;
         width: 99%;
     }
-    .products-bag {
+    .commandes-bag {
         margin: auto;
         width: 100%;
       
@@ -275,26 +366,26 @@ body{
 @media (max-width : 550px)  { 
     .bag{
         padding: 0%;
-        padding-top: 70px;
+        padding-top: 10px;
         padding-bottom: 40px;
     }
-    .item-product {
+    .item-commande {
         margin: 0 10px;
     }
-    .item-product img {
-        width: 100px;
-        height: 140px;
+    .item-commande img {
+        width: 110px;
+        height: 110px;
     }
-    .item-product h1 {
+    .item-commande h1 {
         font-size: 1rem;
     }
-    .item-product h2 {
+    .item-commande h2 {
         font-size: 0.8rem;
     }
-    .item-product select{
+    .item-commande select{
         font-size: 0.8rem;
     }
-    .item-product .btn-close  {
+    .item-commande .btn-close  {
         top: 10px;
     }
 }

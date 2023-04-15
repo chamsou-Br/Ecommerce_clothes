@@ -11,6 +11,7 @@ const upload = require("./middleware/upload");
 const { bagController, addBagController, deleteBagController, deleteAccessoireFromBagController, valideBagController, deleteAccessoireFromProductController } = require("./controllers/bag");
 const session = require("express-session");
 const { accessoiresController, addAccessoireToBagController } = require("./controllers/accessoir");
+const { commandesPageController, updateCommandeStatusController, commaneDetailsController } = require("./controllers/gerant");
 
 require('dotenv').config();
 
@@ -53,6 +54,11 @@ app.post("/bag/:id",verifyAuth,addBagController)
 app.get("/bag/delete/:id",verifyAuth,deleteBagController)
 app.get("/bag/accessoire/delete/:id",verifyAuth,deleteAccessoireFromBagController)
 app.get("/bag/product/accessoire/delete",verifyAuth,deleteAccessoireFromProductController)
+
+app.get("/gerant/commandes",commandesPageController)
+app.get("/gerant/commandes/:id",commaneDetailsController)
+app.get("/gerant/commandes/status",updateCommandeStatusController)
+
 
 
 app.post('/profile/upload', upload.single("picture"),verifyAuth,modifyPictureController);

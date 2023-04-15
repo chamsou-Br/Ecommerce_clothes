@@ -10,7 +10,7 @@ const getUser = async (email) => {
 }
 
 const addUser = async (firstName , lastName , email , address , password , phone) => {
-    await pool.query("INSERT INTO client (type, nom, prenom, email, adresse, telephone, motDePasse, picture ) VALUES ('client',$1,$2,$3,$4,$5,$6,$7)",[lastName,firstName,email,address,phone,password,'https://th.bing.com/th/id/OIP.8-24d462Al7n2nEWHu6AvAHaE8?w=296&h=184&c=7&r=0&o=5&dpr=1.1&pid=1.7'])
+    await pool.query("INSERT INTO client (type, nom, prenom, email, adresse, telephone, motDePasse, picture ) VALUES ('client',$1,$2,$3,$4,$5,$6,$7)",[lastName,firstName,email,address,phone,password,'https://th.bing.com/th/id/OIP.zM3AofCh04TntLpcUe-dHAHaHa?pid=ImgDet&w=194&h=194&c=7&dpr=1.1'])
 }
 
 const changePicture = async (picture , email) => {

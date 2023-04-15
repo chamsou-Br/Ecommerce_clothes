@@ -56,8 +56,10 @@
       <h1>Votre personnal Information</h1>
     </div>
     <div class="profile">
+
             <div class="imgContainer">
                 <div class="profile-img">
+                 
                     <img src="<%= user.picture ? user.picture : 'https://www.pngitem.com/pimgs/m/150-1503945_transparent-user-png-default-user-image-png-png.png' %>" />
                     <form id="upload-form" action="/profile/upload" method="POST" enctype="multipart/form-data">
                       <i class="bi bi-camera"></i>

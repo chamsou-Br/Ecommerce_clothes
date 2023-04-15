@@ -1,0 +1,169 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta charset="ISO-8859-1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ecommerce</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      rel="stylesheet"
+      integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css"
+    />
+    <link rel="stylesheet" href="/styles/home.css" />
+    <link rel="stylesheet" href="/styles/gerant.css" />
+    <link rel="stylesheet" href="/styles/shared.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="//fonts.googleapis.com/css?family=Josefin+Sans"
+    />
+    <style>
+      body {
+        font-family: "Josefin Sans";
+      }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+  </head>
+
+  <body>
+
+        <!-- ======= Navbar ======= -->
+        <%- include("components/navGerant") %>
+        <!-- ======= End navbar ======= -->
+
+
+    <!-- ======= Commend En Attente =======   -->
+    <% if (commande.length > 0) { %>
+        <div class="filter">
+            <ul
+            class="list-group list-group-horizontal position-relative overflow-auto w-90"
+          >
+            <li class="list-group-item  cardFilter done">
+                <img src="https://media.istockphoto.com/vectors/grunge-green-completed-wording-round-rubber-seal-stamp-on-white-vector-id960551208?k=6&m=960551208&s=612x612&w=0&h=GP-BecMBbDTRpLDmsx6G7IdanNnwG9ODl3OEKc_uRhI=" />
+                <div>
+                    <h1>Compléter</h1>
+                    <h2><%= commande.filter((c) => (c.etat == "COMPLETE")).length %> commandes</h2>
+                </div>
+            </li>
+                <li class="list-group-item  cardFilter pennding activ">
+                    <img src="https://activerain.com/image_store/uploads/agents/cameronteam/files/PENDING.png" />
+                    <div>
+                        <h1>En attente</h1>
+                        <h2><%= commande.filter((c) => (c.etat == "EN_ATTENTE")).length %> commandes</h2>
+                    </div>
+                </li>
+                <li class="list-group-item  cardFilter canceld">
+                    <img src="https://i0.wp.com/askthemoneycoach.com/wp-content/uploads/2009/09/bigstock-Cancelled-Stamp-64007296.jpg?fit=500%2C500&ssl=1" />
+                    <div>
+                        <h1>Annuler</h1>
+                        <h2><%= commande.filter((c) => (c.etat == "ANNULER")).length %> commandes</h2>
+                    </div>
+                </li>
+
+          </ul>
+    </div>
+    <div class="bag">
+        <div class="commandes-bag">
+            <% for (let i = 0 ; i < commande.length ; i++) { %>   
+              <a href="/gerant/commandes/<%= commande[i].id %>">            
+                <div class="item-commande" data-status="<%= commande[i].etat %>"> 
+                    <% if (commande[i].picture){ %> 
+                        <img src="../<%= commande[i].picture %>" />
+                    <% }else { %>
+                        <img src="https://th.bing.com/th/id/OIP.zM3AofCh04TntLpcUe-dHAHaHa?pid=ImgDet&w=194&h=194&c=7&dpr=1.1" />
+                    <% } %> 
+                    <div class="item-product-info">
+                        <div class="info">
+                            <h1><%= commande[i].nom + " " + commande[i].prenom %></h1>
+                            <h1>$ <%= commande[i].prix.toLocaleString('en-US', { minimumFractionDigits: 2 }) %></h1>
+                        </div>
+                        <h2>
+                            <%= commande[i].email %>
+                        </h2>
+                        <h3>
+                            <i class="bi bi-geo-fill"></i>
+                            <span><%= commande[i].adresse %></span>
+                        </h3>
+                        <h3>
+                            <i class="bi bi-calendar-fill"></i>
+                            <span><%= commande[i].livraison.toString().split('00')[0] %></span>
+                        </h3>
+                    <div class="update">
+                        <% if (commande[i].etat == "EN_ATTENTE" ) { %>
+                        <a href="/gerant/commandes/status?id=<%= commande[i].id  %>&status=COMPLETE">
+                        <div class="save done"> 
+                            <i class="bi bi-lightbulb-fill"></i>       
+                            <span>Effectuée</span>
+                        </div>
+                        </a>
+                        <a href="/gerant/commandes/status?id=<%= commande[i].id  %>&status=ANNULER">
+                        <div class="save cancel">
+                            <i class="bi bi-x-circle-fill"></i>
+                            <span>Annuler</span>
+                        </div>
+                        </a>
+                        <%}%>
+
+                    </div>
+
+                    </div>
+                </div>
+              </a> 
+
+            <%  } %>
+        </div>
+    </div>
+    <% } else { %>
+        <div class="bag-empty">
+            <i class="bi bi-bag"></i>
+            <h1>
+                Sac de commandes En Attente est vide
+            </h1>
+            <p>
+                en attendant que quelqu’un achète chez nous :)
+            </p>
+        </div>
+    <%} %>
+    <!-- ======= End Bag ======= -->
+    
+
+
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+    <script src="/script/commande.js"></script>
+
+  </body>
+</html>

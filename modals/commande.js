@@ -2,6 +2,46 @@ const pool = require("../db");
 const size = require("../public/data/sizes")
 
 
+const getAllCommande = async () => {
+  try {
+    const commandes =  (await pool.query(
+      "Select commande.* , client.picture  from commande LEFT JOIN client ON commande.client = client.email"
+    )).rows;
+    return commandes
+  } catch (error) {
+    console.log(error)
+    return []
+  }
+
+}
+
+const getCommandeByID = async (id) => {
+  try {
+    const commandes =  ( await pool.query(
+      "Select * from commande where id = $1",[id]
+    ) ).rows[0];
+    const produitsCommande =  ( await pool.query(
+      "Select * from commandeProduits JOIN produit on produit.id = commandeProduits.produit  where commande = $1",[id]
+    )).rows;
+    const accessoiresCommande =  (await pool.query(
+      "Select * from commandeAccessoires JOIN accessoire on accessoire.id = commandeAccessoires.accessoire where commande = $1",[id]
+    )).rows;
+    return {...commandes,products : produitsCommande , accessoires : accessoiresCommande}
+  } catch (error) {
+    console.log(error)
+    return null
+  }
+}
+
+const updateStatusCommande = async (id , status) => {
+  try {
+     await pool.query(
+      "UPDATE commande SET etat = $1 where id = $2",[status,id]
+     )
+  } catch (error) {
+    console.log(error)
+  }
+}
 
 const addCommande = async (data , products , accessoires,client )=> {
     try {
@@ -94,4 +134,4 @@ const addCommande = async (data , products , accessoires,client )=> {
 
 }
 
-module.exports =  { addCommande}
+module.exports =  { addCommande , getAllCommande,getCommandeByID , updateStatusCommande}

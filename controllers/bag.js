@@ -69,7 +69,7 @@ const addBagController = async (req , res) => {
 const valideBagController = async (req , res) => {
     const products = req.session.bag ? req.session.bag : []
    const accs = req.session.accessoire ? req.session.accessoire : []
-   const client = req.user ? req.user.email : null
+   const client = req.client ? req.client.email : null
     await addCommande(req.body,products,accs,client)
     req.session.accessoire = []
     req.session.bag  = []
