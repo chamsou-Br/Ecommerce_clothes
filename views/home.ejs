@@ -189,35 +189,16 @@
     <ul
       class="list-group list-group-horizontal position-relative overflow-auto w-90"
     >
-      <% for (let i=0;i<5;i++) { %>
+      <% for (let i=0;i<pantalons.length;i++) { %>
       <li class="list-group-item border-0">
-        <%- include('components/card',{ i : 0,image :
-        "https://th.bing.com/th/id/OIP.6tz_WpcFRSUCH64gZJtgngHaJ4?pid=ImgDet&w=194&h=258&c=7&dpr=1,1"})
+        <%- include('components/card',{data : pantalons[i]})
         %>
       </li>
       <% } %>
     </ul>
     <!-- ======= End Carousel Section 1 ======= -->
 
-    <!-- ======= Carousel Section 2 ======= -->
-    <div class="titleListContainer">
-      <h1 class="titlelist">Des chemises recommandé</h1>
-      <div class="detailsList">
-        <span>Voir tous</span>
-      </div>
-    </div>
-    <ul
-      class="list-group list-group-horizontal position-relative overflow-auto w-90"
-    >
-      <% for (let i=0;i<5;i++) { %>
-      <li class="list-group-item border-0">
-        <%- include('components/card',{ i : 0 , image :
-        "https://th.bing.com/th/id/OIP.2TipB0AaK2_Xj7kTYMStSgHaHa?w=207&h=207&c=7&r=0&o=5&dpr=1.1&pid=1.7"
-        }) %>
-      </li>
-      <% } %>
-    </ul>
-    <!-- ======= End Carousel Section 2 ======= -->
+
 
     <!-- ======= Carousel Section 3 ======= -->
     <div class="titleListContainer">
@@ -229,10 +210,9 @@
     <ul
       class="list-group list-group-horizontal position-relative overflow-auto w-90"
     >
-      <% for (let i=0;i<5;i++) { %>
+      <% for (let i=0;i<vests.length;i++) { %>
       <li class="list-group-item border-0">
-        <%- include('components/card',{ i : 0,image :
-        "https://th.bing.com/th/id/OIP.Y8N2gq9pO4DTSk5dsZgR2gHaHa?w=215&h=215&c=7&r=0&o=5&dpr=1.1&pid=1.7"})
+        <%- include('components/card',{data : vests[i]})
         %>
       </li>
       <% } %>
