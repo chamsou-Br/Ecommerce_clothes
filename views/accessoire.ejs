@@ -62,9 +62,10 @@
     <div class="filterContainer">
       <select
         class="form-select mt-2"
-        name="categorie"
+        name="sort"
         required
         aria-label="Default select example"
+        id="sort"
       >
         <option disabled selected value="date">Quoi de neuf</option>
         <option value="prix">Prix bas à haut</option>
@@ -76,11 +77,12 @@
 
       <select
       class="form-select mt-2"
-      name="categorie"
+      name="mark"
+      id="mark"
       required
       aria-label="Default select example"
     >
-      <option disabled selected value="S">Marques</option>
+      <option selected value="S">Tous Marques</option>
       <% marks.map((mark) => { %>
         <option value="<%= mark.marque %>"><%= mark.marque %></option>
      <% }) %>
@@ -92,7 +94,7 @@
     <div class="gallery">
       <div class="gallery-items">
         <% for (let i = 0 ; i <  accessoire.length  ; i++) { %>
-        <div class="product">
+        <div data-product="<%= JSON.stringify(accessoire[i]) %>" class="product">
           <div class="gallery-item">
             <div class="mark">
               <%= accessoire[i].marque %>
@@ -132,5 +134,6 @@
       integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
       crossorigin="anonymous"
     ></script>
+    <script src="/script/allProduct.js" ></script>
   </body>
 </html>

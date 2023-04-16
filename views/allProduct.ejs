@@ -64,7 +64,8 @@
     <div class="filterContainer">
       <select
         class="form-select mt-2"
-        name="categorie"
+        name="sort"
+        id="sort"
         required
         aria-label="Default select example"
       >
@@ -79,10 +80,11 @@
       <select
         class="form-select mt-2"
         name="categorie"
+        id="categorie"
         required
         aria-label="Default select example"
       >
-        <option disabled selected value="S">Catégorie</option>
+        <option  selected value="S">Tous Catégorie</option>
         <option value="Homme">Homme</option>
         <option value="Femme">Femme</option>
         <option value="Enfant">Enfant</option>
@@ -90,22 +92,24 @@
 
       <select
         class="form-select mt-2"
-        name="categorie"
+        name="style"
         required
+        id="style"
         aria-label="Default select example"
       >
-        <option disabled selected value="S">Styles</option>
+        <option  selected value="S">Tous Styles</option>
         <% styles.map((item) => { %>
           <option value="<%= item.style %>"><%= item.style %></option>
        <% }) %>
       </select>
       <select
       class="form-select mt-2"
-      name="categorie"
+      name="mark"
       required
+      id="mark"
       aria-label="Default select example"
     >
-      <option disabled selected value="S">Marques</option>
+      <option  selected value="S">Tous Marques</option>
       <% marks.map((mark) => { %>
         <option value="<%= mark.marque %>"><%= mark.marque %></option>
      <% }) %>
@@ -117,7 +121,7 @@
     <div class="gallery">
       <div class="gallery-items">
         <% for (let i = 0 ; i <  products.length  ; i++) { %>
-        <div class="product">
+        <div data-product="<%= JSON.stringify(products[i]) %>" class="product">
           <div class="gallery-item">
             <div class="mark">
               <%= products[i].marque %>
@@ -159,5 +163,6 @@
       integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
       crossorigin="anonymous"
     ></script>
+    <script src="/script/allProduct.js" ></script>
   </body>
 </html>
