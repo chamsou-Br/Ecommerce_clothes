@@ -89,15 +89,15 @@
                 <% } } %>
             <%  } %>
             <% for (let i = 0 ; i < accessoires.length ; i++) { %>
-              <% if (accessoires[i].produit = null) {%>
+              <% if (accessoires[i].produit == null) {%>
               <div class="item-product"> 
-                <img src="<%= accessoiress[i].picture %>" />
+                <img src="<%= accessoires[i].picture %>" />
                 <div class="item-product-info">
                     <h1>$ <%= accessoires[i].prix.toLocaleString('en-US', { minimumFractionDigits: 2 }) %></h1>
                 <h2><%= accessoires[i].type %></h2>
                 <div class="update">
-                  <h4 ><%= accessoires[j].marque %></h4>
-                  <h4><%= accessoires[j].qte %> Qte</h4>
+                  <h4 ><%= accessoires[i].marque %></h4>
+                  <h4><%= accessoires[i].qte %> Qte</h4>
                 </div>
                 <div style="height:50px;width: 60px;"></div>
                 </div>
@@ -140,7 +140,27 @@
             <div class="input-container">
                 <input value='' disabled  class="info " id="livraison" type="date" name="date" placeholder="l’heure de livraison">
                 <i class="bi bi-caret-down icon-input"></i>
-            </div>            
+            </div>   
+            <div class="update">
+              <% if (user.etat == "EN_ATTENTE" ) { %>
+              <a
+                href="/gerant/commandes/status?id=<%= user.id  %>&status=COMPLETE"
+              >
+                <div class="save done">
+                  <i class="bi bi-lightbulb-fill"></i>
+                  <span>Effectuée</span>
+                </div>
+              </a>
+              <a
+                href="/gerant/commandes/status?id=<%= user.id  %>&status=ANNULER"
+              >
+                <div class="save cancel">
+                  <i class="bi bi-x-circle-fill"></i>
+                  <span>Annuler</span>
+                </div>
+              </a>
+              <%}%>
+            </div>         
         </div>
       </form>
     </div>

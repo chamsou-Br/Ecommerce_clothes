@@ -3,11 +3,13 @@ body{
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    background-color: #eee;
+    background-color: #fff;
+    overflow-x: hidden;
 }
 
 .list-group-item.cardFilter {
     background-color: #FFF;  
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2), 0 0 10px rgba(0, 0, 0, 0.1);
     padding: 15px 20px;
     display: flex;
     justify-content: start;
@@ -46,7 +48,6 @@ body{
    }
 
 .filter {
-    margin-top: 70px;
     display: flex;
     justify-content: center;
     margin-bottom: 20px;
@@ -102,7 +103,6 @@ li {
 .bag {
     display: flex;
     justify-content: center;
-    background-color: #red;
     padding-top: 20px;
     overflow-x: hidden;
     padding-bottom: 30px;
@@ -180,7 +180,7 @@ li {
     margin-left: 5px;
 }
 
-.item-commande .update {
+ .update {
     display:  flex;
     margin-top: 20px;
 }
@@ -190,9 +190,9 @@ a {
     cursor: pointer; /* change cursor to pointer on hover */
   }
 
-.item-commande .save {
-    margin-right: 20px;
-    padding: 5px 10px;
+ .save {
+    margin-right: 5px;
+    padding: 5px 5px;
     border: 1px solid #2d2d2d22;
     width: 140px;
     display: flex;
@@ -203,26 +203,26 @@ a {
 }
 
 
-.item-commande .save.done{
+.save.done{
     border: 2px solid #56e164;
     color: #56e164;
 }
-.item-commande .save.cancel {
+.save.cancel {
     border: 2px solid salmon;
     color: salmon;
 }
 
-.item-commande .save.done:hover  {
+.save.done:hover  {
     background-color: #56e164;
     color: #FFF;
 }
 
-.item-commande .save.cancel:hover  {
+ .save.cancel:hover  {
     background-color: salmon;
     color: #FFF;
 }
 
-.item-commande .save i {
+.save i {
     margin-right: 10px;
     font-size: 12px;
     margin-top: 5px;
@@ -362,6 +362,23 @@ a {
         width: 95%;
     }
 }
+.table th  {
+    font-size: 16px;
+}
+.table th , .table td {
+    padding: 20px 0;
+    font-size: 12px;
+}
+.table {
+   margin-left: 10px;
+   overflow-x: scroll;
+
+}
+
+.table tr {
+
+    cursor: pointer;
+}
 
 @media (max-width : 550px)  { 
     .bag{
@@ -387,5 +404,8 @@ a {
     }
     .item-commande .btn-close  {
         top: 10px;
+    }
+    tbody td{
+        font-size: 3px;
     }
 }

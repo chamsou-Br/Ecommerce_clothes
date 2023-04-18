@@ -42,111 +42,211 @@
         font-family: "Josefin Sans";
       }
     </style>
-    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.js"
+      integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+      crossorigin="anonymous"
+    ></script>
   </head>
 
   <body>
-
-        <!-- ======= Navbar ======= -->
+    <div class="nav-small-screen">
+      <!-- ======= Navbar ======= -->
         <%- include("components/navGerant") %>
-        <!-- ======= End navbar ======= -->
+      <!-- ======= End navbar ======= -->
+    </div>
+    <div id="viewport">
+      <!-- ======= Navbar ======= -->
+      <%- include("components/sidebar") %>
+      <!-- ======= End navbar ======= -->
+      <!-- Content -->
+      <div id="content">
+        <nav class="navbar navbar-default">
+          <div class="container-fluid">
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="/">L'atelier de la Mode</a></li>
+            </ul>
+          </div>
+        </nav>
+        <div class="container-fluid">
+          <!-- ======= Commend En Attente =======   -->
 
-
-    <!-- ======= Commend En Attente =======   -->
-    <% if (commande.length > 0) { %>
-        <div class="filter">
+          <% if (commande.length> 0) { %>
+          <div class="filter">
             <ul
-            class="list-group list-group-horizontal position-relative overflow-auto w-90"
-          >
-            <li class="list-group-item  cardFilter done">
-                <img src="https://media.istockphoto.com/vectors/grunge-green-completed-wording-round-rubber-seal-stamp-on-white-vector-id960551208?k=6&m=960551208&s=612x612&w=0&h=GP-BecMBbDTRpLDmsx6G7IdanNnwG9ODl3OEKc_uRhI=" />
+              class="list-group list-group-horizontal position-relative overflow-auto w-90"
+            >
+              <li class="list-group-item cardFilter done">
+                <img
+                  src="https://media.istockphoto.com/vectors/grunge-green-completed-wording-round-rubber-seal-stamp-on-white-vector-id960551208?k=6&m=960551208&s=612x612&w=0&h=GP-BecMBbDTRpLDmsx6G7IdanNnwG9ODl3OEKc_uRhI="
+                />
                 <div>
-                    <h1>Compléter</h1>
-                    <h2><%= commande.filter((c) => (c.etat == "COMPLETE")).length %> commandes</h2>
+                  <h1>Compléter</h1>
+                  <h2>
+                    <%= commande.filter((c) => (c.etat == "COMPLETE")).length %>
+                    commandes
+                  </h2>
                 </div>
-            </li>
-                <li class="list-group-item  cardFilter pennding activ">
-                    <img src="https://activerain.com/image_store/uploads/agents/cameronteam/files/PENDING.png" />
-                    <div>
-                        <h1>En attente</h1>
-                        <h2><%= commande.filter((c) => (c.etat == "EN_ATTENTE")).length %> commandes</h2>
-                    </div>
-                </li>
-                <li class="list-group-item  cardFilter canceld">
-                    <img src="https://i0.wp.com/askthemoneycoach.com/wp-content/uploads/2009/09/bigstock-Cancelled-Stamp-64007296.jpg?fit=500%2C500&ssl=1" />
-                    <div>
-                        <h1>Annuler</h1>
-                        <h2><%= commande.filter((c) => (c.etat == "ANNULER")).length %> commandes</h2>
-                    </div>
-                </li>
-
-          </ul>
-    </div>
-    <div class="bag">
-        <div class="commandes-bag">
-            <% for (let i = 0 ; i < commande.length ; i++) { %>   
-              <a href="/gerant/commandes/<%= commande[i].id %>">            
-                <div class="item-commande" data-status="<%= commande[i].etat %>"> 
-                    <% if (commande[i].picture){ %> 
-                        <img src="../<%= commande[i].picture %>" />
-                    <% }else { %>
-                        <img src="https://th.bing.com/th/id/OIP.zM3AofCh04TntLpcUe-dHAHaHa?pid=ImgDet&w=194&h=194&c=7&dpr=1.1" />
-                    <% } %> 
-                    <div class="item-product-info">
-                        <div class="info">
-                            <h1><%= commande[i].nom + " " + commande[i].prenom %></h1>
-                            <h1>$ <%= commande[i].prix.toLocaleString('en-US', { minimumFractionDigits: 2 }) %></h1>
-                        </div>
-                        <h2>
-                            <%= commande[i].email %>
-                        </h2>
-                        <h3>
-                            <i class="bi bi-geo-fill"></i>
-                            <span><%= commande[i].adresse %></span>
-                        </h3>
-                        <h3>
-                            <i class="bi bi-calendar-fill"></i>
-                            <span><%= commande[i].livraison.toString().split('00')[0] %></span>
-                        </h3>
-                    <div class="update">
-                        <% if (commande[i].etat == "EN_ATTENTE" ) { %>
-                        <a href="/gerant/commandes/status?id=<%= commande[i].id  %>&status=COMPLETE">
-                        <div class="save done"> 
-                            <i class="bi bi-lightbulb-fill"></i>       
-                            <span>Effectuée</span>
-                        </div>
-                        </a>
-                        <a href="/gerant/commandes/status?id=<%= commande[i].id  %>&status=ANNULER">
-                        <div class="save cancel">
-                            <i class="bi bi-x-circle-fill"></i>
-                            <span>Annuler</span>
-                        </div>
-                        </a>
-                        <%}%>
-
-                    </div>
-
-                    </div>
+              </li>
+              <li class="list-group-item cardFilter pennding activ">
+                <img
+                  src="https://activerain.com/image_store/uploads/agents/cameronteam/files/PENDING.png"
+                />
+                <div>
+                  <h1>En attente</h1>
+                  <h2>
+                    <%= commande.filter((c) => (c.etat == "EN_ATTENTE")).length
+                    %> commandes
+                  </h2>
                 </div>
-              </a> 
+              </li>
+              <li class="list-group-item cardFilter canceld">
+                <img
+                  src="https://i0.wp.com/askthemoneycoach.com/wp-content/uploads/2009/09/bigstock-Cancelled-Stamp-64007296.jpg?fit=500%2C500&ssl=1"
+                />
+                <div>
+                  <h1>Annuler</h1>
+                  <h2>
+                    <%= commande.filter((c) => (c.etat == "ANNULER")).length %>
+                    commandes
+                  </h2>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <table class="table caption-top">
+            <caption>
+              List of Commandes
+            </caption>
+            <thead>
+              <tr>
+                <th scope="col">
+                  <div style="display: flex; align-items: center">
+                    <i
+                      style="
+                        margin-right: 15px;
+                        color: #6d6de6;
+                        font-size: 12px;
+                      "
+                      class="bi bi-list-nested"
+                    ></i
+                    >Commande Id
+                  </div>
+                </th>
+                <th scope="col">
+                  <div style="display: flex; align-items: center">
+                    <i
+                      style="
+                        margin-right: 15px;
+                        color: #f29a62;
+                        font-size: 12px;
+                      "
+                      class="bi bi-calendar-fill"
+                    ></i
+                    >date
+                  </div>
+                </th>
+                <th scope="col">
+                  <div style="display: flex; align-items: center">
+                    <i
+                      style="
+                        margin-right: 15px;
+                        color: #ff7575;
+                        font-size: 12px;
+                      "
+                      class="bi bi-pin-map-fill"
+                    ></i
+                    >Adresse
+                  </div>
+                </th>
+                <th scope="col">
+                  <div style="display: flex; align-items: center">
+                    <i
+                      style="
+                        margin-right: 15px;
+                        color: #3d7cda;
+                        font-size: 12px;
+                      "
+                      class="bi bi-currency-exchange"
+                    ></i
+                    >prix
+                  </div>
+                </th>
+                <th scope="col">
+                  <div style="display: flex; align-items: center">
+                    <i
+                      style="
+                        margin-right: 15px;
+                        color: #56e164;
+                        font-size: 12px;
+                      "
+                      class="bi bi-wifi"
+                    ></i
+                    >Etats
+                  </div>
+                </th>
 
-            <%  } %>
-        </div>
-    </div>
-    <% } else { %>
-        <div class="bag-empty">
+              </tr>
+            </thead>
+            <tbody>
+              <% for (let i = 0 ; i < commande.length ; i++) {%>
+      
+                <tr  data-status="<%= commande[i].etat %>"  data-id="<%=commande[i].id%>" >
+                  <th># <%= commande[i].id %></th>
+                  <td>
+                    <%= commande[i].livraison.toString().split('00')[0].split(" ").slice(1).join(" ") %>
+                  </td>
+                  <td><%= commande[i].adresse %></td>
+                  <td>
+                    $ <%= commande[i].prix.toLocaleString('en-US', {
+                    minimumFractionDigits: 2 }) %>
+                  </td>
+                  <td>
+                    <% if (commande[i].etat == "ANNULER") { %>
+                    <i
+                      style="margin-right: 5px; color: salmon; font-size: 8px"
+                      class="bi bi-x-circle-fill"
+                    ></i>
+                    <% }%> <% if (commande[i].etat == "COMPLETE") {%>
+                    <i
+                      style="
+                        margin-right: 5px;
+                        color: rgb(97, 244, 131);
+                        font-size: 8px;
+                      "
+                      class="bi bi-check-circle-fill"
+                    ></i
+                    ><% }%> <% if (commande[i].etat == "EN_ATTENTE") {%>
+                    <i
+                      style="
+                        margin-right: 5px;
+                        color: #f29a62;
+                        font-size: 8px;
+                      "
+                      class="bi bi-hourglass-split"
+                    ></i
+                    ><% }%> <%= commande[i].etat %>
+                  </td>
+  
+                </tr>
+        
+
+              <% } %>
+            </tbody>
+          </table>
+       
+       
+          <% } else { %>
+          <div class="bag-empty">
             <i class="bi bi-bag"></i>
-            <h1>
-                Sac de commandes En Attente est vide
-            </h1>
-            <p>
-                en attendant que quelqu’un achète chez nous :)
-            </p>
+            <h1>Sac de commandes est vide</h1>
+            <p>en attendant que quelqu’un achète chez nous :)</p>
+          </div>
+          <%} %>
+          <!-- ======= End Bag ======= -->
         </div>
-    <%} %>
-    <!-- ======= End Bag ======= -->
-    
-
+      </div>
+    </div>
 
     <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -164,6 +264,5 @@
       crossorigin="anonymous"
     ></script>
     <script src="/script/commande.js"></script>
-
   </body>
 </html>

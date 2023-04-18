@@ -121,7 +121,6 @@ nav {
   text-align: center;
   width: 400px;
   margin: auto;
-  margin-top: 60px;
 }
 .section-title .title {
 
@@ -140,7 +139,6 @@ nav {
     text-align: center;
     width: 600px;
     margin: auto;
-    margin-top: 60px;
   }
 }
 
@@ -218,4 +216,196 @@ nav {
   color: #FFF;
   background-color: #51e2f5;
   border-color: #51e2f5;
+}
+
+
+/* --------------------------------------------- */
+/*             Sidebar                           */
+/* ----------------------------------------------*/
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500');
+
+body {
+  overflow-x: hidden;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+}
+
+/* Toggle Styles */
+
+#viewport {
+  padding-left: 250px;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+#content {
+  width: 100%;
+  position: relative;
+  margin-right: 0;
+}
+
+/* Sidebar Styles */
+
+#sidebar {
+  z-index: 1000;
+  position: fixed;
+  left: 250px;
+  width: 250px;
+  height: 100%;
+  margin-left: -250px;
+  overflow-y: auto;
+  background: #FFF;
+  border-right: 1px solid #bdbbbb44;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+.nav-small-screen {
+  display: none;
+}
+@media screen and (max-width : 1000px ){
+  #sidebar {
+    left: 0px;
+    width: 0px;
+    height: 0%;
+    margin-left: 0px;
+  }
+  #viewport {
+    padding-left: 0px;
+    margin-top: 60px;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+  }
+  .nav-small-screen {
+    display: block;
+  }
+}
+
+#sidebar header {
+  background-color: #2d2d2d;
+  font-size: 20px;
+  line-height: 52px;
+  text-align: center;
+}
+
+#sidebar header a {
+  outline: none;
+  text-decoration: none;
+  color: #fff;
+  display: block;
+  text-decoration: none;
+}
+
+#sidebar header a:hover {
+  color: #fff;
+}
+
+#sidebar .nav{
+  display: block;
+  margin-top: 30px;
+}
+
+#sidebar .nav li {
+  margin: 20px 0;
+}
+
+#sidebar .nav a{
+  background: none;
+  outline: none;
+  text-decoration: none;
+  color: #2d2d2d;
+  font-size: 14px;
+  padding: 16px 24px;
+}
+
+#sidebar .nav a:hover{
+  background: none;
+  color: #51e2f5;
+}
+
+#sidebar .nav a:hover i {
+  color: #51e2f5;
+}
+
+#sidebar .nav a i{
+  margin-right: 16px;
+  color: #2d2d2d;
+  font-size: 12px;
+  margin-top: 3px
+}
+#sidebar .logout {
+  border: 1px solid #2d2d2d;
+  width: 200px;
+  color: #2d2d2d;
+  text-align: center;
+  border-radius: 5px;
+  padding: 10px 15px;
+  position: absolute;
+  bottom: 30px;
+  left: 24px;
+  cursor: pointer;
+}
+#sidebar .logout a:hover {
+  color: #51e2f5;
+}
+#sidebar .logout i  {
+  margin-right: 16px;
+  font-size: 12px;
+  margin-top: 3px
+}
+
+#sidebar .logout:hover {
+  background-color: #51e2f5;
+  color: #FFF;
+  border: none;
+}
+#sidebar .logout a:hover{
+  color: #FFF;
+}
+.update {
+  display: flex;
+  margin-top: 20px;
+}
+
+.save {
+  margin-right: 10px;
+  padding: 5px 5px;
+  border: 1px solid #2d2d2d22;
+  width: 140px;
+  display: flex;
+  justify-content: center;
+  font-size: 1rem;
+  border-radius: 0.2rem;
+  cursor: pointer;
+}
+
+
+.save.done{
+  border: 2px solid #56e164;
+  color: #56e164;
+}
+.save.cancel {
+  border: 2px solid salmon;
+  color: salmon;
+}
+
+.save.done:hover  {
+  background-color: #56e164;
+  color: #FFF;
+}
+
+.save.cancel:hover  {
+  background-color: salmon;
+  color: #FFF;
+}
+
+.save i {
+  margin-right: 10px;
+  font-size: 12px;
+  margin-top: 5px;
 }

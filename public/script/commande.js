@@ -1,10 +1,32 @@
 $(document).ready(function () {
 
-    $('.item-commande').each(function () {
-        var status = $(this).data('status');
-        if (status !=  "EN_ATTENTE") {
-            $(this).hide()
+
+    
+    var screenWidth = $(window).width(); 
+    if (screenWidth < 600) {
+        console.log($("thead th")[0])
+        $("thead th")[0].remove()
+        $("tbody th").each(function(){
+            $(this).remove()
+        })
+    }
+    $(window).on('resize', function() {
+        var screenWidth = $(window).width(); 
+        if (screenWidth < 600) {
+            console.log($("thead th")[0])
+            $("thead th")[0].remove()
+            $("tbody th").each(function(){
+                $(this).remove()
+            })
         }
+      });
+
+    $("tr").each(function(){
+        $(this).click(function(){
+            let link  = "/gerant/commandes/" + $(this).data('id');$
+            window.location.href = link
+        })
+
     })
 
     $(".cardFilter.pennding").click(function () {
@@ -13,7 +35,7 @@ $(document).ready(function () {
             'border-top-style': 'solid',
             'border-top-color': '#f29a62'
           });
-        $('.item-commande').each(function () {
+        $('tbody tr').each(function () {
             var status = $(this).data('status');
             if (status !=  "EN_ATTENTE") {
                 $(this).hide()
@@ -30,7 +52,7 @@ $(document).ready(function () {
             'border-top-color': '#56e164'
           });
           $(this).addClass('activ')
-        $('.item-commande').each(function () {
+        $('tbody tr').each(function () {
             var status = $(this).data('status');
             if (status !=  "COMPLETE") {
                 $(this).hide()
@@ -47,7 +69,7 @@ $(document).ready(function () {
             'border-top-color': '#fa5959'
           });
           $(this).addClass('activ')
-        $('.item-commande').each(function () {
+        $('tbody tr').each(function () {
             var status = $(this).data('status');
             if (status !=  "ANNULER") {
                 $(this).hide()

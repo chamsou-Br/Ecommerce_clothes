@@ -5,7 +5,7 @@ const size = require("../public/data/sizes")
 const getAllCommande = async () => {
   try {
     const commandes =  (await pool.query(
-      "Select commande.* , client.picture  from commande LEFT JOIN client ON commande.client = client.email"
+      "Select commande.* , client.picture  from commande LEFT JOIN client ON commande.client = client.email order by id"
     )).rows;
     return commandes
   } catch (error) {

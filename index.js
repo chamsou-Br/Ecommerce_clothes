@@ -56,8 +56,11 @@ app.get("/bag/accessoire/delete/:id",verifyAuth,deleteAccessoireFromBagControlle
 app.get("/bag/product/accessoire/delete",verifyAuth,deleteAccessoireFromProductController)
 
 app.get("/gerant/commandes",commandesPageController)
-app.get("/gerant/commandes/:id",commaneDetailsController)
 app.get("/gerant/commandes/status",updateCommandeStatusController)
+app.get("/gerant/commandes/:id",commaneDetailsController)
+app.get("/gerant/produit/:type",productsController);
+
+
 
 
 
