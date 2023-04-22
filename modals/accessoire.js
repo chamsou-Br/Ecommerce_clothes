@@ -40,4 +40,11 @@ const getAllAccessoires = async () => {
     }
   }
 
-  module.exports = {getAccessoireById , getAllAccessoires , getMarkOfAccessoires , updateAccessoire}
+
+  const addAccessoire = async (data,path) => {
+    const acc = await pool.query("INSERT INTO accessoire (type, marque, quantite, prix,picture)  VALUES  ($1  , $2 , $3 , $4 , $5)",
+    [data.type,data.mark,data.qty,data.price,"uploads/" + path])
+    return acc
+  }
+
+  module.exports = {getAccessoireById , addAccessoire ,getAllAccessoires , getMarkOfAccessoires , updateAccessoire}

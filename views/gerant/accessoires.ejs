@@ -75,7 +75,11 @@
           <div class="table-responsive">
             <table class="table caption-top">
               <caption>
-                List des accessoires
+                <button class="add-button" 
+                data-toggle="modal"
+                data-target="#add-accessoire-modal"  >
+                + Ajouter accessoires 
+              </button>         
               </caption>
               <thead>
                 <tr>
@@ -159,7 +163,12 @@
                     $ <%= accessoires[i].prix.toLocaleString('en-US', {
                     minimumFractionDigits: 2 }) %>
                   </td>
-                  <td class="openModal-accessoire" data-toggle="modal" data-accessoire="<%= JSON.stringify(accessoires[i]) %>" data-target="#accessoire-modal" >
+                  <td
+                    class="openModal-accessoire"
+                    data-toggle="modal"
+                    data-accessoire="<%= JSON.stringify(accessoires[i]) %>"
+                    data-target="#accessoire-modal"
+                  >
                     <i
                       style="color: #2d2d2d; font-size: 12px"
                       class="bi bi-pencil-square"
@@ -184,48 +193,261 @@
       </div>
     </div>
 
-                      <!-- Modal -->
-                      <div class="modal fade" id="accessoire-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <h5 class="modal-title" id="exampleModalLongTitle">Edit Accessoire</h5>
-                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                              </button>
-                            </div>
-                            <form action="/gerant/accessoires" method="post" >
-                            <div class="modal-body edit-container" >
-                                <input type="hidden" name="id" />
-                                <div class="input-container">
-                                    <label>Type : </label>
-                                    <input  value=""   class="info" type="text" name="type" placeholder="Type">
-                                    <i class="bi bi-caret-down icon-input"></i>
-                                </div>  
-                                <div class="input-container">
-                                  <label>Marque : </label>
-                                  <input  value=""   class="info" type="text" name="mark" placeholder="Marque">
-                                  <i class="bi bi-caret-down icon-input"></i>
-                                </div>  
-                                <div class="input-container">
-                                  <label>Quantite : </label>
-                                  <input  value=""   class="info" type="text" name="qty" placeholder="Quantite">
-                                  <i class="bi bi-caret-down icon-input"></i>
-                                </div>  
-                                <div class="input-container">
-                                  <label>Prix : </label>
-                                  <input  value=""   class="info" type="number" name="price" placeholder="Prix">
-                                  <i class="bi bi-caret-down icon-input"></i>
-                                </div>  
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="accessoire-modal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalCenterTitle"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">
+              Edit Accessoire
+            </h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form action="/gerant/accessoires" method="post">
+            <div class="modal-body edit-container">
+              <input type="hidden" name="id" />
+              <div class="input-container">
+                <label>Type : </label>
+                <input
+                  value=""
+                  class="info"
+                  type="text"
+                  name="type"
+                  placeholder="Type"
+                />
+                <i class="bi bi-caret-down icon-input"></i>
+              </div>
+              <div class="input-container">
+                <label>Marque : </label>
+                <input
+                  value=""
+                  class="info"
+                  type="text"
+                  name="mark"
+                  placeholder="Marque"
+                />
+                <i class="bi bi-caret-down icon-input"></i>
+              </div>
+              <div class="input-container">
+                <label>Quantite : </label>
+                <input
+                  value=""
+                  class="info"
+                  type="text"
+                  name="qty"
+                  placeholder="Quantite"
+                />
+                <i class="bi bi-caret-down icon-input"></i>
+              </div>
+              <div class="input-container">
+                <label>Prix : </label>
+                <input
+                  value=""
+                  class="info"
+                  type="number"
+                  name="price"
+                  placeholder="Prix"
+                />
+                <i class="bi bi-caret-down icon-input"></i>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-secondary">
+                Sauvgarder
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
 
-                          </div>
-                            <div class="modal-footer">
-                              <button type="submit" class="btn btn-secondary "  >Sauvgarder</button>
-                            </div>
-                          </form>
-                          </div>
-                        </div>
-                      </div>
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="accessoire-modal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalCenterTitle"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">
+              Edit Accessoire
+            </h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form action="/gerant/accessoires" method="post">
+            <div class="modal-body edit-container">
+              <input type="hidden" name="id" />
+              <div class="input-container">
+                <label>Type : </label>
+                <input
+                  value=""
+                  class="info"
+                  type="text"
+                  name="type"
+                  placeholder="Type"
+                />
+                <i class="bi bi-caret-down icon-input"></i>
+              </div>
+              <div class="input-container">
+                <label>Marque : </label>
+                <input
+                  value=""
+                  class="info"
+                  type="text"
+                  name="mark"
+                  placeholder="Marque"
+                />
+                <i class="bi bi-caret-down icon-input"></i>
+              </div>
+              <div class="input-container">
+                <label>Quantite : </label>
+                <input
+                  value=""
+                  class="info"
+                  type="text"
+                  name="qty"
+                  placeholder="Quantite"
+                />
+                <i class="bi bi-caret-down icon-input"></i>
+              </div>
+              <div class="input-container">
+                <label>Prix : </label>
+                <input
+                  value=""
+                  class="info"
+                  type="number"
+                  name="price"
+                  placeholder="Prix"
+                />
+                <i class="bi bi-caret-down icon-input"></i>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-secondary">
+                Sauvgarder
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="add-accessoire-modal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalCenterTitle"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">
+              Ajouter Accessoire
+            </h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form action="/gerant/accessoire" method="post"  enctype="multipart/form-data">
+            <div class="modal-body edit-container">
+              <input type="hidden" name="id" /> 
+              <div class="input-container">
+                <label>Photo : </label>
+                <input
+                  class="info"
+                  type="file"
+                  name="picture"
+                  placeholder="Photo"
+                />
+                <i class="bi bi-caret-down icon-input"></i>
+              </div>
+              <div class="input-container">
+                <label>Type : </label>
+                <input
+                  value=""
+                  class="info"
+                  type="text"
+                  name="type"
+                  placeholder="Type"
+                />
+                <i class="bi bi-caret-down icon-input"></i>
+              </div>
+              <div class="input-container">
+                <label>Marque : </label>
+                <input
+                  value=""
+                  class="info"
+                  type="text"
+                  name="mark"
+                  placeholder="Marque"
+                />
+                <i class="bi bi-caret-down icon-input"></i>
+              </div>
+              <div class="input-container">
+                <label>Quantite : </label>
+                <input
+                  value=""
+                  class="info"
+                  type="text"
+                  name="qty"
+                  placeholder="Quantite"
+                />
+                <i class="bi bi-caret-down icon-input"></i>
+              </div>
+              <div class="input-container">
+                <label>Prix : </label>
+                <input
+                  value=""
+                  class="info"
+                  type="number"
+                  name="price"
+                  placeholder="Prix"
+                />
+                <i class="bi bi-caret-down icon-input"></i>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-secondary">
+                Ajouter
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
 
     <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

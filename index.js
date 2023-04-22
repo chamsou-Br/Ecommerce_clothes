@@ -10,7 +10,7 @@ const multer = require("multer");
 const upload = require("./middleware/upload");
 const { bagController, addBagController, deleteBagController, deleteAccessoireFromBagController, valideBagController, deleteAccessoireFromProductController } = require("./controllers/bag");
 const session = require("express-session");
-const { accessoiresController, addAccessoireToBagController, updateAccessoireContrller } = require("./controllers/accessoir");
+const { accessoiresController, addAccessoireToBagController, updateAccessoireContrller, addAccessoireContrller } = require("./controllers/accessoir");
 const { commandesPageController, updateCommandeStatusController, commaneDetailsController, usersPageController, productsPageController, accessoirePageController } = require("./controllers/gerant");
 
 require('dotenv').config();
@@ -63,6 +63,7 @@ app.get("/gerant/produits",verifyAuthAdmin,productsPageController)
 app.post("/gerant/produits",verifyAuthAdmin,updateProductContrller)
 app.get("/gerant/accessoires",verifyAuthAdmin,accessoirePageController)
 app.post("/gerant/accessoires",verifyAuthAdmin,updateAccessoireContrller)
+app.post("/gerant/accessoire",verifyAuthAdmin,upload.single("picture"),addAccessoireContrller)
 
 
 

@@ -61,11 +61,11 @@ $(document).ready(function () {
     $('.openModal-accessoire').each(function(){
         $(this).click(function () {
             const data = $(this).data("accessoire")
-            $("input[name='type']").val(data.type)
-            $("input[name='id']").val(data.id)
-            $("input[name='mark']").val(data.marque)
-            $("input[name='qty']").val(data.quantite)
-            $("input[name='price']").val(data.prix)
+            $("#accessoire-modal input[name='type']").val(data.type)
+            $("#accessoire-modal input[name='id']").val(data.id)
+            $("#accessoire-modal input[name='mark']").val(data.marque)
+            $("#accessoire-modal input[name='qty']").val(data.quantite)
+            $("#accessoire-modal input[name='price']").val(data.prix)
           })
     })
 

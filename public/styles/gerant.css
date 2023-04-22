@@ -495,3 +495,14 @@ tbody .profile-picture {
     padding: 0;
     margin: 0;
 }
+
+.add-button {
+    border: none;
+    background-color: transparent;
+    outline: none;
+}
+
+.add-button:hover{
+    cursor: pointer;
+    color: #51e2f5;
+}
