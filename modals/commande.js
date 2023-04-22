@@ -62,6 +62,8 @@ const addCommande = async (data , products , accessoires,client )=> {
             ]
           );
         products.forEach(async (product) => {
+          await pool.query("UPDATE produit SET quantite = quantite - $1 WHERE produit = $2",
+          [parseInt(product.qty),product.product.id])
           switch (product.size) {
             case "S":
               await pool.query("UPDATE examplaire SET quantites = quantites - $1 WHERE produit = $2 and color = $3",

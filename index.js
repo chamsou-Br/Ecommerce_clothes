@@ -1,17 +1,17 @@
 const express = require("express");
 const homeController = require("./controllers/home");
-const { productsController, productDetailsController } = require("./controllers/products");
+const { productsController, productDetailsController, updateProductContrller } = require("./controllers/products");
 const {getAllProduct , getProductsByType} = require("./modals/products");
 const { loginPageController, loginHandlerController, logoutController, registerController, registerHandlerController } = require("./controllers/auth");
 const cookieParser = require("cookie-parser");
-const { verifyAuth } = require("./middleware/auth");
+const { verifyAuth, verifyAuthAdmin } = require("./middleware/auth");
 const {profileController,modifyPictureController, updateProfileController} = require("./controllers/profile");
 const multer = require("multer");
 const upload = require("./middleware/upload");
 const { bagController, addBagController, deleteBagController, deleteAccessoireFromBagController, valideBagController, deleteAccessoireFromProductController } = require("./controllers/bag");
 const session = require("express-session");
-const { accessoiresController, addAccessoireToBagController } = require("./controllers/accessoir");
-const { commandesPageController, updateCommandeStatusController, commaneDetailsController } = require("./controllers/gerant");
+const { accessoiresController, addAccessoireToBagController, updateAccessoireContrller } = require("./controllers/accessoir");
+const { commandesPageController, updateCommandeStatusController, commaneDetailsController, usersPageController, productsPageController, accessoirePageController } = require("./controllers/gerant");
 
 require('dotenv').config();
 
@@ -55,10 +55,14 @@ app.get("/bag/delete/:id",verifyAuth,deleteBagController)
 app.get("/bag/accessoire/delete/:id",verifyAuth,deleteAccessoireFromBagController)
 app.get("/bag/product/accessoire/delete",verifyAuth,deleteAccessoireFromProductController)
 
-app.get("/gerant/commandes",commandesPageController)
-app.get("/gerant/commandes/status",updateCommandeStatusController)
-app.get("/gerant/commandes/:id",commaneDetailsController)
-app.get("/gerant/produit/:type",productsController);
+app.get("/gerant/commandes",verifyAuthAdmin,commandesPageController)
+app.get("/gerant/commandes/status",verifyAuthAdmin,updateCommandeStatusController)
+app.get("/gerant/commandes/:id",verifyAuthAdmin,commaneDetailsController)
+app.get("/gerant/utilisateurs",verifyAuthAdmin,usersPageController)
+app.get("/gerant/produits",verifyAuthAdmin,productsPageController)
+app.post("/gerant/produits",verifyAuthAdmin,updateProductContrller)
+app.get("/gerant/accessoires",verifyAuthAdmin,accessoirePageController)
+app.post("/gerant/accessoires",verifyAuthAdmin,updateAccessoireContrller)
 
 
 

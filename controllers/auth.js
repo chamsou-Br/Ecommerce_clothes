@@ -5,18 +5,27 @@ const { createToken, createCookie, checkuser, removeCookie } = require("../middl
 
 const loginPageController = (req , res) => {
 
-    res.render('login',{message : null})
+    res.render('login',{message : null}) 
+
 }
 
 const loginHandlerController = async (req , res ) => {
 
     const client = await getUser(req.body.email);
     if (client) {
+        console.log(client)
         const auth = await bcrypt.compare(req.body.password,client.motdepasse )
             if (auth) {
-              const token = await createToken(client,process.env.JWT_SECRET,process.env.JWT_ACCESS_TOKEN_EXPIRES)
-              createCookie(res,token,'accessToken',process.env.ACCESS_TOKEN_COOKIE_EXPIRES);
-              res.redirect('/');
+              if (client.type == "admin") {
+                const token = await createToken(client,process.env.JWT_SECRET,process.env.JWT_ACCESS_TOKEN_EXPIRES)
+                createCookie(res,token,'accessTokenAdmin',process.env.ACCESS_TOKEN_COOKIE_EXPIRES);
+                res.redirect('/gerant/commandes');
+              }else {
+                const token = await createToken(client,process.env.JWT_SECRET,process.env.JWT_ACCESS_TOKEN_EXPIRES)
+                createCookie(res,token,'accessToken',process.env.ACCESS_TOKEN_COOKIE_EXPIRES);
+                res.redirect('/');
+              }
+
             } else {
               // Passwords don't match
               res.render('login', { message: 'E-mail ou mot de passe non valide' });
@@ -30,6 +39,7 @@ const logoutController = (req,res) => {
     removeCookie(res);
     res.redirect("/login")
 }
+
 
 const registerController = (req , res) => {
     res.render("register",{message : null});

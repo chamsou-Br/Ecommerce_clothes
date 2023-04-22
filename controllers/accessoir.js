@@ -1,4 +1,4 @@
-const { getMarkOfAccessoires, getAllAccessoires, getAccessoireById } = require("../modals/accessoire");
+const { getMarkOfAccessoires, getAllAccessoires, getAccessoireById, updateAccessoire } = require("../modals/accessoire");
 const { getTypesOfProducts } = require("../modals/products");
 
 const accessoiresController = async (req , res) => {
@@ -34,4 +34,11 @@ const addAccessoireToBagController = async (req , res) => {
     res.redirect("/bag")
 }
 
-module.exports = {accessoiresController , addAccessoireToBagController}
+const updateAccessoireContrller = async (req , res) => {
+    const data = req.body
+    console.log(data)
+    await updateAccessoire(data);
+    res.redirect("/gerant/accessoires");
+}
+
+module.exports = {accessoiresController , addAccessoireToBagController , updateAccessoireContrller}

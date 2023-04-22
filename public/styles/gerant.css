@@ -322,6 +322,12 @@ a {
     border: 1px solid #51e2f5;
 }
 
+tbody .profile-picture {
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+}
+
 @media (max-width : 1050px)  { 
 
     .list-group-item.cardFilter {
@@ -366,17 +372,23 @@ a {
     font-size: 16px;
 }
 .table th , .table td {
-    padding: 20px 0;
+    padding: 20px 10px;
     font-size: 12px;
+    min-width: 120px;
+    margin-right: 10px;
+    
+}
+.table.users td {
+    margin-top: 10px;
+    padding-top: 30px;
 }
 .table {
    margin-left: 10px;
-   overflow-x: scroll;
+   overflow-x: hidden;
 
 }
 
 .table tr {
-
     cursor: pointer;
 }
 
@@ -408,4 +420,78 @@ a {
     tbody td{
         font-size: 3px;
     }
+}
+
+.edit-container  label {
+    margin-left: 5px;
+    margin-right: 10px;
+    color: #2d2d2d;
+    width: 20%;
+}
+.edit-container  .input-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0;
+    border-bottom :1px solid #2d2d2d44;
+    margin-bottom: 12.5px;
+}
+
+
+.edit-container input{
+    font-size: 1rem;
+    font-weight: normal;
+    color: #2d2d2dAA;
+    background-color: #FFF;
+    height: 40px;
+    width: 80%;
+    border: none;
+    outline: none;
+    padding: 0 10px;
+}
+.edit-container input:disabled {
+    color: #00000099;
+}
+.edit-container  .icon-input {
+    right: 0px;
+    top: 50%;
+}
+
+.exContainer {
+    width: 100%;
+    padding:  0;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+
+}
+.exTitle {
+    color: #2d2d2d;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-top: 7px;
+}
+
+.exContainer .sizeContainer {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.exContainer label {
+    margin-left: 5px;
+    margin-right: 0px;
+    color: #2d2d2d;
+    width: auto
+}
+.exContainer input {
+    font-size: 1rem;
+    font-weight: normal;
+    color: #2d2d2dAA;
+    background-color: #FFF;
+    width: 60px;
+    border: none;
+    outline: none;
+    padding: 0;
+    margin: 0;
 }

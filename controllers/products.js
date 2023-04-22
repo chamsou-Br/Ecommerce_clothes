@@ -1,4 +1,4 @@
-const { getProductsByType, getTypesOfProducts, getMarkOfProducts, getStyleOfProducts, getProductById, getAllProduct, getExamplairOfProduct } = require("../modals/products");
+const { getProductsByType, getTypesOfProducts, getMarkOfProducts, getStyleOfProducts, getProductById, getAllProduct, getExamplairOfProduct, updateProduct } = require("../modals/products");
 const titles = require("../public/data/titles")
 const colors = require("../public/data/color");
 const { getAllAccessoires } = require("../modals/accessoire");
@@ -21,5 +21,16 @@ const productDetailsController = async (req , res) => {
     res.render("details",{types,product : {...product , items : items},colors ,user:req.client,accs : accs});
 }
 
+const updateProductContrller = async (req , res) => {
+try {
+    const data = req.body
+    console.log("update")
+    await updateProduct(data);
+    res.redirect("/gerant/produits");
+} catch (error) {
+    console.log(error,"mm")
+}
+}
 
-module.exports = {productsController,productDetailsController}
+
+module.exports = {productsController,productDetailsController , updateProductContrller}

@@ -251,6 +251,9 @@ body {
 #sidebar {
   z-index: 1000;
   position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   left: 250px;
   width: 250px;
   height: 100%;
@@ -345,9 +348,8 @@ body {
   text-align: center;
   border-radius: 5px;
   padding: 10px 15px;
-  position: absolute;
-  bottom: 30px;
-  left: 24px;
+  margin-bottom: 30px;
+  margin-left: 24px;
   cursor: pointer;
 }
 #sidebar .logout a:hover {
@@ -408,4 +410,30 @@ body {
   margin-right: 10px;
   font-size: 12px;
   margin-top: 5px;
+}
+
+
+
+.table-responsive{
+  margin-bottom: 30px;
+}
+
+.table-responsive::-webkit-scrollbar {
+  width: 12px;
+  height: 10px;
+
+}
+
+.table-responsive::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.table-responsive::-webkit-scrollbar-thumb {
+  background: #5f5950;
+  border-radius: 0.1rem;
+}
+
+.table-responsive::-webkit-scrollbar-thumb:hover {
+  background: #1ecde4;
 }

@@ -11,6 +11,17 @@ const verifyAuth = async (req , res , next) => {
   }
 }
 
+const verifyAuthAdmin = async (req , res , next) => {
+  const admin = await checkadmin(req,res);
+  if (admin) {
+    req.admin = admin
+    next()
+  }else {
+    req.admin = null
+    res.redirect('/login')
+  }
+}
+
 const createToken = async (payload, secretKey, expiresIn) => {
   return jwt.sign(payload, secretKey, {expiresIn : expiresIn });
   };
@@ -23,6 +34,26 @@ const createToken = async (payload, secretKey, expiresIn) => {
           if (encoded) {
             const { motdepasse, ...client } =  encoded;
             return client
+          }
+          else {
+            return null
+          }
+      }
+    } catch (error) {
+      removeCookie(res)
+      return null
+    }
+
+  };
+
+  const checkadmin = async (req,res) => {
+    try {
+      const token = req.cookies.accessTokenAdmin;
+      if (await token) {
+        const encoded = jwt.verify(token, process.env.JWT_SECRET)
+          if (encoded) {
+            const { motdepasse, ...admin } =  encoded;
+            return admin
           }
           else {
             return null
@@ -49,6 +80,7 @@ const createToken = async (payload, secretKey, expiresIn) => {
 
 const removeCookie = (res) => {
   res.clearCookie('accessToken')
+  res.clearCookie("accessTokenAdmin")
 }
   
-  module.exports = { createToken , checkuser  , createCookie , removeCookie , verifyAuth}
+  module.exports = { createToken , checkuser  , checkadmin , createCookie , removeCookie , verifyAuth , verifyAuthAdmin}

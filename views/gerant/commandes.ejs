@@ -52,12 +52,12 @@
   <body>
     <div class="nav-small-screen">
       <!-- ======= Navbar ======= -->
-        <%- include("components/navGerant") %>
+        <%- include("../components/navGerant") %>
       <!-- ======= End navbar ======= -->
     </div>
     <div id="viewport">
       <!-- ======= Navbar ======= -->
-      <%- include("components/sidebar") %>
+      <%- include("../components/sidebar") %>
       <!-- ======= End navbar ======= -->
       <!-- Content -->
       <div id="content">
@@ -114,7 +114,8 @@
               </li>
             </ul>
           </div>
-          <table class="table caption-top">
+          <div class="table-responsive">
+          <table class="table commandes caption-top">
             <caption>
               List of Commandes
             </caption>
@@ -130,7 +131,7 @@
                       "
                       class="bi bi-list-nested"
                     ></i
-                    >Commande Id
+                    >Id
                   </div>
                 </th>
                 <th scope="col">
@@ -234,6 +235,7 @@
               <% } %>
             </tbody>
           </table>
+          </div>
        
        
           <% } else { %>

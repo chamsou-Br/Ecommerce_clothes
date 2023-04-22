@@ -31,4 +31,13 @@ const getAllAccessoires = async () => {
     }
   }
 
-  module.exports = {getAccessoireById , getAllAccessoires , getMarkOfAccessoires}
+  const updateAccessoire = async (data) => {
+    try {
+      await pool.query("UPDATE accessoire SET marque = $1, type = $2 , prix = $3 , quantite = $4  WHERE id = $5",
+      [data.mark,data.type,data.price,data.qty,data.id])
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  module.exports = {getAccessoireById , getAllAccessoires , getMarkOfAccessoires , updateAccessoire}

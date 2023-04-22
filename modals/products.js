@@ -2,8 +2,16 @@ const pool = require("../db");
 
 const getAllProduct = async () => {
   try {
-    const products = (await pool.query("select * from produit")).rows;
-    return products;
+    const products = (await pool.query("select * from produit ")).rows;
+    const examplaires = (await pool.query("select * from examplaire ")).rows;
+    const data = [];
+    for (let i = 0; i < products.length; i++) {
+      const ex = examplaires.filter(
+        (examplaire) => examplaire.produit == products[i].id
+      );
+      data.push({ ...products[i], items: ex });
+    }
+    return data;
   } catch (error) {
     console.log(error, "err");
     return [];
@@ -13,7 +21,9 @@ const getAllProduct = async () => {
 const getProductsByType = async (type) => {
   try {
     const products = (
-      await pool.query("select * from produit where type = $1 order by id", [type])
+      await pool.query("select * from produit where type = $1 order by id", [
+        type,
+      ])
     ).rows;
 
     return products;
@@ -49,7 +59,7 @@ const addProduct = async (data) => {
         data.quantite,
         data.accessoire | NULL,
         data.picture,
-        data.prix
+        data.prix,
       ]
     );
   } catch (error) {
@@ -57,40 +67,81 @@ const addProduct = async (data) => {
   }
 };
 
-const getMarkOfProducts = async() => {
+const getMarkOfProducts = async () => {
   try {
-    const marks = (await pool.query("SELECT DISTINCT marque FROM produit")).rows
-    return marks
+    const marks = (await pool.query("SELECT DISTINCT marque FROM produit"))
+      .rows;
+    return marks;
   } catch (error) {
-    return []
+    return [];
   }
-}
+};
 
-const getStyleOfProducts = async() => {
+const getStyleOfProducts = async () => {
   try {
-    const styles = (await pool.query("SELECT DISTINCT style FROM produit")).rows
-    return styles
+    const styles = (await pool.query("SELECT DISTINCT style FROM produit"))
+      .rows;
+    return styles;
   } catch (error) {
-    return []
+    return [];
   }
-}
+};
 
 const getTypesOfProducts = async () => {
   try {
-    const types = (await pool.query("SELECT DISTINCT type FROM produit")).rows
-    return types
+    const types = (await pool.query("SELECT DISTINCT type FROM produit")).rows;
+    return types;
   } catch (error) {
-    return []
+    return [];
   }
-}
+};
 
 const getExamplairOfProduct = async (id) => {
   try {
-    const examplaires = (await pool.query("SELECT * FROM examplaire where produit = $1",[id])).rows
-    return examplaires
+    const examplaires = (
+      await pool.query("SELECT * FROM examplaire where produit = $1", [id])
+    ).rows;
+    return examplaires;
   } catch (error) {
-    return []
+    return [];
   }
-}
+};
 
-module.exports = { getAllProduct, getProductsByType, getProductById , addProduct , getMarkOfProducts , getStyleOfProducts , getTypesOfProducts , getExamplairOfProduct} ;
+const updateProduct = async (data) => {
+  let qty = 0;
+  await data.itemsId.forEach(async (it, index) => {
+    qty +=
+      parseInt(data["S"][index]) +
+      parseInt(data["M"][index]) +
+      parseInt(data["L"][index]) +
+      parseInt(data["XL"][index]) +
+      parseInt(data["XXL"][index]);
+    await pool.query(
+      "UPDATE examplaire SET quantites = $1, quantitem = $2 , quantitel = $3  , quantitexl = $4 , quantitexxl = $5   WHERE id = $6",
+      [
+        parseInt(data["S"][index]),
+        parseInt(data["M"][index]),
+        parseInt(data["L"][index]),
+        parseInt(data["XL"][index]),
+        parseInt(data["XXL"][index]),
+        parseInt(it),
+      ]
+    );
+  });
+  await pool.query(
+    "UPDATE produit SET nom = $1, type = $2 , style = $3  , marque = $4 ,prix = $5 , quantite = $6  WHERE id = $7",
+    [data.name, data.type, data.style, data.mark, data.price, qty, data.id]
+  );
+};
+
+module.exports = {
+  getAllProduct,
+  getProductsByType,
+  updateProduct,
+  getProductById,
+  addProduct,
+  getMarkOfProducts,
+  getStyleOfProducts,
+  getTypesOfProducts,
+  getExamplairOfProduct,
+};
