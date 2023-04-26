@@ -61,7 +61,11 @@
                             </a>    
                         </div>
  
-                    <img src="<%= product.picture %>" />
+                    <img src='<% if (product.picture.includes("uploads")) { %>
+                      ../../<%= product.picture %>
+                    <% } else { %>
+                      <%= product.picture %>
+                    <% } %>' />
                 </div>
                 <button type="button" class="addAccessoire" data-toggle="modal" data-target="#exampleModalCenter">
                   + Ajouter Accessoire
@@ -91,10 +95,11 @@
                     </div>
                     <div class="reduction">
                         <div>
-                             jusqua 30 % de réduction , Utiliser le code :  
-                             <span>
-                                CHANCE
-                            </span> 
+                             <% if (product.accessoires) { %>
+                                With : <span><%= product.accessoires %></span>
+                            <% } else{ %>
+                              Without Accessoires
+                            <% } %>
                         </div>
                         <i class="bi bi-lightbulb-fill"></i>
                     </div>

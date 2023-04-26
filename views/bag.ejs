@@ -148,7 +148,7 @@
             <h1>TOTAL</h1>
             <div class="sub-total">
                 <h2>Sous-total</h2>
-                <span>$20.00</span>
+                <span>$ <%= price.toLocaleString('en-US', { minimumFractionDigits: 2 }) %></span>
             </div>
             <div class="sub-total">
                 <h2>Votre Infomation</h2>
@@ -190,7 +190,7 @@
                 <input required class="info" type="date" name="date" placeholder="l’heure de livraison">
                 <i class="bi bi-caret-down icon-input"></i>
             </div>
-            <input type="hidden"  value="20.00" name="price" />
+            <input type="hidden"  value="<%= price %>" name="price" />
             <button type="submit" class="finaliser">
                 FINALISER
             </button>

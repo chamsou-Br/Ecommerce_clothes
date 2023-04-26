@@ -45,23 +45,28 @@ const getProductById = async (id) => {
   }
 };
 
-const addProduct = async (data) => {
+const addProduct = async (data,path) => {
   try {
-    await pool.query(
-      "INSERT INTO produit (type, nom, descr, style, catgorie, marque, quantite, accessoire, picture,prix) values ( $1 , $2 , $3 , $4 , $5 , $6 , $7 , $8 , $9 , $10)",
+    const qty = data["S"].reduce((a, b) => parseInt(a) + parseInt(b) , 0) + data["M"].reduce((a, b) => parseInt(a) + parseInt(b) , 0) + data["L"].reduce((a, b) => parseInt(a) + parseInt(b) , 0) + data["XL"].reduce((a, b) => parseInt(a) + parseInt(b) , 0) + data["XXL"].reduce((a, b) => parseInt(a) + parseInt(b) , 0);
+    const product = await pool.query(
+      "INSERT INTO produit (type, nom, descr, style, catgorie, marque, quantite, picture,prix , accessoires) values ( $1 , $2 , $3 , $4 , $5 , $6  , $7 , $8 , $9 , $10) RETURNING id",
       [
         data.type,
-        data.title,
+        data.name,
         data.descr,
         data.style,
-        data.categorie,
-        data.marque,
-        data.quantite,
-        data.accessoire | NULL,
-        data.picture,
-        data.prix,
+        data.sexe,
+        data.mark,
+        qty,
+        "uploads/" + path ,
+        parseFloat(data.price),
+        data.accessoires
       ]
     );
+    data.color.forEach(async (it , index) => {
+      await pool.query("INSERT INTO examplaire (produit, color, quantites, quantitem, quantitel, quantitexl, quantitexxl, quantitexxxl)  values  ($1,$2 , $3  ,  $4 , $5 , $6 ,$7 ,  $8) ",
+      [product.rows[0].id , it , data['S'][index] , data['M'][index] ,  data['L'][index]  ,  data['XL'][index]  ,  data['XXL'][index] , 0  ])
+    })
   } catch (error) {
     console.log(error);
   }

@@ -1,4 +1,4 @@
-const { getProductsByType, getTypesOfProducts, getMarkOfProducts, getStyleOfProducts, getProductById, getAllProduct, getExamplairOfProduct, updateProduct } = require("../modals/products");
+const { getProductsByType, getTypesOfProducts, getMarkOfProducts, getStyleOfProducts, getProductById, getAllProduct, getExamplairOfProduct, updateProduct, addProduct } = require("../modals/products");
 const titles = require("../public/data/titles")
 const colors = require("../public/data/color");
 const { getAllAccessoires } = require("../modals/accessoire");
@@ -28,9 +28,20 @@ try {
     await updateProduct(data);
     res.redirect("/gerant/produits");
 } catch (error) {
-    console.log(error,"mm")
+    res.redirect("/login");
 }
 }
 
+const addProductContrller = async (req , res) => {
+    try {
+        const data = req.body
+        console.log(data)
+        await addProduct(data,req.file.filename)
+        res.redirect("/gerant/produits");
+    } catch (error) {
+        res.redirect("/login");
+    }
+    }
 
-module.exports = {productsController,productDetailsController , updateProductContrller}
+
+module.exports = {productsController,productDetailsController , updateProductContrller , addProductContrller}

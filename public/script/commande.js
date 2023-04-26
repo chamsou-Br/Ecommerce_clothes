@@ -72,19 +72,19 @@ $(document).ready(function () {
     $('.openModal-product').each(function(){
         $(this).click(function () {
             const data = $(this).data("product")
-            $("input[name='id']").val(data.id)
-            $("input[name='name']").val(data.nom)
-            $("input[name='mark']").val(data.marque)
-            $("input[name='type']").val(data.type)
-            $("input[name='style']").val(data.style)
-            $("input[name='price']").val(data.prix)
+            $("#product-modal input[name='id']").val(data.id)
+            $("#product-modal input[name='name']").val(data.nom)
+            $("#product-modal input[name='mark']").val(data.marque)
+            $("#product-modal input[name='type']").val(data.type)
+            $("#product-modal input[name='style']").val(data.style)
+            $("#product-modal input[name='price']").val(data.prix)
             data.items.forEach(it => {
                 const labels = ["S[]","M[]","L[]","XL[]","XXL[]"];
                 const values = ["quantites","quantitem","quantitel","quantitexl","quantitexxl"]
                 var h1 = $('<h1>').addClass('exTitle').text( it.color + ' :');
                 var id = $('<input>').addClass('info').attr('type', 'hidden').attr('name', "itemsId[]").attr("value",it.id);
-                $(".edit-container").append(h1);
-                $(".edit-container").append(id);
+                $("#product-modal .edit-container").append(h1);
+                $("#product-modal .edit-container").append(id);
                 var div1 = $('<div>').addClass('exContainer');
                 for (let i =0 ; i< 5;i++) {         
                     var div2 = $('<div>').addClass('sizeContainer');
@@ -93,9 +93,28 @@ $(document).ready(function () {
                     $(div2).append(label).append(input);
                     $(div1).append(div2);
                 }
-                $(".edit-container").append(h1).append(div1);
+                $("#product-modal .edit-container").append(h1).append(div1);
           })
     })
+})
+
+$(".addModal").click(function(){
+    const labels = ["S[]","M[]","L[]","XL[]","XXL[]"];
+    var colors = ['rouge', 'bleu', 'blanc', 'noir'];
+    var select = $('<select name="color[]" class="color" >');
+    for (var i = 0; i < colors.length; i++) {
+    $('<option>').val(colors[i]).text(colors[i]).appendTo(select);
+    }
+    var div1 = $('<div>').addClass('exContainer');
+    for (let i =0 ; i< 5;i++) {         
+        var div2 = $('<div>').addClass('sizeContainer');
+        var label = $('<label>').text(labels[i].split("[")[0] +  ' :');
+        var input = $('<input>').addClass('info').attr('type', 'number').attr('name', labels[i]).attr('placeholder', 'Qte');
+        $(div2).append(label).append(input);
+        $(div1).append(div2);
+    }
+    $("#add-product-modal .edit-container .addModal").before(select);
+    $("#add-product-modal .edit-container .addModal").before(div1);
 })
 
 })

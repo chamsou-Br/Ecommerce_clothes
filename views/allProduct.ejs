@@ -129,7 +129,11 @@
             
               <img
                 class=""
-                src="<%= products[i].picture %>"
+                src='<% if (products[i].picture.includes("uploads")) { %>
+                  ../../<%= products[i].picture %>
+                <% } else { %>
+                  <%= products[i].picture %>
+                <% } %>' 
                 alt=""
                 class="img-fluid"
               />

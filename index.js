@@ -1,6 +1,6 @@
 const express = require("express");
 const homeController = require("./controllers/home");
-const { productsController, productDetailsController, updateProductContrller } = require("./controllers/products");
+const { productsController, productDetailsController, updateProductContrller, addProductContrller } = require("./controllers/products");
 const {getAllProduct , getProductsByType} = require("./modals/products");
 const { loginPageController, loginHandlerController, logoutController, registerController, registerHandlerController } = require("./controllers/auth");
 const cookieParser = require("cookie-parser");
@@ -61,6 +61,7 @@ app.get("/gerant/commandes/:id",verifyAuthAdmin,commaneDetailsController)
 app.get("/gerant/utilisateurs",verifyAuthAdmin,usersPageController)
 app.get("/gerant/produits",verifyAuthAdmin,productsPageController)
 app.post("/gerant/produits",verifyAuthAdmin,updateProductContrller)
+app.post("/gerant/produit",verifyAuthAdmin,upload.single("picture"),addProductContrller)
 app.get("/gerant/accessoires",verifyAuthAdmin,accessoirePageController)
 app.post("/gerant/accessoires",verifyAuthAdmin,updateAccessoireContrller)
 app.post("/gerant/accessoire",verifyAuthAdmin,upload.single("picture"),addAccessoireContrller)

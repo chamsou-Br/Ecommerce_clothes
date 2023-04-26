@@ -1,13 +1,33 @@
 const { json } = require("express");
 const { addCommande } = require("../modals/commande");
 const { getTypesOfProducts, getProductById } = require("../modals/products");
+const  nodemailer= require("nodemailer")
+
+const transporter = nodemailer.createTransport({
+    service: 'Gmail',
+    auth: {
+      user: process.env.MAIL,
+      pass: process.env.PASSWORD_MAIL
+    }
+  });
 
  const bagController = async (req , res) => {
     const types = await getTypesOfProducts();
     const user  = req.client
     req.session.bag = req.session.bag ? req.session.bag : []
     req.session.accessoire = req.session.accessoire ? req.session.accessoire : []
-    res.render("bag",{types,user,bag : req.session.bag ,accessoires : req.session.accessoire });
+    let price = 0 ;
+    console.log(req.session.bag , req.session.accessoire)
+    req.session.accessoire.forEach(it => {
+        price += it.accessoire.prix * it.qty
+    })
+    req.session.bag.forEach(it => {
+        price += it.product.prix * it.qty
+        it.accessoire.forEach(it2 => {
+            price += it2.prix
+        })
+    })
+    res.render("bag",{types,user,bag : req.session.bag ,accessoires : req.session.accessoire , price : price });
 }
 
 const deleteBagController = async (req , res) => {
@@ -71,6 +91,18 @@ const valideBagController = async (req , res) => {
    const accs = req.session.accessoire ? req.session.accessoire : []
    const client = req.client ? req.client.email : null
     await addCommande(req.body,products,accs,client)
+    const mailOptions = {
+        from: process.env.MAIL,
+        to:  req.body.email,
+        subject: "L'atelier de la Mode",
+        text: 'Votre commande dans notre boutique est ajoutée avec succès'
+      };
+    
+      transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+          console.log(error);
+        }
+      });
     req.session.accessoire = []
     req.session.bag  = []
     res.redirect("/bag")

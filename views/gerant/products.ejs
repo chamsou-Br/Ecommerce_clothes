@@ -75,7 +75,11 @@
             <div class="table-responsive">
           <table class="table  caption-top">
             <caption>
-              List des produits
+              <button class="add-button" 
+              data-toggle="modal"
+              data-target="#add-product-modal"  >
+              + Ajouter Produit 
+            </button>   
             </caption>
             <thead>
               <tr>
@@ -233,7 +237,7 @@
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLongTitle">Edit Accessoire</h5>
+            <h5 class="modal-title" id="exampleModalLongTitle">Edit Produit</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -266,6 +270,7 @@
                 <input  value=""   class="info" type="text" name="price" placeholder="Prix">
                 <i class="bi bi-caret-down icon-input"></i>
               </div>
+             
         </div>
           <div class="modal-footer">
             <button type="submit" class="btn btn-secondary ">Sauvgarder</button>
@@ -275,6 +280,84 @@
       </div>
     </div>
 
+
+         <!-- Modal -->
+         <div class="modal fade" id="add-product-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Ajouter Produit</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <form action="/gerant/produit" method="post"  enctype="multipart/form-data"  >
+              <div class="modal-body edit-container" >
+                <div class="input-container">
+                  <label>Photo : </label>
+                  <input
+                    class="info"
+                    type="file"
+                    name="picture"
+                    placeholder="Photo"
+                  />
+                  <i class="bi bi-caret-down icon-input"></i>
+                </div>
+                  <div class="input-container">
+                      <label>Nom : </label>
+                      <input  value=""   class="info" type="text" name="name" placeholder="Nom">
+                      <i class="bi bi-caret-down icon-input"></i>
+                  </div>  
+                  <div class="input-container">
+                    <label>Descrp : </label>
+                    <input  value=""   class="info" type="text" name="descr" placeholder="Description">
+                    <i class="bi bi-caret-down icon-input"></i>
+                  </div> 
+                  <div class="input-container">
+                    <label>Type : </label>
+                    <input  value=""   class="info" type="text" name="type" placeholder="vest - pantalon ....">
+                    <i class="bi bi-caret-down icon-input"></i>
+                  </div>  
+                  <div class="input-container">
+                    <label>Categorie : </label>
+                    <input  value=""   class="info" type="text" name="sexe" placeholder="Homme - Femme - Enfant ...">
+                    <i class="bi bi-caret-down icon-input"></i>
+                  </div> 
+                  <div class="input-container">
+                    <label>Marque : </label>
+                    <input  value=""   class="info" type="text" name="mark" placeholder="Marque">
+                    <i class="bi bi-caret-down icon-input"></i>
+                  </div>  
+                  <div class="input-container">
+                    <label>Style : </label>
+                    <input  value=""   class="info" type="text" name="style" placeholder="Classique - Sportif ... ">
+                    <i class="bi bi-caret-down icon-input"></i>
+                  </div>  
+                  <div class="input-container">
+                    <label>Prix : </label>
+                    <input  value=""   class="info" type="text" name="price" placeholder="Prix">
+                    <i class="bi bi-caret-down icon-input"></i>
+                  </div>
+                  <div class="input-container">
+                    <label>Style : </label>
+                    <input  value=""   class="info" type="text" name="style" placeholder="Classique - Sportif ... ">
+                    <i class="bi bi-caret-down icon-input"></i>
+                  </div>  
+                  <div class="input-container">
+                    <label>Accessoires : </label>
+                    <input  value=""   class="info" type="text" name="accessoires" placeholder="cravate -  nœud papillon ... ">
+                    <i class="bi bi-caret-down icon-input"></i>
+                  </div>  
+                  <h1 class="exTitle addModal">+ ajouter modal pour le produit</h1>
+            </div>
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-secondary ">Ajouter</button>
+              </div>
+            </form>
+            </div>
+          </div>
+        </div>
+    
     <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
       integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
