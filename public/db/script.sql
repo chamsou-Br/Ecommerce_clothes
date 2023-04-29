@@ -99,6 +99,18 @@ prix DOUBLE PRECISION  ,
 type varchar(50)
 );
 
+-- create table examplaireCombinaison (
+-- id SERIAL primary key ,
+-- combinaison integer REFERENCES produit(id),
+-- color varchar(20),
+-- quantiteS integer default 0,
+-- quantiteM integer default 0,
+-- quantiteL integer default 0,
+-- quantiteXL integer default 0,
+-- quantiteXXL integer default 0,
+-- quantiteXXXL integer default 0
+-- );
+
 create table combinaisonProduit (
 id serial primary key,
 combinaison integer references combinaison(id),
