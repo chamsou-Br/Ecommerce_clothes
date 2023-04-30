@@ -67,6 +67,31 @@ $("#sort").change(function() {
     $(".productsFound").text( cpt.toString() + " styles trouvés")
   });
 
+  $("#categorieCom").change(function() {
+    var selectedOption = $(this).val();
+    var selectedIndex = this.selectedIndex;
+    let cpt = 0;
+    $(".product").each(function(){
+        let current = $(this);
+            let data = current.data("product")
+            console.log(data.items[0],selectedOption,selectedIndex)
+            if (!data.items[0].catgorie || selectedIndex == 0 || data.items[0].catgorie == selectedOption ) {
+                current.show()
+                cpt++;
+            }else {
+                current.hide()
+            }
+    })
+    $(".productsFound").text( cpt.toString() + " styles trouvés")
+  });
+
+  $("#typeComp").change(function() {
+    var selectedOption = $(this).val();
+    window.location = selectedOption
+    
+  });
+  
+
   $("#style").change(function() {
     var selectedOption = $(this).val();
     var selectedIndex = this.selectedIndex;

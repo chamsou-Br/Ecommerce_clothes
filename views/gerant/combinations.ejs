@@ -1,0 +1,348 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta charset="ISO-8859-1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ecommerce</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      rel="stylesheet"
+      integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css"
+    />
+    <link rel="stylesheet" href="/styles/home.css" />
+    <link rel="stylesheet" href="/styles/gerant.css" />
+    <link rel="stylesheet" href="/styles/shared.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="//fonts.googleapis.com/css?family=Josefin+Sans"
+    />
+    <style>
+      body {
+        font-family: "Josefin Sans";
+      }
+    </style>
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.js"
+      integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body>
+    <div class="nav-small-screen">
+      <!-- ======= Navbar ======= -->
+      <%- include("../components/navGerant") %>
+      <!-- ======= End navbar ======= -->
+    </div>
+    <div id="viewport">
+      <!-- ======= Navbar ======= -->
+      <%- include("../components/sidebar") %>
+      <!-- ======= End navbar ======= -->
+      <!-- Content -->
+      <div id="content">
+        <nav class="navbar navbar-default">
+          <div class="container-fluid">
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="/">L'atelier de la Mode</a></li>
+            </ul>
+          </div>
+        </nav>
+        <div class="container-fluid">
+          <!-- ======= Commend En Attente =======   -->
+
+          <% if (combinations.length> 0) { %>
+          <div class="table-responsive">
+            <table class="table caption-top">
+              <caption>
+                <button class="add-button" 
+                data-toggle="modal"
+                data-target="#combination-modal"  >
+                + Ajouter combination 
+              </button>         
+              </caption>
+              <thead>
+                <tr>
+                  <th scope="col">
+                    <div style="display: flex; align-items: center">
+                      <i
+                        style="
+                          margin-right: 15px;
+                          color: #6d6de6;
+                          font-size: 12px;
+                        "
+                        class="bi bi-list-nested"
+                      ></i
+                      >Combinaison
+                    </div>
+                  </th>
+
+                  <th scope="col">
+                    <div style="display: flex; align-items: center">
+                      <i
+                        style="
+                          margin-right: 15px;
+                          color: #56e164;
+                          font-size: 12px;
+                        "
+                        class="bi bi-border-style"
+                      ></i
+                      >Type
+                    </div>
+                  </th>
+
+
+                  <th scope="col">
+                    <div style="display: flex; align-items: center">
+                      <i
+                        style="
+                          margin-right: 15px;
+                          color: #56e164;
+                          font-size: 12px;
+                        "
+                        class="bi bi-currency-exchange"
+                      ></i
+                      >Prix
+                    </div>
+                  </th>
+                  <th scope="col">
+                    <div style="display: flex; align-items: center">
+                      <i
+                        style="
+                          margin-right: 15px;
+                          color: #6d6de6;
+                          font-size: 12px;
+                        "
+                        class=" bi bi-bag"
+                      ></i
+                      >Contenu
+                    </div>
+                  </th>
+                  <th scope="col">
+                    <div style="display: flex; align-items: center">
+                      <i
+                        style="
+                          margin-right: 15px;
+                          color: #ff7575;
+                          font-size: 12px;
+                        "
+                        class="bi bi-trash3"
+                      ></i
+                      >Supprimer
+                    </div>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <% for (let i = 0 ; i < combinations.length ; i++) {%>
+
+                <tr>
+                  <th><%= combinations[i].nom %></th>
+                  <td><%= combinations[i].type %></td>
+                  <td><%= combinations[i].prix.toLocaleString('en-US', {
+                    minimumFractionDigits: 2 }) %></td>
+                  <td>
+                    <% for (let j = 0 ; j < combinations[i].items.length ; j++ ) { %>
+                        <%=combinations[i].items[j].nom %> | 
+                   <% } %>
+                  </td>
+                  <td>
+                    <a href="/gerant/deletecombinaisons/<%= combinations[i].id %>" >
+                    <i
+                    style="color: #2d2d2d; font-size: 12px"
+                    class="bi bi-x-circle"
+                  ></i>
+                  </a>
+                  </td>
+                </tr>
+
+                <% } %>
+              </tbody>
+            </table>
+          </div>
+
+          <% } else { %>
+          <div class="bag-empty">
+            <i class="bi bi-bag"></i>
+            <h1>Sac des combinations est vide</h1>
+            <p>en attendant que vous ajouter des nouvaux accessoire :)</p>
+          </div>
+          <%} %>
+          <!-- ======= End Bag ======= -->
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="combination-modal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalCenterTitle"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">
+              Ajouter Combination
+            </h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form action="/gerant/combinaisons" method="post">
+            <div class="modal-body edit-container">
+              <input type="hidden" name="id" />
+              <div class="input-container">
+                <label>Nom : </label>
+                <input
+                  value=""
+                  class="info"
+                  type="text"
+                  name="name"
+                  placeholder="Nom"
+                />
+                <i class="bi bi-caret-down icon-input"></i>
+              </div>
+              <div class="input-container">
+                <label>Descr : </label>
+                <input
+                  value=""
+                  class="info"
+                  type="text"
+                  name="descr"
+                  placeholder="description"
+                />
+                <i class="bi bi-caret-down icon-input"></i>
+              </div>
+              <div class="input-container">
+                <label>Type : </label>            
+                <select
+                style="border : none"
+                value=""
+                class="info"
+                type="text"
+                name="type"
+                placeholder="Type"
+              >
+                <option  selected disabled value="S">Type</option>
+                <option value="Homme">combinaison de base </option>
+                <option value="Femme">combinaison business</option>
+                <option value="Enfant">combinaison de luxe</option>
+              </select>
+                <i class="bi bi-caret-down icon-input"></i>
+              </div>
+              <div class="input-container">
+                <label>Prix : </label>
+                <input
+                  value=""
+                  class="info"
+                  type="text"
+                  name="price"
+                  placeholder="Prix"
+                />
+                <i class="bi bi-caret-down icon-input"></i>
+              </div>
+              <div style="margin: 10px 0px;" class="exTitle products-items"  >
+
+              </div>
+              <h1 class="exTitle addModal" data-toggle="modal" data-target="#exampleModalCenter" >+ ajouter produit pour la combinaison</h1>
+
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-secondary">
+                Sauvgarder
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+                                                    <!-- Modal -->
+                                                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                                          <div class="modal-content">
+                                                            <div class="modal-header">
+                                                              <h5 class="modal-title" id="exampleModalLongTitle">Products</h5>
+                                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                              </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <select
+                                                                style="width: 60%;padding: 10px;border: none;"
+                                                                value=""
+                                                                class="typeModal"
+                                                                type="text"
+                                                                name="typeModal"
+                                                                placeholder="Type"
+                                                              >
+                                                                <option selected value="All">Toutes </option>
+                                                                <% types.map(it => { %>
+                                                                    <option value="<%= it.type %>"><%= it.type %></option>
+                                                                <% }) %>
+                                                              </select>
+                                                              <ul
+                                                              class="list-group list-group-horizontal position-relative overflow-auto w-90"
+                                                            >
+                                                              <% for (let i=0;i<products.length;i++) { %>
+                                                              <li class="list-group-item border-0">
+                                                                <%- include('../components/accessCard',{ isAcc : false,acc : products[i] }) %>
+                                                              </li>
+                                                              <% } %>
+                                                            </ul>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                              <button type="button" class="btn btn-secondary " id="closeModal" data-dismiss="modal">Fermer</button>
+                                                            </div>
+                                                          </div>
+                                                        </div>
+                                                      </div>
+
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+    <script src="/script/commande.js"></script>
+  </body>
+</html>

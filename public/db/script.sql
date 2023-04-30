@@ -1,10 +1,12 @@
 create table client (
-email character varying(30) primary key,
-prenom character varying(30) not null,
-nom character varying(30) not null ,
-adresse character varying(200) ,
-telephone character varying(20) ,
-motDePasse character varying(16)
+    email character varying(30) primary key,
+    prenom character varying(30) NOT NULL,
+    nom character varying(30) NOT NULL,
+    adresse character varying(200),
+    telephone character varying(20),
+    motdepasse character varying(300),
+    picture character varying(500),
+    type character varying(30)
 );
 
 create table produit (
@@ -16,7 +18,7 @@ style varchar(40),
 catgorie varchar(40),
 marque varchar(40),
 quantite  integer default 0,
-accessoire BOOLEAN default false,
+accessoire varchar(40),
 picture varchar(300),
 prix double PRECISION ,
 rang integer default 0, 
@@ -44,23 +46,22 @@ create table examplaire (
 id SERIAL primary key ,
 produit integer REFERENCES produit(id),
 color varchar(20),
-quantiteS integer default 0,
-quantiteM integer default 0,
-quantiteL integer default 0,
-quantiteXL integer default 0,
-quantiteXXL integer default 0,
-quantiteXXXL integer default 0
+size varchar(20),
+qte integer default 0,
 );
 
+
 create table commande (
-id Serial primary key,
-client varchar(30) references client(email),
-nom varchar(30),
-prenom varchar(30),
-adresse character varying(200) ,
-telephone character varying(20),
-livraison TIMESTAMP,
-prix double PRECISION
+    id Serial primary key,
+    client character varying(30) references client(email), ,
+    nom character varying(30),
+    prenom character varying(30),
+    adresse character varying(200),
+    telephone character varying(20),
+    livraison timestamp without time zone,
+    prix double precision,
+    email character varying(50),
+    etat character varying(30) DEFAULT 'EN_ATTENTE'::character varying
 );
 
 create table commandeProduits (
@@ -99,17 +100,6 @@ prix DOUBLE PRECISION  ,
 type varchar(50)
 );
 
--- create table examplaireCombinaison (
--- id SERIAL primary key ,
--- combinaison integer REFERENCES produit(id),
--- color varchar(20),
--- quantiteS integer default 0,
--- quantiteM integer default 0,
--- quantiteL integer default 0,
--- quantiteXL integer default 0,
--- quantiteXXL integer default 0,
--- quantiteXXXL integer default 0
--- );
 
 create table combinaisonProduit (
 id serial primary key,

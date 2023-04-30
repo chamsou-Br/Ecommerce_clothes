@@ -61,7 +61,7 @@
                             </a>    
                         </div>
  
-                    <img src='<% if (product.picture.includes("uploads")) { %>
+                    <img src='<% if (product.picture.includes("uploads") && !product.picture.includes("http")) { %>
                       ../../<%= product.picture %>
                     <% } else { %>
                       <%= product.picture %>
@@ -166,7 +166,7 @@
                                 >
                                   <% for (let i=0;i<accs.length;i++) { %>
                                   <li class="list-group-item border-0">
-                                    <%- include('components/accessCard',{ acc : accs[i] }) %>
+                                    <%- include('components/accessCard',{isAcc : true, acc : accs[i] }) %>
                                   </li>
                                   <% } %>
                                 </ul>

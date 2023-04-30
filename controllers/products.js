@@ -2,6 +2,7 @@ const { getProductsByType, getTypesOfProducts, getMarkOfProducts, getStyleOfProd
 const titles = require("../public/data/titles")
 const colors = require("../public/data/color");
 const { getAllAccessoires } = require("../modals/accessoire");
+const { getTypesOfCombinations } = require("../modals/combination");
 
 const productsController = async (req , res) => {
     const type = req.params.type;
@@ -9,7 +10,8 @@ const productsController = async (req , res) => {
     const marks = await getMarkOfProducts()
     const styles = await getStyleOfProducts();
     const types = await getTypesOfProducts();
-    res.render("allProduct",{products,marks,styles,types , info : titles[type],user : req.client});
+    const typesCom = await getTypesOfCombinations()
+    res.render("allProduct",{isProduct : true,products,marks,styles,types ,typesCom, info : titles[type],user : req.client});
 }
 
 const productDetailsController = async (req , res) => {
@@ -18,7 +20,8 @@ const productDetailsController = async (req , res) => {
     const items = await getExamplairOfProduct(id);
     const accs = await getAllAccessoires();
     const types = await getTypesOfProducts();
-    res.render("details",{types,product : {...product , items : items},colors ,user:req.client,accs : accs});
+    const typesCom = await getTypesOfCombinations()
+    res.render("details",{types,typesCom,product : {...product , items : items},colors ,user:req.client,accs : accs});
 }
 
 const updateProductContrller = async (req , res) => {

@@ -1,6 +1,7 @@
 const { getAllAccessoires } = require("../modals/accessoire");
+const { getAllCombinations } = require("../modals/combination");
 const { getAllCommande, updateStatusCommande, getCommandeByID } = require("../modals/commande");
-const { getAllProduct } = require("../modals/products");
+const { getAllProduct, getTypesOfProducts } = require("../modals/products");
 const { getAllUsers } = require("../modals/user");
 const  nodemailer= require("nodemailer")
 
@@ -36,6 +37,8 @@ const productsPageController = async (req, res) => {
 };
 
 const accessoirePageController = async (req, res) => {
+  const combinations = await getAllCombinations(); 
+  console.log(combinations[0])
   const accessoires = await getAllAccessoires();
   res.render("gerant/accessoires", {
     accessoires: accessoires
@@ -45,7 +48,16 @@ const accessoirePageController = async (req, res) => {
 const commaneDetailsController = async (req , res) => {
   const id  = req.params.id ? req.params.id : 0
   const {products  , accessoires , ...user } = await getCommandeByID(id);
+
   res.render("gerant/commandeDetails",{user,products : products ,accessoires : accessoires });
+}
+
+
+const combinationsPageController = async (req , res) => {
+  const combinations = await getAllCombinations(); 
+  const types  =await getTypesOfProducts();
+  const products = await getAllProduct();
+  res.render("gerant/combinations",{combinations ,types, products  });
 }
 
 const updateCommandeStatusController = async (req  , res) => {
@@ -72,4 +84,4 @@ const updateCommandeStatusController = async (req  , res) => {
 
 
 
-module.exports = { commandesPageController ,accessoirePageController, productsPageController ,  usersPageController , updateCommandeStatusController , commaneDetailsController};
+module.exports = { commandesPageController , combinationsPageController ,accessoirePageController, productsPageController ,  usersPageController , updateCommandeStatusController , commaneDetailsController};

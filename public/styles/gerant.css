@@ -287,7 +287,6 @@ a {
     height: 40px;
     width: 280px;
     border: none;
-
     outline: none;
     padding: 0 10px;
 }
@@ -438,17 +437,7 @@ tbody .profile-picture {
 }
 
 
-.edit-container input{
-    font-size: 1rem;
-    font-weight: normal;
-    color: #000;
-    background-color: #FFF;
-    height: 40px;
-    width: 80%;
-    border: none;
-    outline: none;
-    padding: 0 10px;
-}
+
 
 .edit-container select{
     font-size: 1rem;
@@ -460,6 +449,18 @@ tbody .profile-picture {
     border: 0.5px solid #2d2d2d22;
     outline: none;
     padding:  10px;
+}
+
+.edit-container input , select.add{
+    font-size: 1rem;
+    font-weight: normal;
+    color: #000;
+    background-color: #FFF;
+    height: 40px;
+    width: 80%;
+    border: none;
+    outline: none;
+    padding: 0 10px;
 }
 
 .edit-container input:disabled {

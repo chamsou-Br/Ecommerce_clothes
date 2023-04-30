@@ -1,12 +1,16 @@
-<div class="Accesscard" accId="<%= acc.id %>" >
+<div class="Accesscard" accType="<%= acc.type %>" accId="<%= acc.id %>" >
         <div class="card-image"  style="overflow: hidden;">
-            <div accType="<%= acc.type %>" accId="<%=  JSON.stringify(acc) %>" class="iconContainer">+</div>
-            <img class="" src="<%= acc.picture %>" style="object-fit: cover;" />
+            <div accType="<%= isAcc ? acc.type : acc.nom %>" accId="<%=  JSON.stringify(acc) %>" class="iconContainer">+</div>
+            <img   src='<% if ( !acc.picture.includes("http")) { %>
+                ../../<%= acc.picture %>
+              <% } else { %>
+                <%= acc.picture %>
+              <% } %>'  style="object-fit: cover;"  />
         </div>
         <div class="box">
             <div style="display: flex;justify-content: space-between;">
-                <h4><%= acc.type %></h4>
-                <h4>$ <%= acc.prix.toLocaleString('en-US', { minimumFractionDigits: 2 }) %></h4>
+                <h4><%= isAcc ? acc.type : acc.nom %></h4>
+                <h4 style="width: 50px;" >$ <%= acc.prix.toLocaleString('en-US', { minimumFractionDigits: 2 }) %></h4>
             </div>
         </div>
 </div>

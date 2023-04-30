@@ -1,4 +1,5 @@
 const { getMarkOfAccessoires, getAllAccessoires, getAccessoireById, updateAccessoire, addAccessoire } = require("../modals/accessoire");
+const { getTypesOfCombinations } = require("../modals/combination");
 const { getTypesOfProducts } = require("../modals/products");
 
 const accessoiresController = async (req , res) => {
@@ -6,7 +7,8 @@ const accessoiresController = async (req , res) => {
     const accessoire = await getAllAccessoires();
     const marks = await getMarkOfAccessoires()
     const types = await getTypesOfProducts();
-    res.render("accessoire",{accessoire,marks,types , user : req.client});
+    const typesCom = await getTypesOfCombinations()
+    res.render("accessoire",{accessoire,marks,types ,typesCom, user : req.client});
 }
 
 const addAccessoireToBagController = async (req , res) => {

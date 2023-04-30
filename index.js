@@ -11,7 +11,8 @@ const upload = require("./middleware/upload");
 const { bagController, addBagController, deleteBagController, deleteAccessoireFromBagController, valideBagController, deleteAccessoireFromProductController } = require("./controllers/bag");
 const session = require("express-session");
 const { accessoiresController, addAccessoireToBagController, updateAccessoireContrller, addAccessoireContrller } = require("./controllers/accessoir");
-const { commandesPageController, updateCommandeStatusController, commaneDetailsController, usersPageController, productsPageController, accessoirePageController } = require("./controllers/gerant");
+const { commandesPageController, updateCommandeStatusController, commaneDetailsController, usersPageController, productsPageController, accessoirePageController, combinationsPageController } = require("./controllers/gerant");
+const { combinationssController, addCombinationController, deleteCombinaisonController } = require("./controllers/combination");
 
 require('dotenv').config();
 
@@ -36,6 +37,7 @@ app.get('/',verifyAuth, homeController);
 
 app.get("/produit/details/:id",verifyAuth,productDetailsController)
 app.get("/produit/:type",verifyAuth,productsController);
+app.get("/combinaison/:type",verifyAuth,combinationssController);
 app.get("/accessoire",verifyAuth,accessoiresController)
 app.get("/accessoire/:id",verifyAuth,addAccessoireToBagController)
 
@@ -65,7 +67,9 @@ app.post("/gerant/produit",verifyAuthAdmin,upload.single("picture"),addProductCo
 app.get("/gerant/accessoires",verifyAuthAdmin,accessoirePageController)
 app.post("/gerant/accessoires",verifyAuthAdmin,updateAccessoireContrller)
 app.post("/gerant/accessoire",verifyAuthAdmin,upload.single("picture"),addAccessoireContrller)
-
+app.get("/gerant/combinaisons",verifyAuthAdmin,combinationsPageController)
+app.post("/gerant/combinaisons",verifyAuthAdmin,addCombinationController)
+app.get("/gerant/deletecombinaisons/:id",verifyAuthAdmin,deleteCombinaisonController)
 
 
 

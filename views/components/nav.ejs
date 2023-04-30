@@ -20,9 +20,9 @@
             Des combinaisons
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" href="#">combinaison de luxe</a>
-            <a class="dropdown-item" href="#">combinaison busines</a>
-            <a class="dropdown-item" href="#">combinaison de luxe</a>
+            <% typesCom.map(item => { %>
+              <a class="dropdown-item" href="/combinaison/<%= item.type.split(" ")[2] %>" ><%= item.type %></a> 
+            <% }) %>
           </div>
         </li>
         <li class="nav-item">

@@ -72,15 +72,12 @@
         <option disabled selected value="date">Quoi de neuf</option>
         <option value="prix">Prix bas à haut</option>
         <option value="prix">Prix élevé à bas</option>
-        <option value="rang">rang</option>
-        <option value="adore">adore</option>
-
       </select>
 
       <select
         class="form-select mt-2"
         name="categorie"
-        id="categorie"
+        id="categorieCom"
         required
         aria-label="Default select example"
       >
@@ -92,56 +89,44 @@
 
       <select
         class="form-select mt-2"
-        name="style"
+        name="type"
         required
-        id="style"
+        id="typeComp"
         aria-label="Default select example"
       >
-        <option  selected value="S">Tous Styles</option>
-        <% styles.map((item) => { %>
-          <option value="<%= item.style %>"><%= item.style %></option>
+        <option selected  disabled >Types</option>
+        <% typesCom.map((item) => { %>
+          <option value="/combinaison/<%= item.type.split(" ")[2] %>"><%= item.type %></option>
        <% }) %>
       </select>
-      <select
-      class="form-select mt-2"
-      name="mark"
-      required
-      id="mark"
-      aria-label="Default select example"
-    >
-      <option  selected value="S">Tous Marques</option>
-      <% marks.map((mark) => { %>
-        <option value="<%= mark.marque %>"><%= mark.marque %></option>
-     <% }) %>
 
-    </select>
     </div>
-    <div class="productsFound"><%= products.length %> styles trouvés</div>
+    <div class="productsFound"><%= combinations.length %> styles trouvés</div>
     <!-- ======= End filter Brands ======= -->
     <div class="gallery">
       <div class="gallery-items">
-        <% for (let i = 0 ; i <  products.length  ; i++) { %>
-        <div data-product="<%= JSON.stringify(products[i]) %>" class="product">
+        <% for (let i = 0 ; i <  combinations.length  ; i++) { %>
+        <div data-product="<%= JSON.stringify(combinations[i]) %>" class="product">
           <div class="gallery-item">
             <div class="mark">
-              <%= products[i].marque %>
+              <%= combinations[i].type %>
             </div>
             
               <img
                 class=""
-                src='<% if (!products[i].picture.includes("http")) { %>
-                  ../../<%= products[i].picture %>
+                src='<% if (combinations[i].items[0].picture.includes("uploads")) { %>
+                  ../../<%= combinations[i].items[0].picture %>
                 <% } else { %>
-                  <%= products[i].picture %>
+                  <%= combinations[i].items[0].picture %>
                 <% } %>' 
                 alt=""
                 class="img-fluid"
               />
       
-              <a href="/produit/details/<%= products[i].id %>" class="gallery-lightbox">  <div class="iconContainer">+</div> </a>
+              <a href="/combinaison/details/<%= combinations[i].id %>" class="gallery-lightbox">  <div class="iconContainer">+</div> </a>
           </div>
-          <h2><%= products[i].nom %></h2>
-          <h1>$ <%= products[i].prix.toLocaleString('en-US', { minimumFractionDigits: 2 }) %></h1>
+          <h2><%= combinations[i].nom %></h2>
+          <h1>$ <%= combinations[i].prix.toLocaleString('en-US', { minimumFractionDigits: 2 }) %></h1>
         </div>
         <% } %>
       </div>

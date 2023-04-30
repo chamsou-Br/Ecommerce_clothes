@@ -1,4 +1,5 @@
 const { removeCookie, createToken } = require("../middleware/auth");
+const { getTypesOfCombinations } = require("../modals/combination");
 const { getTypesOfProducts } = require("../modals/products");
 const { changePicture, getUser, updateProfile } = require("../modals/user");
 const { createCookie } = require("./auth");
@@ -26,8 +27,9 @@ const profileController = async (req , res) => {
         res.redirect("/login")
     }
     const types = await getTypesOfProducts();
+    const typesCom = await getTypesOfCombinations()
     const user = req.client
-    res.render("profile",{types,user})
+    res.render("profile",{types,typesCom,user})
 }
 
 module.exports = {profileController,modifyPictureController,updateProfileController};

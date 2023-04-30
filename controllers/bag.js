@@ -1,7 +1,8 @@
 const { json } = require("express");
 const { addCommande } = require("../modals/commande");
 const { getTypesOfProducts, getProductById } = require("../modals/products");
-const  nodemailer= require("nodemailer")
+const  nodemailer= require("nodemailer");
+const { getTypesOfCombinations } = require("../modals/combination");
 
 const transporter = nodemailer.createTransport({
     service: 'Gmail',
@@ -13,6 +14,7 @@ const transporter = nodemailer.createTransport({
 
  const bagController = async (req , res) => {
     const types = await getTypesOfProducts();
+    const typesCom = await getTypesOfCombinations()
     const user  = req.client
     req.session.bag = req.session.bag ? req.session.bag : []
     req.session.accessoire = req.session.accessoire ? req.session.accessoire : []
@@ -27,7 +29,7 @@ const transporter = nodemailer.createTransport({
             price += it2.prix
         })
     })
-    res.render("bag",{types,user,bag : req.session.bag ,accessoires : req.session.accessoire , price : price });
+    res.render("bag",{types,typesCom,user,bag : req.session.bag ,accessoires : req.session.accessoire , price : price });
 }
 
 const deleteBagController = async (req , res) => {

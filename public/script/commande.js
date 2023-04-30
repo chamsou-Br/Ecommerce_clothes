@@ -98,7 +98,7 @@ $(document).ready(function () {
     })
 })
 
-$(".addModal").click(function(){
+$("#add-product-modal .addModal").click(function(){
     const labels = ["S[]","M[]","L[]","XL[]","XXL[]"];
     var colors = ['rouge', 'bleu', 'blanc', 'noir'];
     var select = $('<select name="color[]" class="color" >');
@@ -115,6 +115,60 @@ $(".addModal").click(function(){
     }
     $("#add-product-modal .edit-container .addModal").before(select);
     $("#add-product-modal .edit-container .addModal").before(div1);
+})
+
+$(".Accesscard .iconContainer").each(function(){
+    $(this).click(function(){
+       
+          const value = $(this).attr('accId')
+          const type = $(this).attr('accType')
+          console.log(value,type)
+          if ($(this).text() == "+") {
+
+            $(this).text('✔')
+            $('<input>').attr({
+              type: 'hidden',
+              class : "productsId",
+              name: 'products[]',
+              value: JSON.parse(value).id,
+              data : type
+            }).appendTo('form');
+
+    
+            var mySpan = $('<p>').text("- " + JSON.parse(value).nom );
+            $(".products-items").append(mySpan); 
+
+          }else {
+            $(this).text('+');
+            let i = 0;
+            $('.productsId').filter(function() {
+                i = $(".productsId").index(this)
+                console.log(JSON.parse(value).id ," = ",$(this).val() )
+                return $(this).val() == JSON.parse(value).id;
+              }).each(function() {
+                // Delete the input element
+                $(this).remove();
+              });
+              $(".products-items p")[i].remove()
+        
+          }
+    })
+})
+
+$(".typeModal").change(function(){
+    
+    const selectedValue = $(this).val();
+    console.log(selectedValue)
+    $(".Accesscard").each(function(){
+        const type = $(this).attr('accType')
+        console.log(type)
+        if (type == selectedValue || selectedValue == "All") {
+            $(this).parent().show()
+        }else {
+            $(this).parent().hide();
+        }
+    })
+
 })
 
 })

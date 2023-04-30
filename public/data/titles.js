@@ -10,5 +10,9 @@ module.exports = {
     chemise : {
         title : "Chemises",
         descr : "Trouver de nouvelles couches pour correspondre à votre ajustement n’est pas toujours facile. Entrez: notre boutique de chemises pour hommes et femmes - votre go-to pour une apparence élégante"
+    },
+    base : {
+        title : "combinaison de base",
+        descr : "Trouver de nouvelles couches pour correspondre à votre ajustement n’est pas toujours facile. Entrez: notre boutique de combinaison de base pour hommes et femmes - votre go-to pour une apparence élégante"
     }
 }
