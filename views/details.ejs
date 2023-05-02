@@ -60,26 +60,35 @@
                                 <i style="color: #FFF;font-size : 36px" class="bi  bi-heart-fill"></i>
                             </a>    
                         </div>
- 
-                    <img src='<% if (product.picture.includes("uploads") && !product.picture.includes("http")) { %>
-                      ../../<%= product.picture %>
-                    <% } else { %>
-                      <%= product.picture %>
-                    <% } %>' />
+                    <% 
+                    let img ;
+                    if (!isCombination) {
+                      img=  !product.picture.includes("http") ? "../../" + product.picture :product.picture  
+                    }else {
+                      img = !product.items[0].picture.includes("http") ? "../../" + product.items[0].picture :product.items[0].picture 
+                    }
+  
+                    %>
+                    <img src="<%= img %>"/>
                 </div>
+                <% if (!isCombination) { %>
                 <button type="button" class="addAccessoire" data-toggle="modal" data-target="#exampleModalCenter">
                   + Ajouter Accessoire
                 </button>
 
+               <% } %>
+
                 
 
             </div>
-            <form action="/bag/<%= product.id %>" method="post" class=" details-right">
+            <% let action = isCombination  ? "/bag/combinaison/" + product.id : "/bag/" +product.id  %>
+            <form action="<%= action %>" method="post" class=" details-right">
                 <div class="details-info">
                     <h1>
-                        <%= product.nom %>
+                        <%= isCombination ? product.nom : product.nom %>
                     </h1>
-                    <p><%= product.descr %></p>
+                    <p><%= isCombination ? product.descr :  product.descr %></p>
+                    <% if (!isCombination) { %>
                     <div class="rating">
                         <i class="bi bi-star-fill"></i>
                         <i class="bi bi-star-fill"></i>
@@ -88,30 +97,44 @@
                         <i class="bi bi-star-fill"></i>
                         <span >(<%= product.rang %>)</span>
                     </div>
+                    <% } %>
                 </div>
                 <div class="details-info">
-                    <div class="price">
-                        $ <%= product.prix.toLocaleString('en-US', { minimumFractionDigits: 2 }) %>
+                  <% let price = isCombination ? product.prix : product.prix 
+
+                  %>
+                    <% if (isCombination) { %>
+                      <div class="price" style="display: flex;justify-content: space-between;">
+                        <span>$ <%= price.toLocaleString('en-US', { minimumFractionDigits: 2 }) %></span>
+                       <span style="color: rgb(241, 86, 86);text-decoration: line-through;" >$ <%= product.items.reduce((acc, val) => acc + val.prix, 0).toLocaleString('en-US', { minimumFractionDigits: 2 }) %></span>
                     </div>
+                    <%} else { %>
+                      <div class="price">
+                        $ <%= price.toLocaleString('en-US', { minimumFractionDigits: 2 }) %>
+                    </div>
+                    <%} %>
+                    <% if (!isCombination) { %>
                     <div class="reduction">
                         <div>
                              <% if (product.accessoires) { %>
-                                With : <span><%= product.accessoires %></span>
+                                Avec : <span><%= product.accessoires %></span>
                             <% } else{ %>
-                              Without Accessoires
+                              Sans Accessoires
                             <% } %>
                         </div>
                         <i class="bi bi-lightbulb-fill"></i>
                     </div>
+                    <% } %>
                 </div>
+                <% if (!isCombination) { %>
                 <div class="details-info">
                     <div id="test" class="price">
                         choisir une couleur
                     </div>
-                    <input type="hidden" value="<%= product.items[0].color %>" name="color" id="itemActive" />
-                    <div class="colors">
+                    <input type="hidden" class="color-product" value="<%= product.items[0].color %>" name="color" id="itemActive" />
+                    <div class="colors product">
                       <% product.items.map((item,index) => { %>
-                        <div class="color <%= index == 0 ? "active" : '' %>">
+                        <div class="color  <%= index == 0 ? "active" : '' %>">
                           <div class="color-top" style="background-color: <%= colors[item.color][0] %>"></div>
                           <div class="color-bottom" style="background-color: <%= colors[item.color][1] %>"></div>
                       </div>
@@ -121,12 +144,13 @@
                     </div>
                 </div>
 
+
                 <div class="details-info">
                     <div class="price">
                         choisissez votre taille
                     </div>
                     <select  class="form-select mt-2" name="size" required  aria-label="Default select example">
-                        <option id="S" selected <%= product.items[0].quantites == 0 ? "disabled" : "" %> value="S">S </option>
+                        <option id="S" selected  <%= product.items[0].quantites == 0 ? "disabled" : "" %> value="S">S </option>
                         <option id="M" <%= product.items[0].quantitem == 0 ? "disabled" : "" %> value="M">M</option>
                         <option id="L" <%= product.items[0].quantitel == 0 ? "disabled" : "" %> value="L">L</option>
                         <option id="XL" <%= product.items[0].quantitexl == 0 ? "disabled" : "" %> value="XL">XL</option>
@@ -138,18 +162,48 @@
                         Accessoires
                       </div>
                     </div>
-                    <button type="submit" class="buyButtoncontainer">
+                    <button  <%= !product.items[0].quantites && !product.items[0].quantitem && !product.items[0].quantitel && !product.items[0].quantitexl && !product.items[0].quantitexxl ? "disabled" : "" %> type="submit" class="buyButtoncontainer">
                         Ajouter au panier
                     </button>
                     </a>
                 </div>
+
+                <% }else {product.items.map((it,i) => {%>
+                 <div class="details-info products-combination">
+                    <div id="test" class="price">
+                      <%= it.nom %> <i style="margin: 2px 10px;" class="bi bi-eye-fill <%= i == 0 ? 'active' : null %>   view"></i>
+                    </div>
+                    <input type="hidden" value="<%= it.productsItems[0].color %>" name="color" id="itemActive" />
+                    <div class="colors">
+                      <% it.productsItems.map((item,index) => { %>
+                        <div class="color <%= index == 0 ? "active" : '' %>">
+                          <div class="color-top" style="background-color: <%= colors[item.color][0] %>"></div>
+                          <div class="color-bottom" style="background-color: <%= colors[item.color][1] %>"></div>
+                      </div>
+
+                      <%}) %>
+
+                    </div>
+                  <select  class="form-select mt-2" name="size" required  aria-label="Default select example">
+                      <option id="S" selected  <%= it.productsItems[0].quantites == 0 ? "disabled" : "" %> value="S">S </option>
+                      <option id="M" <%= it.productsItems[0].quantitem == 0 ? "disabled" : "" %> value="M">M</option>
+                      <option id="L" <%= it.productsItems[0].quantitel == 0 ? "disabled" : "" %> value="L">L</option>
+                      <option id="XL" <%= it.productsItems[0].quantitexl == 0 ? "disabled" : "" %> value="XL">XL</option>
+                      <option id="XXL" <%= it.productsItems[0].quantitexxl == 0 ? "disabled" : "" %> value="XXL">XXL</option>
+                  </select>
+                </div>
+                <%}) %>
+                <button  type="submit" class="buyButtoncontainer">
+                  Ajouter au panier
+               </button>
+                <% }  %>
 
                     
 
               </form>
     </div>
     <!-- ======= End trending Brands ======= -->
-
+    <% if (!isCombination) { %>
                           <!-- Modal -->
                           <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -177,7 +231,7 @@
                               </div>
                             </div>
                           </div>
-    
+    <%} %>
     <!-- ======= Footer ======= -->
         <%- include('components/footer') %>
     <!-- ======= End Footer ======= -->
@@ -199,7 +253,7 @@
       crossorigin="anonymous"
     ></script>
     <script>
-      const product = <%- JSON.stringify(product) %>
+      const product = <%-  JSON.stringify(product)  %>
   </script>
     <script src="/script/details.js"></script>
   </body>

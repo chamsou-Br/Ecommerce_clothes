@@ -251,6 +251,11 @@
                   <i class="bi bi-caret-down icon-input"></i>
               </div>  
               <div class="input-container">
+                <label>Descrp : </label>
+                <input  value=""   class="info" type="text" name="descr" placeholder="Description">
+                <i class="bi bi-caret-down icon-input"></i>
+              </div>  
+              <div class="input-container">
                 <label>Type : </label>
                 <input  value=""   class="info" type="text" name="type" placeholder="Type">
                 <i class="bi bi-caret-down icon-input"></i>
@@ -300,47 +305,79 @@
                     type="file"
                     name="picture"
                     placeholder="Photo"
+                    required
                   />
                   <i class="bi bi-caret-down icon-input"></i>
                 </div>
                   <div class="input-container">
                       <label>Nom : </label>
-                      <input  value=""   class="info" type="text" name="name" placeholder="Nom">
+                      <input required  value=""   class="info" type="text" name="name" placeholder="Nom">
                       <i class="bi bi-caret-down icon-input"></i>
                   </div>  
                   <div class="input-container">
                     <label>Descrp : </label>
-                    <input  value=""   class="info" type="text" name="descr" placeholder="Description">
+                    <input required value=""   class="info" type="text" name="descr" placeholder="Description">
                     <i class="bi bi-caret-down icon-input"></i>
                   </div> 
                   <div class="input-container">
                     <label>Type : </label>
-                    <input  value=""   class="info" type="text" name="type" placeholder="vest - pantalon ....">
+                    <select
+                    style="border : none"
+                    value=""
+                    class="info"
+                    type="text"
+                    name="type"
+                    placeholder="Type"
+                    required
+                  >
+                    <option  selected disabled value="S">Type</option>
+                    <option value="pantalons">pantalons</option>
+                    <option value="vest">vest</option>
+                    <option value="pull"> pull</option>
+                    <option value="chemise">chemise</option>
+                    <option value="short">short</option>
+                    <option value="chaussette">chaussette</option>
+                    <option value="autre">autre</option>
+                  </select>
+                    
                     <i class="bi bi-caret-down icon-input"></i>
                   </div>  
                   <div class="input-container">
                     <label>Categorie : </label>
-                    <input  value=""   class="info" type="text" name="sexe" placeholder="Homme - Femme - Enfant ...">
+                    <select
+                    style="border : none"
+                    value=""
+                    class="info"
+                    type="text"
+                    name="sexe"
+                    placeholder="Sexe"
+                    required
+                  >
+                    <option  selected disabled value="S">Categorie</option>
+                    <option value="Homme">Homme</option>
+                    <option value="Femme">Femme</option>
+                    <option value="Enfant">Enfant</option>
+                  </select>
                     <i class="bi bi-caret-down icon-input"></i>
                   </div> 
                   <div class="input-container">
                     <label>Marque : </label>
-                    <input  value=""   class="info" type="text" name="mark" placeholder="Marque">
+                    <input required  value=""   class="info" type="text" name="mark" placeholder="Marque">
                     <i class="bi bi-caret-down icon-input"></i>
                   </div>  
                   <div class="input-container">
                     <label>Style : </label>
-                    <input  value=""   class="info" type="text" name="style" placeholder="Classique - Sportif ... ">
+                    <input required value=""   class="info" type="text" name="style" placeholder="Classique - Sportif ... ">
                     <i class="bi bi-caret-down icon-input"></i>
                   </div>  
                   <div class="input-container">
                     <label>Prix : </label>
-                    <input  value=""   class="info" type="text" name="price" placeholder="Prix">
+                    <input required value=""   class="info" type="text" name="price" placeholder="Prix">
                     <i class="bi bi-caret-down icon-input"></i>
                   </div>
                   <div class="input-container">
                     <label>Accessoires : </label>
-                    <input  value=""   class="info" type="text" name="accessoires" placeholder="cravate -  nœud papillon ... ">
+                    <input required value=""   class="info" type="text" name="accessoires" placeholder="cravate -  nœud papillon ... ">
                     <i class="bi bi-caret-down icon-input"></i>
                   </div>  
                   <h1 class="exTitle addModal">+ ajouter modal pour le produit</h1>

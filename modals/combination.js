@@ -47,8 +47,9 @@ const getAllCombinations = async () => {
   }
   
   const deleteCombination = async (id) => {
-    await pool.query("delete from combinaison where id = $1",[id])
     await pool.query("delete from combinaisonproduit where combinaison = $1",[id])
+    await pool.query("delete from combinaison where id = $1",[id])
+
   }
 
   const getCombinationById = async (id) => {
@@ -60,7 +61,7 @@ const getAllCombinations = async () => {
             const ex = await getExamplairOfProduct(combinationsProducts[i].produit);
             data.push({ ...combinationsProducts[i], productsItems: ex });
         }
-        return {...combinations[0],products : data};
+        return {...combinations[0],items : data};
       } catch (error) {
         console.log(error, "err");
         return null;

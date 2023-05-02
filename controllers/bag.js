@@ -88,6 +88,12 @@ const addBagController = async (req , res) => {
     res.redirect("/bag")
 }
 
+
+const addCombinationToBagController = async (req , res) => {
+console.log(req.body);
+res.redirect("/combinaison/base")
+}
+
 const valideBagController = async (req , res) => {
     const products = req.session.bag ? req.session.bag : []
    const accs = req.session.accessoire ? req.session.accessoire : []
@@ -109,4 +115,4 @@ const valideBagController = async (req , res) => {
     req.session.bag  = []
     res.redirect("/bag")
 }
-module.exports = {bagController,addBagController , deleteBagController , deleteAccessoireFromProductController ,deleteAccessoireFromBagController,valideBagController}
+module.exports = {bagController,addBagController ,addCombinationToBagController, deleteBagController , deleteAccessoireFromProductController ,deleteAccessoireFromBagController,valideBagController}

@@ -21,7 +21,7 @@ const productDetailsController = async (req , res) => {
     const accs = await getAllAccessoires();
     const types = await getTypesOfProducts();
     const typesCom = await getTypesOfCombinations()
-    res.render("details",{types,typesCom,product : {...product , items : items},colors ,user:req.client,accs : accs});
+    res.render("details",{isCombination : false,types,typesCom,product : {...product , items : items},colors ,user:req.client,accs : accs});
 }
 
 const updateProductContrller = async (req , res) => {

@@ -85,6 +85,7 @@ $("#sort").change(function() {
     $(".productsFound").text( cpt.toString() + " styles trouvés")
   });
 
+  // filter combinaison
   $("#typeComp").change(function() {
     var selectedOption = $(this).val();
     window.location = selectedOption
@@ -92,6 +93,9 @@ $("#sort").change(function() {
   });
   
 
+
+
+  // filter style de produit
   $("#style").change(function() {
     var selectedOption = $(this).val();
     var selectedIndex = this.selectedIndex;
@@ -113,6 +117,7 @@ $("#sort").change(function() {
     $(".productsFound").text( cpt.toString() + " styles trouvés")
   });
 
+  // filter marque de produit
   $("#mark").change(function() {
     var selectedOption = $(this).val();
     var selectedIndex = this.selectedIndex;
@@ -134,6 +139,26 @@ $("#sort").change(function() {
     $(".productsFound").text( cpt.toString() + " styles trouvés")
   });
 
+
+  $('.combination').each(function(){
+    let data = $(this).data("product");
+    let src;
+    let i = 0;
+    setTimeout(()=> {
+        setInterval(()=> {
+            i = (i + 1) % data.items.length
+            if (!data.items[i].picture.includes("http")) {
+                src = "../../" + data.items[i].picture
+               } else { 
+                src =  data.items[i].picture
+               }  
+            let img = $(this).find('img')
+            img.attr('src', src)
+        },2000)
+    },1000* parseInt(data.id))
+
+
+  })
 
 
 

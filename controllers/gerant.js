@@ -57,6 +57,7 @@ const combinationsPageController = async (req , res) => {
   const combinations = await getAllCombinations(); 
   const types  =await getTypesOfProducts();
   const products = await getAllProduct();
+
   res.render("gerant/combinations",{combinations ,types, products  });
 }
 

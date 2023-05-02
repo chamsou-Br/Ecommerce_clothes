@@ -5,9 +5,9 @@ $(document).ready(function () {
         $("#accessoireContainer .price").text("");
     }
 
-    $(".color").each(function(){
+    $(".product.colors .color").each(function(){
         $(this).click(function() {
-            let index = $(".color").index(this);
+            let index = $(".product.colors .color").index(this);
             $("#itemActive").val(product.items[index].color)
             $('.color').each(function() {
                 $(this).removeClass("active")
@@ -23,6 +23,43 @@ $(document).ready(function () {
                        
         })
     });
+    $(".products-combination").each(function(){
+        let ProductIndex = $(".products-combination").index(this);
+        let productItem = $(this);
+        productItem.find(".view").click(function () {
+            
+            if (!product.items[ProductIndex].picture.includes("http")) {
+                $("img").attr("src","../../" + product.items[ProductIndex].picture)
+               } else { 
+                $("img").attr("src",product.items[ProductIndex].picture)
+                
+               }  
+            $(".view").each(function(){
+                $(this).removeClass("active")
+            })
+            $(this).addClass("active")
+        })
+        productItem.find(".color").each(function(){
+            let color = $(this);
+            color.click(function() {
+                let index = productItem.find(".color").index(this);
+                productItem.find("#itemActive").val(product.items[ProductIndex].productsItems[index].color)
+                productItem.find(".color").each(function() {
+                    $(this).removeClass("active")
+                })
+                $(this).addClass("active");
+                product.items[ProductIndex].productsItems[index].quantites == 0 ?  productItem.find("#S").prop("disabled", true) : $("#S").prop("disabled", false);
+                product.items[ProductIndex].productsItems[index].quantitem == 0 ? productItem.find("#M").prop("disabled", true) : $("#M").prop("disabled", false); 
+                product.items[ProductIndex].productsItems[index].quantitel == 0 ? productItem.find("#L").prop("disabled", true) : $("#L").prop("disabled", false); 
+                product.items[ProductIndex].productsItems[index].quantitexl == 0 ? productItem.find("#XL").prop("disabled", true) : $("#XL").prop("disabled", false); 
+                product.items[ProductIndex].productsItems[index].quantitexxl == 0 ? productItem.find("#XXL").prop("disabled", true) : $("#XXL").prop("disabled", false); 
+
+            })
+        });
+
+    })
+
+
 
     $(".Accesscard .iconContainer").each(function(){
         $(this).click(function(){

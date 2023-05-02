@@ -78,6 +78,7 @@ $(document).ready(function () {
             $("#product-modal input[name='type']").val(data.type)
             $("#product-modal input[name='style']").val(data.style)
             $("#product-modal input[name='price']").val(data.prix)
+            $("#product-modal input[name='descr']").val(data.descr)
             data.items.forEach(it => {
                 const labels = ["S[]","M[]","L[]","XL[]","XXL[]"];
                 const values = ["quantites","quantitem","quantitel","quantitexl","quantitexxl"]

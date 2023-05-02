@@ -135,7 +135,7 @@
     box-shadow: none;
   }
 
-  .details-info .buyButtoncontainer {
+ .buyButtoncontainer {
     padding: 10px 0px;
     border: 2px solid #51e2f5;
     background-color: #FFF;
@@ -147,12 +147,17 @@
     margin-top: 20px;
     border-radius: 2rem;
   }
-  .details-info .buyButtoncontainer:hover{
+.buyButtoncontainer:hover{
     background-color: #51e2f5;
     color: #fff;
     cursor: pointer;
   }
-
+.buyButtoncontainer:disabled {
+    background-color: #EEE;
+    border-color: #00000055;
+    color: #FFF;
+    cursor: not-allowed;
+  }
   .details-right .reduction {
     display: flex;
     align-items: center;
@@ -298,4 +303,11 @@ ul.list-group::-webkit-scrollbar-thumb:hover {
 
 #accessoireContainer {
   margin-top: 15px;
+}
+
+.view {
+  cursor: pointer;
+}
+.view.active {
+  color: #1ecde4;
 }
