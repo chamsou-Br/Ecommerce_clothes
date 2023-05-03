@@ -54,9 +54,56 @@
 
 
     <!-- ======= Bag =======   -->
-    <% if (bag.length > 0 || accessoires.length > 0) { %>
+    <% if (bag.length > 0 || accessoires.length > 0 || com.length > 0) { %>
     <div class="bag">
         <div class="products-bag">
+          <% for (let i = 0 ; i < com.length ; i++) { %>
+          <div class="item-combination">
+            <a href="/bag/combinaison/delete/<%= i %>">
+              <button type="button" class="btn-close" aria-label="Close"></button>
+            </a>
+            <h1><%= com[i].com.nom %></h1>
+            <div style="display: flex;justify-content: space-between;">
+            <h1>qte : <%= com[i].qty %></h1>
+            
+            <h1 >$ <%=  com[i].com.prix.toLocaleString('en-US', { minimumFractionDigits: 2 })%></h1>
+          </div>
+            <% 
+              let productsItems = com[i].com.items;
+              for (let z = 0 ; z < productsItems.length ; z++) { 
+            %>
+            <div class="item-product item-product-combination "> 
+                <a href="/bag/delete/<%= i %>">
+                
+                </a>
+                <a href="/produit/details/<%= productsItems[z].id %>">
+                <img src='<% if (!productsItems[z].picture.includes("http")) { %>
+                    ../../<%= productsItems[z].picture%>
+                     <% } else { %>
+                    <%= productsItems[z].picture %>
+                <% } %>' />
+                 </a>
+                <div class="item-product-info">
+                    <h1 style="color: rgb(228, 76, 76);text-decoration: line-through;" >$ <%=  productsItems[z].prix.toLocaleString('en-US', { minimumFractionDigits: 2 })%></h1>
+                <h2><%= productsItems[z].nom %></h2>
+                <div class="flex">
+                    <select  class="form-select mt-2" name="quantite" required  aria-label="Default select example">
+                        <option  <% if (com[i].size[z] === 'S') { %> selected <% } %> id="S"  value="S">S </option>
+                        <option  <% if (com[i].size[z] === 'M') { %> selected <% } %> id="M" value="M">M</option>
+                        <option <% if (com[i].size[z] === 'L') { %> selected <% } %>  value="L">L</option>
+                        <option <% if (com[i].size[z] === 'XL') { %> selected <% } %> id="XL"  value="XL">XL</option>
+                        <option <% if (com[i].size[z] === 'XXL') { %> selected <% } %> id="XXL" value="XXL">XXL</option>
+                    </select>
+                    <select  class="form-select mt-2" name="quantite" required  aria-label="Default select example">
+                        <option id="S" selected value="<%= com[i].color[z] %>"><%= com[i].color[z]  %> </option>
+  
+                    </select>
+                </div>
+                </div>
+            </div>
+            <% } %>
+          </div>
+          <%} %>
             <% for (let i = 0 ; i < bag.length ; i++) { %>
                 
                 <div class="item-product"> 
@@ -64,12 +111,16 @@
                     <button type="button" class="btn-close" aria-label="Close"></button>
                     </a>
                     <a href="/produit/details/<%= bag[i].product.id %>">
-                    <img src="<%= bag[i].product.picture %>" />
+                    <img src='<% if (!bag[i].product.picture.includes("http")) { %>
+                    ../../<%= bag[i].product.picture%>
+                     <% } else { %>
+                    <%= bag[i].product.picture %>
+                      <% } %>' />
                      </a>
                     <div class="item-product-info">
                         <h1>$ <%=  bag[i].product.prix.toLocaleString('en-US', { minimumFractionDigits: 2 })%></h1>
-                    <h2><%= bag[i].product.nom %></h2>
-                    <div class="update">
+                    <h2 ><%= bag[i].product.nom %></h2>
+                    <div class="flex">
                         <select  class="form-select mt-2" name="quantite" required  aria-label="Default select example">
                             <option id="S" selected  value="S"><%= bag[i].qty %></option>
                         </select>
@@ -96,11 +147,15 @@
                     <a href="/bag/product/accessoire/delete?id=<%= i%>&acc=<%= j %>">
                     <button type="button" class="btn-close" aria-label="Close"></button>
                     </a>
-                    <img src="<%=  bag[i].accessoire[j].picture %>" />
+                    <img src='<% if (!bag[i].accessoire[j].picture.includes("http")) { %>
+                    ../../<%= bag[i].accessoire[j].picture%>
+                     <% } else { %>
+                    <%= bag[i].accessoire[j].picture %>
+                      <% } %>'  />
                     <div class="item-product-info">
                         <h1>$ <%=  bag[i].accessoire[j].prix.toLocaleString('en-US', { minimumFractionDigits: 2 }) %></h1>
                     <h2><%=  bag[i].accessoire[j].type %></h2>
-                    <div class="update">
+                    <div class="flex">
                         <select  class="form-select mt-2" name="quantite" required  aria-label="Default select example">
                             <option id="S" selected  value="S">  1 </option>
                         </select>
@@ -121,11 +176,15 @@
                 <a href="/bag/accessoire/delete/<%= i %>">
                 <button type="button" class="btn-close" aria-label="Close"></button>
                 </a>
-                <img src="<%= accessoires[i].accessoire.picture %>" />
+                <img src='<% if (!accessoires[i].accessoire.picture.includes("http")) { %>
+                    ../../<%= accessoires[i].accessoire.picture%>
+                     <% } else { %>
+                    <%= accessoires[i].accessoire.picture %>
+                      <% } %>'   />
                 <div class="item-product-info">
                     <h1>$ <%= accessoires[i].accessoire.prix.toLocaleString('en-US', { minimumFractionDigits: 2 }) %></h1>
                 <h2><%= accessoires[i].accessoire.type %></h2>
-                <div class="update">
+                <div class="flex">
                     <select  class="form-select mt-2" name="quantite" required  aria-label="Default select example">
                         <option id="S" selected  value="S"><%= accessoires[i].qty %></option>
                     </select>

@@ -2,7 +2,7 @@ const { json } = require("express");
 const { addCommande } = require("../modals/commande");
 const { getTypesOfProducts, getProductById } = require("../modals/products");
 const  nodemailer= require("nodemailer");
-const { getTypesOfCombinations } = require("../modals/combination");
+const { getTypesOfCombinations, getCombinationsByType, getCombinationById } = require("../modals/combination");
 
 const transporter = nodemailer.createTransport({
     service: 'Gmail',
@@ -18,8 +18,11 @@ const transporter = nodemailer.createTransport({
     const user  = req.client
     req.session.bag = req.session.bag ? req.session.bag : []
     req.session.accessoire = req.session.accessoire ? req.session.accessoire : []
+    req.session.combinations = req.session.combinations ? req.session.combinations : []
     let price = 0 ;
-    console.log(req.session.bag , req.session.accessoire)
+    req.session.combinations.forEach(it=>{
+        price += it.com.prix * it.qty;
+    })
     req.session.accessoire.forEach(it => {
         price += it.accessoire.prix * it.qty
     })
@@ -29,7 +32,7 @@ const transporter = nodemailer.createTransport({
             price += it2.prix
         })
     })
-    res.render("bag",{types,typesCom,user,bag : req.session.bag ,accessoires : req.session.accessoire , price : price });
+    res.render("bag",{types,typesCom,user,bag : req.session.bag ,accessoires : req.session.accessoire ,com : req.session.combinations,  price : price });
 }
 
 const deleteBagController = async (req , res) => {
@@ -43,6 +46,12 @@ const deleteAccessoireFromProductController = async (req , res) => {
     const acc = req.query.acc
     console.log(id , acc)
     req.session.bag[id].accessoire.splice(acc, 1) 
+    res.redirect("/bag")
+}
+
+const deleteComFromBagController = async (req , res) => {
+    const id = req.params.id
+    req.session.combinations.splice(id, 1)
     res.redirect("/bag")
 }
 
@@ -89,16 +98,50 @@ const addBagController = async (req , res) => {
 }
 
 
+  function compareArrays(array1, array2) {
+    if (array1.length !== array2.length) {
+      return false;
+    }
+    for (let i = 0; i < array1.length; i++) {
+      if (array1[i] !== array2[i]) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  
 const addCombinationToBagController = async (req , res) => {
-console.log(req.body);
-res.redirect("/combinaison/base")
+    const id = req.params.id;
+    const com = await getCombinationById(id);
+    let combinations = req.session.combinations ? req.session.combinations : [];
+
+    const {color , size} = req.body;
+    let isExiste = false
+    let index = 0;
+    // verify if existe 
+    while (!isExiste && index < combinations.length) {
+        if (combinations[index].com.id == com.id && compareArrays(combinations[index].size,size) && compareArrays(combinations[index].color,color)  ) {
+            isExiste = true
+        }
+        index++;
+    }
+    index --;
+    if (isExiste == true) {
+        req.session.combinations[index] = {...combinations[index] ,qty : combinations[index].qty + 1}
+    }else{
+        req.session.combinations = [...combinations,{qty : 1 , com : com ,  color , size }]
+    }
+    res.redirect("/bag")
 }
 
 const valideBagController = async (req , res) => {
     const products = req.session.bag ? req.session.bag : []
    const accs = req.session.accessoire ? req.session.accessoire : []
    const client = req.client ? req.client.email : null
-    await addCommande(req.body,products,accs,client)
+   const combinations = req.session.combinations ? req.session.combinations : []
+   console.log("client",client);
+    await addCommande(req.body,products,accs,client,combinations)
     const mailOptions = {
         from: process.env.MAIL,
         to:  req.body.email,
@@ -106,13 +149,14 @@ const valideBagController = async (req , res) => {
         text: 'Votre commande dans notre boutique est ajoutée avec succès'
       };
     
-      transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-          console.log(error);
-        }
-      });
+    //   transporter.sendMail(mailOptions, (error, info) => {
+    //     if (error) {
+    //       console.log(error);
+    //     }
+    //   });
     req.session.accessoire = []
     req.session.bag  = []
+    req.session.combinations  = []
     res.redirect("/bag")
 }
-module.exports = {bagController,addBagController ,addCombinationToBagController, deleteBagController , deleteAccessoireFromProductController ,deleteAccessoireFromBagController,valideBagController}
+module.exports = {bagController,deleteComFromBagController , addBagController ,addCombinationToBagController, deleteBagController , deleteAccessoireFromProductController ,deleteAccessoireFromBagController,valideBagController}

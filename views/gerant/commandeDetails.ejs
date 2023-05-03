@@ -56,14 +56,63 @@
     <!-- ======= Bag =======   -->
     <div class="bag">
         <div class="products-bag">
+          <%  
+            for (let i = 0 ; i < combinations.length ; i++) { %>
+            <div class="item-combination">
+              <h1><%= combinations[i].nom %></h1>
+              <div style="display: flex;justify-content: space-between;">
+              <h1>qte : <%= combinations[i].items[0].qte %></h1>
+              
+              <h1 >$ <%=  combinations[i].prix.toLocaleString('en-US', { minimumFractionDigits: 2 })%></h1>
+            </div>
+              <% 
+                let productsItems = combinations[i].items;
+                for (let z = 0 ; z < productsItems.length ; z++) { 
+              %>
+              <div class="item-product item-product-combination "> 
+                  <a href="/bag/delete/<%= i %>">
+                  
+                  </a>
+                  <a href="/produit/details/<%= productsItems[z].id %>">
+                  <img src='<% if (!productsItems[z].picture.includes("http")) { %>
+                    ../../<%= productsItems[z].picture %>
+                     <% } else { %>
+                    <%= productsItems[z].picture %>
+                <% } %>'/>
+                   </a>
+                  <div class="item-product-info">
+                      <h1 style="color: rgb(228, 76, 76);text-decoration: line-through;" >$ <%=  productsItems[z].prix.toLocaleString('en-US', { minimumFractionDigits: 2 })%></h1>
+                  <h2><%= productsItems[z].nom %></h2>
+                  <div class="flex">
+                      <select  class="form-select mt-2" name="quantite" required  aria-label="Default select example">
+                          <option  <% if (productsItems[z].size === 'S') { %> selected <% } %> id="S"  value="S">S </option>
+                          <option  <% if (productsItems[z].size === 'M') { %> selected <% } %> id="M" value="M">M</option>
+                          <option <% if (productsItems[z].size === 'L') { %> selected <% } %>  value="L">L</option>
+                          <option <% if (productsItems[z].size === 'XL') { %> selected <% } %> id="XL"  value="XL">XL</option>
+                          <option <% if (productsItems[z].size === 'XXL') { %> selected <% } %> id="XXL" value="XXL">XXL</option>
+                      </select>
+                      <select  class="form-select mt-2" name="quantite" required  aria-label="Default select example">
+                          <option id="S" selected value="<%= productsItems[z].color %>"><%= productsItems[z].color  %> </option>
+    
+                      </select>
+                  </div>
+                  </div>
+              </div>
+              <% } %>
+            </div>
+            <%} %>
             <% for (let i = 0 ; i < products.length ; i++) { %>
                 
                 <div class="item-product"> 
-                    <img src="<%= products[i].picture %>" />
+                    <img src='<% if (!products[i].picture.includes("http")) { %>
+                    ../../<%= products[i].picture%>
+                     <% } else { %>
+                    <%= products[i].picture %>
+                <% } %>'  />
                     <div class="item-product-info">
                         <h1>$ <%=  products[i].prix.toLocaleString('en-US', { minimumFractionDigits: 2 })%></h1>
                     <h2><%= products[i].nom %></h2>
-                    <div class="update">
+                    <div class="flex">
                         <h4 ><%= products[i].qte %> Qte</h4>
                         <h4>Size <%= products[i].size %></h4>
                         <h4><%= products[i].color %></h4>
@@ -74,11 +123,15 @@
                 <% for(let j = 0 ; j< accessoires.length;j++) { %>
                   <% if (accessoires[j].produit = products[i].produit) {%>
                   <div class="item-product"> 
-                    <img src="<%=  accessoires[j].picture %>" />
+                    <img src='<% if (!accessoires[j].picture.includes("http")) { %>
+                    ../../<%= accessoires[j].picture%>
+                     <% } else { %>
+                    <%= accessoires[j].picture %>
+                <% } %>'   />
                     <div class="item-product-info">
                         <h1>$ <%=  accessoires[j].prix.toLocaleString('en-US', { minimumFractionDigits: 2 }) %></h1>
                     <h2><%=  accessoires[j].type %></h2>
-                    <div class="update">
+                    <div class="flex">
                       <h4 ><%= accessoires[j].marque %></h4>
                       <h4><%= accessoires[j].qte %> Qte</h4>
                     </div>
@@ -91,11 +144,15 @@
             <% for (let i = 0 ; i < accessoires.length ; i++) { %>
               <% if (accessoires[i].produit == null) {%>
               <div class="item-product"> 
-                <img src="<%= accessoires[i].picture %>" />
+                <img src='<% if (!accessoires[i].picture.includes("http")) { %>
+                    ../../<%= accessoires[i].picture%>
+                     <% } else { %>
+                    <%= accessoires[i].picture %>
+                <% } %>'    />
                 <div class="item-product-info">
                     <h1>$ <%= accessoires[i].prix.toLocaleString('en-US', { minimumFractionDigits: 2 }) %></h1>
                 <h2><%= accessoires[i].type %></h2>
-                <div class="update">
+                <div class="flex">
                   <h4 ><%= accessoires[i].marque %></h4>
                   <h4><%= accessoires[i].qte %> Qte</h4>
                 </div>
@@ -141,7 +198,7 @@
                 <input value='' disabled  class="info " id="livraison" type="date" name="date" placeholder="l’heure de livraison">
                 <i class="bi bi-caret-down icon-input"></i>
             </div>   
-            <div class="update">
+            <div class="flex">
               <% if (user.etat == "EN_ATTENTE" ) { %>
               <a
                 href="/gerant/commandes/status?id=<%= user.id  %>&status=COMPLETE"

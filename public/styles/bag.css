@@ -57,6 +57,36 @@ body{
     position: relative;
 }
 
+.item-combination {
+    padding: 20px 0px;
+    margin: 0 30px;
+    border-bottom: 0.5px solid #22222222;
+    position: relative;
+}
+.item-combination h1{
+    color: #2d2d2d;
+    font-size: 1.2rem;
+    font-weight: bold;
+    letter-spacing: 1.1px;
+}
+.item-combination h2 {
+    color: #2d2d2dCC;
+    font-size: 1rem;
+    font-weight: 500;
+    margin-top: 5px;
+    overflow: hidden; /* Hide the overflowing text */
+    white-space: nowrap; /* Prevent line breaks within the paragraph */
+    text-overflow: ellipsis; /* Replace overflowing text with ellipsis (...) */
+}
+
+.item-product.item-product-combination {
+    display:  flex;
+    justify-content: start;
+    padding: 20px 0px;
+    margin: 0 30px;
+    position: relative;
+}
+
 .item-product img {
     width: 110px;
     height: 150px;
@@ -66,9 +96,9 @@ body{
     cursor: pointer;
 
 }
-.item-product .btn-close {
+ .btn-close {
     position: absolute;
-    top: 30px;
+    top: 20px;
     right: 0px;
     font-size: 0.8rem;
 }
@@ -78,6 +108,9 @@ body{
     flex-direction: column;
     justify-content: space-between;
     padding: 5px;
+}
+.item-product.item-product-combination .item-product-info  {
+    justify-content: start;
 }
 .item-product h1 {
     color: #2d2d2d;
@@ -95,20 +128,23 @@ body{
     text-overflow: ellipsis; /* Replace overflowing text with ellipsis (...) */
 }
 
-.item-product .update {
+.item-product .flex {
     display:  flex;
 }
-.item-product .update h4 {
+.flex {
+    display: flex;
+}
+.item-product .flex h4 {
     margin-top: 10px;
     font-size: 1rem;
     color: #2d2d2d;
     border-right: 1px solid #2d2d2d;
     padding:0 20px;
 }
-.item-product .update h4:first-of-type {
+.item-product .flex h4:first-of-type {
     padding-left: 0;
 }
-.item-product .update select {
+.item-product .flex select {
     width: 80px;
     padding:0 10px;
     border-top: none;
@@ -116,12 +152,13 @@ body{
     border-radius: 0;
     font-size: 0.8rem;
     color: #2d2d2d;
+    margin-top: 0;
 }
-.item-product .update select:nth-of-type(1) {
+.item-product .flex select:nth-of-type(1) {
     border-left: none;
     padding-left: 0;
 }
-.item-product .update select:last-of-type{
+.item-product .flex select:last-of-type{
     border-right: none;
 }
 
@@ -280,6 +317,9 @@ body{
     }
     .item-product {
         margin: 0 10px;
+    }
+    .item-product.item-product-combination {
+        margin: 0 0px;
     }
     .item-product img {
         width: 100px;

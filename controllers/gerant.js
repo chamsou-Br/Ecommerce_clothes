@@ -47,9 +47,10 @@ const accessoirePageController = async (req, res) => {
 
 const commaneDetailsController = async (req , res) => {
   const id  = req.params.id ? req.params.id : 0
-  const {products  , accessoires , ...user } = await getCommandeByID(id);
+  const {products  , accessoires,combinations , ...user } = await getCommandeByID(id);
 
-  res.render("gerant/commandeDetails",{user,products : products ,accessoires : accessoires });
+
+  res.render("gerant/commandeDetails",{user,products : products ,accessoires : accessoires,combinations : combinations });
 }
 
 

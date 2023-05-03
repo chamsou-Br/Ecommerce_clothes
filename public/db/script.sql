@@ -101,6 +101,7 @@ type varchar(50)
 );
 
 
+
 create table combinaisonProduit (
 id serial primary key,
 combinaison integer references combinaison(id),

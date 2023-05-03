@@ -29,9 +29,9 @@ $(document).ready(function () {
         productItem.find(".view").click(function () {
             
             if (!product.items[ProductIndex].picture.includes("http")) {
-                $("img").attr("src","../../" + product.items[ProductIndex].picture)
+                $("img.product-img").attr("src","../../" + product.items[ProductIndex].picture)
                } else { 
-                $("img").attr("src",product.items[ProductIndex].picture)
+                $("img.product-img").attr("src",product.items[ProductIndex].picture)
                 
                }  
             $(".view").each(function(){

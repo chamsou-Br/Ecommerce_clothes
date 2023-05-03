@@ -8,7 +8,7 @@ const { verifyAuth, verifyAuthAdmin } = require("./middleware/auth");
 const {profileController,modifyPictureController, updateProfileController} = require("./controllers/profile");
 const multer = require("multer");
 const upload = require("./middleware/upload");
-const { bagController, addBagController, deleteBagController, deleteAccessoireFromBagController, valideBagController, deleteAccessoireFromProductController, addCombinationToBagController } = require("./controllers/bag");
+const { bagController, addBagController, deleteBagController, deleteAccessoireFromBagController, valideBagController, deleteAccessoireFromProductController, addCombinationToBagController, deleteComFromBagController } = require("./controllers/bag");
 const session = require("express-session");
 const { accessoiresController, addAccessoireToBagController, updateAccessoireContrller, addAccessoireContrller } = require("./controllers/accessoir");
 const { commandesPageController, updateCommandeStatusController, commaneDetailsController, usersPageController, productsPageController, accessoirePageController, combinationsPageController } = require("./controllers/gerant");
@@ -59,6 +59,7 @@ app.post("/bag/combinaison/:id",verifyAuth,addCombinationToBagController)
 app.get("/bag/delete/:id",verifyAuth,deleteBagController)
 app.get("/bag/accessoire/delete/:id",verifyAuth,deleteAccessoireFromBagController)
 app.get("/bag/product/accessoire/delete",verifyAuth,deleteAccessoireFromProductController)
+app.get("/bag/combinaison/delete/:id",verifyAuth,deleteComFromBagController)
 
 app.get("/gerant/commandes",verifyAuthAdmin,commandesPageController)
 app.get("/gerant/commandes/status",verifyAuthAdmin,updateCommandeStatusController)
