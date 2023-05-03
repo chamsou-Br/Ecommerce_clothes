@@ -1,6 +1,6 @@
 const express = require("express");
 const homeController = require("./controllers/home");
-const { productsController, productDetailsController, updateProductContrller, addProductContrller } = require("./controllers/products");
+const { productsController, productDetailsController, updateProductContrller, addProductContrller, deleteProductController } = require("./controllers/products");
 const {getAllProduct , getProductsByType} = require("./modals/products");
 const { loginPageController, loginHandlerController, logoutController, registerController, registerHandlerController } = require("./controllers/auth");
 const cookieParser = require("cookie-parser");
@@ -10,7 +10,7 @@ const multer = require("multer");
 const upload = require("./middleware/upload");
 const { bagController, addBagController, deleteBagController, deleteAccessoireFromBagController, valideBagController, deleteAccessoireFromProductController, addCombinationToBagController, deleteComFromBagController } = require("./controllers/bag");
 const session = require("express-session");
-const { accessoiresController, addAccessoireToBagController, updateAccessoireContrller, addAccessoireContrller } = require("./controllers/accessoir");
+const { accessoiresController, addAccessoireToBagController, updateAccessoireContrller, addAccessoireContrller, deleteAccessoireController } = require("./controllers/accessoir");
 const { commandesPageController, updateCommandeStatusController, commaneDetailsController, usersPageController, productsPageController, accessoirePageController, combinationsPageController } = require("./controllers/gerant");
 const { combinationssController, addCombinationController, deleteCombinaisonController, combinationDetailsController } = require("./controllers/combination");
 
@@ -74,6 +74,8 @@ app.post("/gerant/accessoire",verifyAuthAdmin,upload.single("picture"),addAccess
 app.get("/gerant/combinaisons",verifyAuthAdmin,combinationsPageController)
 app.post("/gerant/combinaisons",verifyAuthAdmin,addCombinationController)
 app.get("/gerant/deletecombinaisons/:id",verifyAuthAdmin,deleteCombinaisonController)
+app.get("/gerant/deleteAccessoire/:id",verifyAuthAdmin,deleteAccessoireController)
+app.get("/gerant/deleteproduit/:id",verifyAuthAdmin,deleteProductController)
 
 
 

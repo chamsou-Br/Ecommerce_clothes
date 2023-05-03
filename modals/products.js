@@ -112,6 +112,11 @@ const getExamplairOfProduct = async (id) => {
   }
 };
 
+const deleteProduct = async (id) => {
+  await pool.query("delete from examplaire where produit = $1",[id])
+  await pool.query("delete from produit where id = $1",[id])
+}
+
 const updateProduct = async (data) => {
   let qty = 0;
   await data.itemsId.forEach(async (it, index) => {
@@ -149,4 +154,5 @@ module.exports = {
   getStyleOfProducts,
   getTypesOfProducts,
   getExamplairOfProduct,
+  deleteProduct
 };

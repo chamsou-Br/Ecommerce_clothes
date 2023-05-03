@@ -173,7 +173,6 @@ const addCommande = async (data , products , accessoires,client,combinations )=>
             default:
               break;
           }
-          console.log(index,";dezml,edmlk") 
             await pool.query(
                 "INSERT INTO commandeProduits (commande, produit , qte , size , color , combinaison) values ( $1 , $2 , $3 , $4 , $5,$6)",
                 [

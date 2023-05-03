@@ -47,4 +47,9 @@ const getAllAccessoires = async () => {
     return acc
   }
 
-  module.exports = {getAccessoireById , addAccessoire ,getAllAccessoires , getMarkOfAccessoires , updateAccessoire}
+
+  const deleteAccessoire = async (id) => {
+    await pool.query("delete from accessoire where id = $1",[id])
+  }
+
+  module.exports = {getAccessoireById , deleteAccessoire,addAccessoire ,getAllAccessoires , getMarkOfAccessoires , updateAccessoire}

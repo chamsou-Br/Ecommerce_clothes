@@ -140,7 +140,6 @@ const valideBagController = async (req , res) => {
    const accs = req.session.accessoire ? req.session.accessoire : []
    const client = req.client ? req.client.email : null
    const combinations = req.session.combinations ? req.session.combinations : []
-   console.log("client",client);
     await addCommande(req.body,products,accs,client,combinations)
     const mailOptions = {
         from: process.env.MAIL,
@@ -149,11 +148,11 @@ const valideBagController = async (req , res) => {
         text: 'Votre commande dans notre boutique est ajoutée avec succès'
       };
     
-    //   transporter.sendMail(mailOptions, (error, info) => {
-    //     if (error) {
-    //       console.log(error);
-    //     }
-    //   });
+      transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+          console.log(error);
+        }
+      });
     req.session.accessoire = []
     req.session.bag  = []
     req.session.combinations  = []

@@ -38,7 +38,6 @@ const productsPageController = async (req, res) => {
 
 const accessoirePageController = async (req, res) => {
   const combinations = await getAllCombinations(); 
-  console.log(combinations[0])
   const accessoires = await getAllAccessoires();
   res.render("gerant/accessoires", {
     accessoires: accessoires

@@ -177,6 +177,19 @@
                       >Modifier
                     </div>
                   </th>
+                  <th scope="col">
+                    <div style="display: flex; align-items: center">
+                      <i
+                        style="
+                          margin-right: 15px;
+                          color: #ff7575;
+                          font-size: 12px;
+                        "
+                        class="bi bi-trash3"
+                      ></i
+                      >Supprimer
+                    </div>
+                  </th>
 
               </tr>
             </thead>
@@ -210,10 +223,18 @@
                     class="bi bi-pencil-square"
                   ></i>
                    </td>
-  
+                   <td >
+                    <a href="/gerant/deleteproduit/<%= products[i].id %>" >
+                    <i
+                    style="
+                      color: #2D2D2D;
+                      font-size: 12px;
+                    "
+                    class="bi bi-x-circle"
+                  ></i>
+                  </a>
+                   </td>
                 </tr>
-        
-
               <% } %>
             </tbody>
           </table>
