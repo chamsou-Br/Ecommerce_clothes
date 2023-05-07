@@ -46,14 +46,12 @@ const addAccessoireToBagController = async (req , res) => {
 
 const updateAccessoireContrller = async (req , res) => {
     const data = req.body
-    console.log(data)
     await updateAccessoire(data);
     res.redirect("/gerant/accessoires");
 }
 
 const addAccessoireContrller = async (req , res) => {
     const data = req.body
-    console.log(data,req.file)
     await addAccessoire(data,req.file.filename)
     res.redirect("/gerant/accessoires");
 }

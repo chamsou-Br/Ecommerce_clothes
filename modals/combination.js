@@ -43,7 +43,6 @@ const getAllCombinations = async () => {
    product.map(async it => {
     await pool.query("Insert into combinaisonproduit  (combinaison , produit ) values ($1 , $2 )",[id,parseInt(it)])
    })
-   console.log(id,"id")
   }
   
   const deleteCombination = async (id) => {

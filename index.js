@@ -31,7 +31,7 @@ app.use(session({
     secret: 'Ecommerce', // Set your own secret key for session management
     resave: false,
     saveUninitialized: true
-  }));
+}));
 
 app.get('/',verifyAuth, homeController);
 
